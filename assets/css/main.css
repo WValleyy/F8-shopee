@@ -1096,4 +1096,241 @@ i.home-product-item__like-icon.fa-regular {
 
 /* footer */
 
+.footer-main {
+    background-color: #fbfbfb;
+    padding: 50px  0 20px;
+}
 
+.footer-main__heading {
+    font-size: 1.3rem;
+    color: var(--black-color);
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.footer-main__list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+}
+
+.footer-main__link {
+    text-decoration: none;
+    color: #585858;
+    font-size: 1.2rem;
+    line-height: 2.4rem;
+}
+
+.footer-main__link:has(.footer-main__icon) {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.footer-main__link:not(:has(span)):hover {
+    color: var(--primary-color);
+}
+
+.footer-main__link:has(span):hover span {
+    color: var(--primary-color);
+}
+
+.footer-main__icon{
+    font-size: 1.6rem;
+}
+
+.footer-main__payment-list,
+.footer-main__shipping-list {
+    list-style: none;
+    padding-left: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.footer-main__payment-item,
+.footer-main__shipping-item {
+    width: 55px;
+    height: 30px;
+    background-color: var(--white-color);
+    border-radius: 2px;
+    padding: 4px;
+    border: 1px solid var(--border-color);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer-main__payment-img,
+.footer-main__shipping-img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+.footer-main__payment-list {
+    margin-bottom: 20px;
+}
+
+.footer-main__download {
+    display: flex;
+    align-items: stretch;
+    gap: 12px;
+}
+
+.footer-main__download-app-qr {
+    width: 80px;
+    height: 80px;
+    border: 1px solid #dbdbdb;
+    border-radius: 2px;
+}
+
+.footer-main__download-qr {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+}
+
+.footer-main__download-apps {
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.footer-main__download-app-link {
+   border: 1px solid #dbdbdb;
+   border-radius: 2px;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+   padding: 3px;
+
+}
+
+.footer-main__download-app-img {
+    height: 16px;
+}
+
+/* footer-main__copyright */
+
+.footer-main__copyright {
+    padding: 20px 0;
+    border-top: 1px solid #e5e5e5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;   
+}
+
+.footer-main__copyright-text,
+.footer-main__region,
+.footer-main__region-link {
+    font-size: 1.4rem;
+    color: #737373;
+    line-height: 2.4rem;
+}
+
+.footer-main__region-link {
+    position: relative;
+    text-decoration: none;
+    padding: 0 4px;
+}
+
+.footer-main__region-link:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    right: 1px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1.4rem;
+    background-color: #dfdfdf;
+}
+
+/* footer-info */
+
+.footer-info {
+    background-color: #f5f5f5;
+    padding: 45px 0;
+}
+
+.footer-info__policy-list {
+    list-style: none;
+    padding-left: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.footer-info__policy-link {
+    position: relative;
+    text-decoration: none;
+    color: #585858;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+
+.footer-info__policy-item:not(:last-child) ::after {
+    content: "";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1px;
+    height: 1.5rem;
+    background-color: #dfdfdf;
+}
+
+.footer-info__certification {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+}
+
+.footer-info__certification-link {
+    text-decoration: none;
+}
+
+/* Base */
+.footer-info__certification-img {
+    background-image: url("https://deo.shopeemobile.com/shopee/shopee-pcmall-live-sg/assets/269d99f72b0ddacd.png");
+    background-repeat: no-repeat;
+    display: block;
+}
+
+/* Đã đăng ký Bộ Công Thương */
+.footer-info__certification-img--registered {
+    width: 120px;
+    height: 45px;
+
+    background-position: 14.3911439114% 99.4117647059%;
+    background-size: 551.6666666667% 477.7777777778%;
+}
+
+/* Chứng nhận hàng chính hãng */
+.footer-info__certification-img--no-fake {
+    width: 48px;
+    height: 48px;
+
+    background-position: 1.6286644951% 92.2155688623%;
+    background-size: 1379.1666666667% 447.9166666667%;
+}
+
+.footer-info__company,
+.footer-info__copyright{
+    text-align: center;
+    color: rgba(0,0,0,0.65);
+    font-size: 1.3rem;
+    font-weight: 400;
+    line-height: 1.3rem;
+}
+
+.footer-info__company-name {
+    margin-bottom:30px;
+}
+
+.footer-info__company-text {
+    margin: 8px 0;;
+}
