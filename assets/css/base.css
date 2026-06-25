@@ -60,6 +60,18 @@ html {
     padding-right: 5px;
 }
 
+.grid__column-5 {
+    width: 41.66667%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+.grid__column-7 {
+    width: 58.33333%;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
 
 @keyframes fadeIn{
     from{
