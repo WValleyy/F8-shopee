@@ -108,6 +108,7 @@ html {
     position: fixed;
     inset: 0;
     animation: fadeIn 0.1s linear;
+    z-index: 9999;
     }
 
 .modal__overlay {
@@ -124,6 +125,10 @@ html {
      --growth-from: 0.8;
      --growth-to: 1;
     }
+
+.is-hidden {
+    display: none !important;
+}
 
 /* Button Styles */
 .btn {
@@ -229,6 +234,11 @@ html {
 
 .select-filter__item-link:hover {
     color: var(--primary-color);
+}
+
+.select-filter__item--active .select-filter__item-link {
+    color: var(--primary-color);
+    font-weight: 500;
 }
 
 .select-filter:hover .select-filter__list{

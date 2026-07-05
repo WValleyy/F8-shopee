@@ -98,40 +98,64 @@
                                 Hỗ trợ
                             </a>
                         </li>
-                        <!-- <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link header__navbar-item-link-strong header__navbar-item-separate" >Đăng ký</a>
-                        </li>
-                        <li class="header__navbar-item">
-                            <a href="" class="header__navbar-item-link header__navbar-item-link-strong">Đăng nhập</a>
-                        </li> -->
-                        <li class="header__navbar-item header__navbar-item-user">
-                            <img src="https://media.tenor.com/S8Vv6-uLUA0AAAAM/cute-cat.gif" alt="" class="header__navbar-user-avt">
-                            <span class="header__navbar-user-name">Valley</span>
-                            
-                            <ul class="header__navbar-user-menu">
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="header__navbar-user-link">
-                                        <i class="header__navbar-user-icon fa-solid fa-user"></i>
-                                        <span>Tài khoản của tôi</span>
-                                    </a>
-                                </li>
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="header__navbar-user-link">
-                                        <i class="header__navbar-user-icon fa-solid fa-box"></i>
-                                        <span>Đơn mua</span>
-                                    </a>
-                                </li>
-                                <li class="header__navbar-user-item">
-                                    <a href="" class="header__navbar-user-link">
-                                        <i class="header__navbar-user-icon fa-solid fa-right-from-bracket"></i>
-                                        <span>Đăng xuất</span>
-                                    </a>
-                                </li>
-                               
-            
-                            </ul>
-                           
-                        </li>
+
+                        <li class="header__navbar-item header__navbar-item--guest">
+                        <a
+                            href="#"
+                            id="register-btn"
+                            class="header__navbar-item-link header__navbar-item-link-strong header__navbar-item-separate">
+                            Đăng ký
+                        </a>
+                    </li>
+
+                    <li class="header__navbar-item header__navbar-item--guest">
+                        <a
+                            href="#"
+                            id="login-btn"
+                            class="header__navbar-item-link header__navbar-item-link-strong">
+                            Đăng nhập
+                        </a>
+                    </li>
+
+                    <li class="header__navbar-item header__navbar-item-user is-hidden">
+                        <img
+                            src="https://media.tenor.com/S8Vv6-uLUA0AAAAM/cute-cat.gif"
+                            alt="Avatar"
+                            class="header__navbar-user-avt">
+
+                        <span class="header__navbar-user-name">
+                            Valley
+                        </span>
+
+                        <ul class="header__navbar-user-menu">
+
+                            <li class="header__navbar-user-item">
+                                <a href="#" class="header__navbar-user-link">
+                                    <i class="header__navbar-user-icon fa-solid fa-user"></i>
+                                    <span>Tài khoản của tôi</span>
+                                </a>
+                            </li>
+
+                            <li class="header__navbar-user-item">
+                                <a href="purchase.html" class="header__navbar-user-link">
+                                    <i class="header__navbar-user-icon fa-solid fa-box"></i>
+                                    <span>Đơn mua</span>
+                                </a>
+                            </li>
+
+                            <li class="header__navbar-user-item">
+                                <a
+                                    href="#"
+                                    id="logout-btn"
+                                    class="header__navbar-user-link">
+                                    <i class="header__navbar-user-icon fa-solid fa-right-from-bracket"></i>
+                                    <span>Đăng xuất</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                       
                     </ul>
                 </nav>
 
@@ -175,12 +199,6 @@
                                     Lịch sử tìm kiếm
                                 </h3>
                                 <ul class="searchbar-history__list">
-                                    <li class="searchbar-history__item">
-                                        <a href="">Ai lam ta la tuyet the thien tai a</a>
-                                    </li>
-                                    <li class="searchbar-history__item">
-                                        <a href="">Xich tam tuan thien</a>
-                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -190,10 +208,11 @@
     
                     <div class="header__cart">
                         <div class="header__cart-wrapper">
-                            <a href="" class="header__cart-link">
+                            <a href="cart.html" class="header__cart-link">
                                 <i class="header__cart-icon fa-solid fa-cart-shopping"></i>
+                                <span class="header__cart-notice">0</span>
                             </a>
-                            <span class="header__cart-notice">0</span>
+                            
                             <!-- No cart: header__cart-list--no-cart -->
                             <div class="header__cart-list ">
                                 <img src="assets/img/no_cart.png" alt="no cart" class="header__cart-no-cart-img">
@@ -260,7 +279,7 @@
                                     </li>
                                 </ul>
 
-                                <button class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</button>
+                                <a href="cart.html" class="header__cart-view-cart btn btn--primary">Xem giỏ hàng</a>
                                 </div>
                         </div>
 
@@ -278,31 +297,34 @@
                                 Danh mục</h3>
                             <ul class="category-list">
                                 <li class="category-item category-item--active">
-                                    <a href="" class="category-item__link">Điện thoại & Phụ kiện</a>
+                                    <a href="" class="category-item__link" data-category="all">Tất cả</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Máy tính & Laptop</a>
+                                    <a href="" class="category-item__link" data-category="phone">Điện thoại & Phụ kiện</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Thiết bị điện tử</a>
+                                    <a href="" class="category-item__link" data-category="laptop">Máy tính & Laptop</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Đồng hồ</a>
+                                    <a href="" class="category-item__link" data-category="electronics">Thiết bị điện tử</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Thời trang nam</a>
+                                    <a href="" class="category-item__link" data-category="watch">Đồng hồ</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Thời trang nữ</a>
+                                    <a href="" class="category-item__link" data-category="fashion-men">Thời trang nam</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Thời trang trẻ em</a>
+                                    <a href="" class="category-item__link" data-category="fashion-women">Thời trang nữ</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Giày dép nam</a>
+                                    <a href="" class="category-item__link" data-category="fashion-kids">Thời trang trẻ em</a>
                                 </li>
                                 <li class="category-item">
-                                    <a href="" class="category-item__link">Giày dép nữ</a>
+                                    <a href="" class="category-item__link" data-category="men-shoes">Giày dép nam</a>
+                                </li>
+                                <li class="category-item">
+                                    <a href="" class="category-item__link" data-category="women-shoes">Giày dép nữ</a>
                                 </li>
                         </nav>
                     </div>
@@ -310,9 +332,9 @@
                         <div class="home-filter">
                            <div class="home-filter__right-wrapper">
                                  <span class="home-filter__label">Sắp xếp theo</span>
-                                <button class="home-filter__btn btn btn--primary">Phổ biến</button>
-                                <button class="home-filter__btn btn">Mới nhất</button>
-                                <button class="home-filter__btn btn">Bán chạy</button>
+                                <button class="home-filter__btn btn btn--primary" data-sort="popular">Phổ biến</button>
+                                <button class="home-filter__btn btn" data-sort="newest">Mới nhất</button>
+                                <button class="home-filter__btn btn" data-sort="best-selling">Bán chạy</button>
 
                                 <div class="select-filter">
                                     <span class="select-filter__label">Giá</span>
@@ -320,12 +342,12 @@
 
                                     <ul class="select-filter__list">
                                         <li class="select-filter__item">
-                                            <a href="" class="select-filter__item-link">
+                                            <a href="" class="select-filter__item-link" data-sort="price-asc">
                                                 Giá: Thấp đến cao
                                             </a>
                                         </li>
                                         <li class="select-filter__item">
-                                            <a href="" class="select-filter__item-link">
+                                            <a href="" class="select-filter__item-link" data-sort="price-desc">
                                                 Giá: Cao đến thấp
                                             </a>
                                         </li>
@@ -339,10 +361,10 @@
                                 </span>
 
                                 <div class="home-filter__page-control">
-                                    <a href="" class="home-filter__page-btn btn btn--no-hover btn--disable">
+                                    <a href="" class="home-filter__page-btn btn btn--no-hover btn--disable" data-navigation="prev">
                                         <i class="home-filter__page-icon fa-solid fa-chevron-left"></i>
                                     </a>
-                                    <a href="" class="home-filter__page-btn btn btn--no-hover">
+                                    <a href="" class="home-filter__page-btn btn btn--no-hover" data-navigation="next">
                                         <i class="home-filter__page-icon fa-solid fa-chevron-right"></i>
                                     </a>
                                 </div>
@@ -911,103 +933,271 @@
             
         </footer>
     </div>
-    <!-- <div class="modal">
+ 
+    <div class="modal is-hidden" id="auth-modal">
         <div class="modal__overlay"></div>
-        <div class="modal__body"> -->
-                <!-- Register Form -->
-                <!-- <div class="auth-form">
-                    <div class="auth-form__container">
-                        <header class="auth-form__header">
-                            <h3 class="auth-form__heading">Đăng ký</h3>
-                            <span class="auth-form--switch-btn">
-                                Đăng nhập
-                            </span>
-                        </header>
 
-                        <div class="auth-form__form">
-                            <div class="auth-form__group">
-                                <input type="text" class="auth-form__input" placeholder="Email">
-                            </div>
-                            <div class="auth-form__group">
-                                <input type="password" class="auth-form__input" placeholder="Mật khẩu">
-                            </div>
-                            <div class="auth-form__group">
-                                <input type="password" class="auth-form__input" placeholder="Mật khẩu">
-                            </div>
+        <div class="modal__body">
+
+            <!-- Register -->
+            <div class="auth-form auth-form--register">
+
+                <div class="auth-form__container">
+
+                    <header class="auth-form__header">
+                        <h3 class="auth-form__heading">Đăng ký</h3>
+
+                        <span
+                            class="auth-form--switch-btn"
+                            data-switch="login">
+                            Đăng nhập
+                        </span>
+                    </header>
+
+                    <div class="auth-form__form">
+
+                        <div class="auth-form__group">
+                            <input
+                                id="register-name"
+                                name="name"
+                                type="text"
+                                class="auth-form__input"
+                                placeholder="Tên hiển thị"
+                                autocomplete="name">
+                            
+                            <span class="auth-form__message"></span>
                         </div>
 
-                        <div class="auth-form__aside">
-                         <p class="auth-form__policy-text">
-                            Bằng việc đăng kí, bạn đã đồng ý với Shopee về 
-                            <a href="" class="auth-form__link">Điều khoản dịch vụ</a> và 
-                            <a href="" class="auth-form__link">Chính sách bảo mật</a>
-                         </p>   
+                        <div class="auth-form__group">
+                            <input
+                                id="register-email"
+                                name="email"
+                                type="email"
+                                class="auth-form__input"
+                                placeholder="Email"
+                                autocomplete="email">
+
+                            <span class="auth-form__message"></span>
                         </div>
-    
-                        <div class="auth-form__controls">
-                            <button class="btn">TRỞ LẠI</button>
-                            <button class="btn btn--primary">ĐĂNG KÝ</button>
+
+                        <div class="auth-form__group">
+                            <input
+                                id="register-password"
+                                name="password"
+                                type="password"
+                                class="auth-form__input"
+                                placeholder="Mật khẩu"
+                                autocomplete="new-password">
+
+                            <span class="auth-form__message"></span>
                         </div>
+
+                        <div class="auth-form__group">
+                            <input
+                                id="register-confirm-password"
+                                name="confirm-password"
+                                type="password"
+                                class="auth-form__input"
+                                placeholder="Nhập lại mật khẩu"
+                                autocomplete="new-password">
+
+                            <span class="auth-form__message"></span>
+                        </div>
+
                     </div>
 
+                    <div class="auth-form__aside">
 
-                    <div class="auth-form__socials">
-                        <a href="" class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
-                            <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                            <span class="auth-form__socials-text">Kết nối với Facebook</span>
-                        </a>
-                        <a href="" class="btn btn--size-s auth-form__socials--google btn--no-hover">
-                            <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                            <span class="auth-form__socials-text">Kết nối với Google</span>
-                        </a>
+                        <p class="auth-form__policy-text">
+                            Bằng việc đăng ký, bạn đã đồng ý với Shopee về
+                            <a href="#" class="auth-form__link">
+                                Điều khoản dịch vụ
+                            </a>
+                            &
+                            <a href="#" class="auth-form__link">
+                                Chính sách bảo mật
+                            </a>
+                        </p>
+
                     </div>
-                </div> -->
 
-                  <!-- <div class="auth-form">
-                    <div class="auth-form__container">
-                        <header class="auth-form__header">
-                            <h3 class="auth-form__heading">Đăng nhập</h3>
-                            <span class="auth-form--switch-btn">
-                                Đăng ký
-                            </span>
-                        </header>
+                    <div class="auth-form__controls">
 
-                        <div class="auth-form__form">
-                            <div class="auth-form__group">
-                                <input type="text" class="auth-form__input" placeholder="Email">
-                            </div>
-                            <div class="auth-form__group">
-                                <input type="password" class="auth-form__input" placeholder="Mật khẩu">
-                            </div>
+                        <button
+                            type="button"
+                            class="btn auth-close">
+                            TRỞ LẠI
+                        </button>
+
+                        <button
+                            type="button"
+                            id="register-submit"
+                            class="btn btn--primary">
+                            ĐĂNG KÝ
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="auth-form__socials">
+
+                    <a
+                        href="#"
+                        class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                        <span class="auth-form__socials-text">
+                            Kết nối với Facebook
+                        </span>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                        <span class="auth-form__socials-text">
+                            Kết nối với Google
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            <!-- Login -->
+
+            <div class="auth-form auth-form--login is-hidden">
+
+                <div class="auth-form__container">
+
+                    <header class="auth-form__header">
+
+                        <h3 class="auth-form__heading">
+                            Đăng nhập
+                        </h3>
+
+                        <span
+                            class="auth-form--switch-btn"
+                            data-switch="register">
+                            Đăng ký
+                        </span>
+
+                    </header>
+
+                    <div class="auth-form__form">
+
+                        <div class="auth-form__group">
+                            <input
+                                id="login-email"
+                                name="email"
+                                type="email"
+                                class="auth-form__input"
+                                placeholder="Email"
+                                autocomplete="email">
+
+                            <span class="auth-form__message"></span>
                         </div>
 
-                            <div class="auth-form__aside">
-                                <div class="auth-form__help">
-                                    <a href="" class="auth-form__help-link auth-form__help-forgot">Quên mật khẩu</a>
-                                    <span class="auth-form__help-separate"></span>
-                                    <a href="" class="auth-form__help-link">Cần trợ giúp?</a>
-                                </div>
-                            </div>
-                        <div class="auth-form__controls">
-                            <button class="btn">TRỞ LẠI</button>
-                            <button class="btn btn--primary">ĐĂNG NHẬP</button>
+                        <div class="auth-form__group">
+                            <input
+                                id="login-password"
+                                name="password"
+                                type="password"
+                                class="auth-form__input"
+                                placeholder="Mật khẩu"
+                                autocomplete="current-password">
+
+                            <span class="auth-form__message"></span>
                         </div>
+
                     </div>
 
+                    <div class="auth-form__aside">
 
-                    <div class="auth-form__socials">
-                        <a href="" class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
-                            <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
-                            <span class="auth-form__socials-text">Kết nối với Facebook</span>
-                        </a>
-                        <a href="" class="btn btn--size-s auth-form__socials--google btn--no-hover">
-                            <i class="auth-form__socials-icon fa-brands fa-google"></i>
-                            <span class="auth-form__socials-text">Kết nối với Google</span>
-                        </a>
+                        <div class="auth-form__help">
+
+                            <a
+                                href="#"
+                                class="auth-form__help-link auth-form__help-forgot">
+                                Quên mật khẩu
+                            </a>
+
+                            <span class="auth-form__help-separate"></span>
+
+                            <a
+                                href="#"
+                                class="auth-form__help-link">
+                                Cần trợ giúp?
+                            </a>
+
+                        </div>
+
                     </div>
-                </div> -->
+
+                    <div class="auth-form__controls">
+
+                        <button
+                            type="button"
+                            class="btn auth-close">
+                            TRỞ LẠI
+                        </button>
+
+                        <button
+                            type="button"
+                            id="login-submit"
+                            class="btn btn--primary">
+                            ĐĂNG NHẬP
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="auth-form__socials">
+
+                    <a
+                        href="#"
+                        class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                        <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                        <span class="auth-form__socials-text">
+                            Kết nối với Facebook
+                        </span>
+
+                    </a>
+
+                    <a
+                        href="#"
+                        class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                        <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                        <span class="auth-form__socials-text">
+                            Kết nối với Google
+                        </span>
+
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
+
     </div>
+
+    </div>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/products.js"></script>
+    <script src="assets/js/auth.js"></script>
+    <script src="assets/js/home.js"></script>
 </body>
 
 </html>
