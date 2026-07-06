@@ -1,0 +1,258 @@
+<div class="modal is-hidden" id="auth-modal">
+    <div class="modal__overlay"></div>
+
+    <div class="modal__body">
+
+        <!-- Register -->
+        <div class="auth-form auth-form--register">
+
+            <div class="auth-form__container">
+
+                <header class="auth-form__header">
+                    <h3 class="auth-form__heading">Đăng ký</h3>
+
+                    <span
+                        class="auth-form--switch-btn"
+                        data-switch="login">
+                        Đăng nhập
+                    </span>
+                </header>
+
+                <div class="auth-form__form">
+
+                    <div class="auth-form__group">
+                        <input
+                            id="register-name"
+                            name="name"
+                            type="text"
+                            class="auth-form__input"
+                            placeholder="Tên hiển thị"
+                            autocomplete="name">
+                        
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                    <div class="auth-form__group">
+                        <input
+                            id="register-email"
+                            name="email"
+                            type="email"
+                            class="auth-form__input"
+                            placeholder="Email"
+                            autocomplete="email">
+
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                    <div class="auth-form__group">
+                        <input
+                            id="register-password"
+                            name="password"
+                            type="password"
+                            class="auth-form__input"
+                            placeholder="Mật khẩu"
+                            autocomplete="new-password">
+
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                    <div class="auth-form__group">
+                        <input
+                            id="register-confirm-password"
+                            name="confirm-password"
+                            type="password"
+                            class="auth-form__input"
+                            placeholder="Nhập lại mật khẩu"
+                            autocomplete="new-password">
+
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                </div>
+
+                <div class="auth-form__aside">
+
+                    <p class="auth-form__policy-text">
+                        Bằng việc đăng ký, bạn đã đồng ý với Shopee về
+                        <a href="#" class="auth-form__link">
+                            Điều khoản dịch vụ
+                        </a>
+                        &
+                        <a href="#" class="auth-form__link">
+                            Chính sách bảo mật
+                        </a>
+                    </p>
+
+                </div>
+
+                <div class="auth-form__controls">
+
+                    <button
+                        type="button"
+                        class="btn auth-close">
+                        TRỞ LẠI
+                    </button>
+
+                    <button
+                        type="button"
+                        id="register-submit"
+                        class="btn btn--primary">
+                        ĐĂNG KÝ
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="auth-form__socials">
+
+                <a
+                    href="#"
+                    class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Facebook
+                    </span>
+
+                </a>
+
+                <a
+                    href="#"
+                    class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Google
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <!-- Login -->
+
+        <div class="auth-form auth-form--login is-hidden">
+
+            <div class="auth-form__container">
+
+                <header class="auth-form__header">
+
+                    <h3 class="auth-form__heading">
+                        Đăng nhập
+                    </h3>
+
+                    <span
+                        class="auth-form--switch-btn"
+                        data-switch="register">
+                        Đăng ký
+                    </span>
+
+                </header>
+
+                <div class="auth-form__form">
+
+                    <div class="auth-form__group">
+                        <input
+                            id="login-email"
+                            name="email"
+                            type="email"
+                            class="auth-form__input"
+                            placeholder="Email"
+                            autocomplete="email">
+
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                    <div class="auth-form__group">
+                        <input
+                            id="login-password"
+                            name="password"
+                            type="password"
+                            class="auth-form__input"
+                            placeholder="Mật khẩu"
+                            autocomplete="current-password">
+
+                        <span class="auth-form__message"></span>
+                    </div>
+
+                </div>
+
+                <div class="auth-form__aside">
+
+                    <div class="auth-form__help">
+
+                        <a
+                            href="#"
+                            class="auth-form__help-link auth-form__help-forgot">
+                            Quên mật khẩu
+                        </a>
+
+                        <span class="auth-form__help-separate"></span>
+
+                        <a
+                            href="#"
+                            class="auth-form__help-link">
+                            Cần trợ giúp?
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="auth-form__controls">
+
+                    <button
+                        type="button"
+                        class="btn auth-close">
+                        TRỞ LẠI
+                    </button>
+
+                    <button
+                        type="button"
+                        id="login-submit"
+                        class="btn btn--primary">
+                        ĐĂNG NHẬP
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="auth-form__socials">
+
+                <a
+                    href="#"
+                    class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Facebook
+                    </span>
+
+                </a>
+
+                <a
+                    href="#"
+                    class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Google
+                    </span>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
