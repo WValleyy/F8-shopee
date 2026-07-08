@@ -2,6 +2,7 @@
   "name": "f8-shopee",
   "version": "1.0.0",
   "description": "",
+  "type": "module",
   "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -19,6 +20,7 @@
   "homepage": "https://github.com/WValleyy/F8-shopee#readme",
   "dependencies": {
     "ejs": "^6.0.1",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "express-ejs-layouts": "^2.5.1"
   }
 }

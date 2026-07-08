@@ -1,10 +1,7 @@
-/* Home product */
+/* Product Card */
 
-.home-product {
-    margin-bottom: 10px;
-}
 /* Card */
-.home-product-item {
+.product-card {
     position: relative;
     background-color: var(--white-color);
     border-radius: 6px;
@@ -18,13 +15,13 @@
 
 }
 
-.home-product-item:hover {
+.product-card:hover {
     transform: translateY(-4px);
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.12);
 }
 
 /* Ảnh */
-.home-product-item__img {
+.product-card__img {
     padding-top: 100%;
     background-repeat: no-repeat;
     background-size: contain;
@@ -34,7 +31,7 @@
 }
 
 /* Tên sản phẩm */
-.home-product-item__name {
+.product-card__name {
     font-size: 1.4rem;
     color: var(--text-color);
     font-weight: 400;
@@ -50,26 +47,26 @@
 }
 
 /* Giá */
-.home-product-item__price {
+.product-card__price {
     display: flex;
     align-items: baseline;
     flex-wrap: wrap;
     gap: 8px;
     margin: 0 10px 10px 10px;
 }
-.home-product-item__price-old {
+.product-card__price-old {
     font-size: 1.3rem;
     color: var(--gray-text-color);
     text-decoration: line-through;
 }
-.home-product-item__price-current {
+.product-card__price-current {
     font-size: 1.4rem;
     color: var(--primary-color);
     font-weight: 400;
 }
 
 /* Like + Rating */
-.home-product-item__action {
+.product-card__action {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -78,45 +75,45 @@
 
 }
 
-.home-product-item__like {
+.product-card__like {
     font-size: 1.3rem;
 }
 
-i.home-product-item__like-icon.fa-solid {
+i.product-card__like-icon.fa-solid {
     display: none;
     color: #ff424f;
 }
 
-i.home-product-item__like-icon.fa-regular {
+i.product-card__like-icon.fa-regular {
     color: #ff424f;
 }
 
-.home-product-item__like--liked i.home-product-item__like-icon.fa-solid {
+.product-card__like--liked i.product-card__like-icon.fa-solid {
     display: inline-block;
 }
 
-.home-product-item__like--liked i.home-product-item__like-icon.fa-regular {
+.product-card__like--liked i.product-card__like-icon.fa-regular {
     display: none;
 }
 
 
-.home-product-item__rating {
+.product-card__rating {
     font-size: 0.8rem;
     color: #d5d5d5;
     margin-left: auto;
 
 }
 
-.home-product-item__star--gold {
+.product-card__star--gold {
     color: var(--gold-star-color);
 }
 
-.home-product-item__sold {
+.product-card__sold {
     font-size: 1.2rem;
     color: var(--text-color);
 }
 /* Badge yêu thích */
-.home-product-item__favorite {
+.product-card__favorite {
     position: absolute;
     top: 10px;
     left: -4px;
@@ -130,7 +127,7 @@ i.home-product-item__like-icon.fa-regular {
     padding: 0 4px;
 }
 
-.home-product-item__favorite::after {
+.product-card__favorite::after {
     position: absolute;
     content: "";
     left: 0;
@@ -140,17 +137,17 @@ i.home-product-item__like-icon.fa-regular {
     filter: brightness(0.7);
 }
 
-.home-product-item__favorite i {
+.product-card__favorite i {
     font-size: 0.9rem;
     margin: 0 -1px 0 -1px;
     color: var(--white-color);
 }
-.home-product-item__favorite-msg {
+.product-card__favorite-msg {
     color: var(--white-color);
 }
 
 /* Badge giảm giá */
-.home-product-item__sale-off {
+.product-card__sale-off {
     position: absolute;
     top: 0;
     right: 0;
@@ -161,20 +158,20 @@ i.home-product-item__like-icon.fa-regular {
     text-align: center;
     border-top-right-radius: 5px;
 }
-.home-product-item__sale-off-percent {
+.product-card__sale-off-percent {
     font-size: 1.3rem;
     line-height: 1.3rem;
     color: var(--primary-color);
     font-weight: 600;
 }
-.home-product-item__sale-off-label {
+.product-card__sale-off-label {
     font-size: 1.3rem;
     line-height: 1.3rem;
     color: var(--white-color);
     font-weight: 600;
 }
 
-.home-product-item__sale-off::after {
+.product-card__sale-off::after {
     position: absolute;
     content: "";
     left: 0;
@@ -182,32 +179,4 @@ i.home-product-item__like-icon.fa-regular {
     border-width: 0 20px 4px;
     border-style: solid;
     border-color: transparent  rgb(255, 216, 64, 0.94) transparent rgb(255, 216, 64, 0.94);
-}
-
-.home-product__pagination {
-    margin: 48px 0 32px 0;
-}
-
-.home-product__empty-state {
-    height: 600px;
-    flex: 0 0 calc(100% - 10px);
-    margin: 10px 5px 0;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: center;
-    justify-content: center;
-    background-color: var(--white-color);
-    border-radius: 2px;
-}
-
-.home-product__empty-state-img {
-    width: 100px;
-    height: 100px;
-}
-
-.home-product__empty-state-heading {
-    font-size: 1.8rem;
-    color: var(--text-color);
-    font-weight: 400;
 }

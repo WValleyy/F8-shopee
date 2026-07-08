@@ -1,0 +1,201 @@
+<%- include("./components/account-header", {
+    title: "Địa chỉ của tôi",
+    button: {
+        id: "btn-add-address",
+        text: "+ Thêm địa chỉ"
+    }
+}) %>
+
+<% if (addresses.length) { %>
+
+    <section class="address">
+
+        <div class="address__list">
+
+            <% addresses.forEach(address => { %>
+
+                <%- include("../partials/address-card", {
+                    address
+                }) %>
+
+            <% }) %>
+
+        </div>
+
+    </section>
+
+<% } else { %>
+
+    <section class="address address--empty">
+
+        <div class="address__empty">
+
+            <svg
+                class="address__empty-icon"
+                viewBox="0 0 24 24"
+                aria-hidden="true">
+
+                <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z">
+                </path>
+
+            </svg>
+
+            <p class="address__empty-text">
+
+                Bạn chưa có địa chỉ nào.
+
+            </p>
+
+            <button
+                type="button"
+                id="btn-add-address-empty"
+                class="btn btn--primary">
+
+                Thêm địa chỉ
+
+            </button>
+
+        </div>
+
+    </section>
+
+<% } %>
+
+<!-- ================= Address Modal ================= -->
+
+<div
+    id="address-modal"
+    class="modal">
+
+    <div class="modal__overlay"></div>
+
+    <div class="modal__body">
+
+        <form
+            id="address-form"
+            class="auth-form">
+
+            <div class="auth-form__container">
+
+                <div class="auth-form__header">
+
+                    <h3 class="auth-form__heading">
+
+                        Địa chỉ
+
+                    </h3>
+
+                </div>
+
+                <div class="auth-form__form">
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="text"
+                            name="fullName"
+                            class="auth-form__input"
+                            placeholder="Họ và tên">
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="text"
+                            name="phone"
+                            class="auth-form__input"
+                            placeholder="Số điện thoại">
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="text"
+                            name="province"
+                            class="auth-form__input"
+                            placeholder="Tỉnh / Thành phố">
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="text"
+                            name="district"
+                            class="auth-form__input"
+                            placeholder="Quận / Huyện">
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="text"
+                            name="ward"
+                            class="auth-form__input"
+                            placeholder="Phường / Xã">
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <textarea
+                            name="addressLine"
+                            class="auth-form__input auth-form__textarea"
+                            rows="4"
+                            placeholder="Địa chỉ cụ thể">
+
+                        </textarea>
+
+                    </div>
+
+                    <div class="auth-form__group">
+
+                        <label class="auth-form__checkbox">
+
+                            <input
+                                type="checkbox"
+                                name="isDefault">
+
+                            <span>
+
+                                Đặt làm địa chỉ mặc định
+
+                            </span>
+
+                        </label>
+
+                    </div>
+
+                </div>
+
+                <div class="auth-form__controls">
+
+                    <button
+                        type="button"
+                        class="btn auth-form__controls-back">
+
+                        Hủy
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary">
+
+                        Lưu
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

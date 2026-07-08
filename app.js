@@ -1,29 +1,36 @@
-const express = require("express");
+import express from 'express';
+import expressLayouts from 'express-ejs-layouts';
+
+import homeRoutes from './routes/views/home.routes.js';
+import accountRoutes from './routes/views/account.routes.js';
 
 const app = express();
 
-app.use(express.static("public"));
+// ================= Middleware =================
 
-app.set("view engine", "ejs");
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
 
-app.listen(3000);
+app.use(express.static('public'));
 
-app.get("/", (req,res)=>{
+// ================= View Engine =================
 
-    res.render("home");
+app.use(expressLayouts);
 
+app.set('view engine', 'ejs');
+app.set('layout', 'layout');
+
+// ================= Routes =================
+
+app.use('/', homeRoutes);
+app.use('/account', accountRoutes);
+
+// ================= 404 =================
+
+app.use((req, res) => {
+    res.status(404).render('404', {
+        title: '404 - Page Not Found',
+    });
 });
 
-app.get("/product",(req,res)=>{
-
-    res.render("product");
-
-});
-
-app.get("/cart",(req,res)=>{
-
-    res.render("cart");
-
-});
-
-app.use(express.static("public"));
+export default app;

@@ -1,0 +1,144 @@
+<%- include("./components/account-header", {
+    title: "Những thiết lập riêng tư"
+}) %>
+
+<section class="privacy">
+
+    <div class="privacy-card">
+
+        <div class="privacy-card__content">
+
+            <h3 class="privacy-card__title">
+
+                Yêu cầu xóa tài khoản
+
+            </h3>
+
+            <p class="privacy-card__description">
+
+                Sau khi tài khoản bị xóa hoàn toàn, toàn bộ dữ liệu không thể khôi
+                phục.
+
+            </p>
+
+            <ul class="privacy-card__list">
+
+                <li>
+
+                    Thông tin cá nhân sẽ bị xóa.
+
+                </li>
+
+                <li>
+
+                    Đơn hàng và lịch sử giao dịch có thể không còn truy cập được.
+
+                </li>
+
+                <li>
+
+                    Voucher chưa sử dụng sẽ bị hủy.
+
+                </li>
+
+                <li>
+
+                    Bạn sẽ không thể đăng nhập bằng tài khoản này.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="privacy-card__actions">
+
+            <button
+                type="button"
+                id="btn-delete-account"
+                class="btn btn--primary btn--danger">
+
+                Xóa tài khoản
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Delete Account Modal ================= -->
+
+<div
+    id="delete-account-modal"
+    class="modal">
+
+    <div class="modal__overlay"></div>
+
+    <div class="modal__body">
+
+        <form
+            id="delete-account-form"
+            class="auth-form">
+
+            <div class="auth-form__container">
+
+                <div class="auth-form__header">
+
+                    <h3 class="auth-form__heading">
+
+                        Xóa tài khoản
+
+                    </h3>
+
+                </div>
+
+                <div class="auth-form__form">
+
+                    <p class="auth-form__text">
+
+                        Hành động này không thể hoàn tác. Vui lòng nhập mật khẩu để xác
+                        nhận.
+
+                    </p>
+
+                    <div class="auth-form__group">
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="auth-form__input"
+                            placeholder="Nhập mật khẩu">
+
+                    </div>
+
+                </div>
+
+                <div class="auth-form__controls">
+
+                    <button
+                        type="button"
+                        class="btn auth-form__controls-back">
+
+                        Hủy
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary btn--danger">
+
+                        Xóa tài khoản
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

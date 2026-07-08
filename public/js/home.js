@@ -153,36 +153,36 @@
         const safeRating = Math.max(0, Math.min(5, Number(rating) || 0));
 
         return Array.from({ length: 5 }, (_, index) => `
-            <i class="${index < safeRating ? 'home-product-item__star--gold ' : ''}fa-solid fa-star"></i>
+            <i class="${index < safeRating ? 'product-card__star--gold ' : ''}fa-solid fa-star"></i>
         `).join('');
     };
 
     const renderProductCard = (product) => `
         <div class="grid__column-2-4">
-            <a class="home-product-item" href="product.html">
-                <div class="home-product-item__img" style="background-image: url('${product.image}');"></div>
-                <h4 class="home-product-item__name">${product.name}</h4>
-                <div class="home-product-item__price">
-                    <span class="home-product-item__price-old">${product.priceOld}</span>
-                    <span class="home-product-item__price-current">${product.priceCurrent}</span>
+            <a class="product-card" href="product.html">
+                <div class="product-card__img" style="background-image: url('${product.image}');"></div>
+                <h4 class="product-card__name">${product.name}</h4>
+                <div class="product-card__price">
+                    <span class="product-card__price-old">${product.priceOld}</span>
+                    <span class="product-card__price-current">${product.priceCurrent}</span>
                 </div>
-                <div class="home-product-item__action">
-                    <span class="home-product-item__like">
-                        <i class="home-product-item__like-icon fa-solid fa-heart"></i>
-                        <i class="home-product-item__like-icon fa-regular fa-heart"></i>
+                <div class="product-card__action">
+                    <span class="product-card__like">
+                        <i class="product-card__like-icon fa-solid fa-heart"></i>
+                        <i class="product-card__like-icon fa-regular fa-heart"></i>
                     </span>
-                    <span class="home-product-item__rating">
+                    <span class="product-card__rating">
                         ${renderProductStars(product.rating)}
                     </span>
-                    <span class="home-product-item__sold">${product.sold}</span>
+                    <span class="product-card__sold">${product.sold}</span>
                 </div>
-                <div class="home-product-item__favorite">
+                <div class="product-card__favorite">
                     <i class="fa-solid fa-check"></i>
-                    <span class="home-product-item__favorite-msg">Yêu thích</span>
+                    <span class="product-card__favorite-msg">Yêu thích</span>
                 </div>
-                <div class="home-product-item__sale-off">
-                    <span class="home-product-item__sale-off-percent">${product.discount}</span>
-                    <span class="home-product-item__sale-off-label">GIẢM</span>
+                <div class="product-card__sale-off">
+                    <span class="product-card__sale-off-percent">${product.discount}</span>
+                    <span class="product-card__sale-off-label">GIẢM</span>
                 </div>
             </a>
         </div>
@@ -435,7 +435,7 @@
     const setupProductNavigation = () => {
         const categoryLinks = Array.from(document.querySelectorAll('.category-item__link'));
         const productList = document.querySelector('.home-product .grid__row');
-        const paginationList = document.querySelector('.home-product__pagination');
+        const paginationList = document.querySelector('.home-product__pagination .pagination');
         const pageCurrent = document.querySelector('.home-filter__page-current');
         const pageTotal = document.querySelector('.home-filter__page-total');
         const pageControlButtons = Array.from(document.querySelectorAll('.home-filter__page-btn'));
@@ -476,17 +476,19 @@
         };
 
         const goToPreviousPage = () => {
-            goToPage(currentPage - 1);
+            goToPage(homeState.currentPage - 1);
         };
 
         const goToNextPage = () => {
-            goToPage(currentPage + 1);
+            goToPage(homeState.currentPage + 1);
         };
 
         const updatePageControls = (totalPages) => {
-            pageControlButtons.forEach((button, index) => {
-                const isPreviousButton = button.dataset.navigation === 'prev' || index === 0;
-                const isDisabled = totalPages <= 1
+            pageControlButtons.forEach((button) => {
+                const isPreviousButton = button.dataset.navigation === 'prev';
+
+                const isDisabled =
+                    totalPages <= 1
                     || (isPreviousButton && homeState.currentPage === 1)
                     || (!isPreviousButton && homeState.currentPage === totalPages);
 
@@ -516,11 +518,15 @@
             });
 
             if (pageCurrent) {
-                pageCurrent.textContent = String(filteredProducts.length ? homeState.currentPage : 0);
+                pageCurrent.textContent = String(
+                    filteredProducts.length ? homeState.currentPage : 0
+                );
             }
 
             if (pageTotal) {
-                pageTotal.textContent = String(filteredProducts.length ? totalPages : 0);
+                pageTotal.textContent = String(
+                    filteredProducts.length ? totalPages : 0
+                );
             }
 
             updatePageControls(totalPages || 1);
@@ -532,7 +538,11 @@
             }
 
             renderProducts(productList, pageProducts);
-            renderPagination(paginationList, homeState.currentPage, totalPages);
+            renderPagination(
+                paginationList,
+                homeState.currentPage,
+                totalPages
+            );
         };
 
         refreshHomeProducts = syncView;
@@ -543,6 +553,7 @@
 
                 homeState.activeCategory = link.dataset.category || 'all';
                 homeState.currentPage = 1;
+
                 syncView();
             });
         });
@@ -550,25 +561,32 @@
         paginationList.addEventListener('click', (event) => {
             const paginationLink = event.target.closest('.pagination-item__link');
 
-            if (!paginationLink || paginationLink.parentElement?.classList.contains('pagination-item--disabled')) {
+            if (
+                !paginationLink ||
+                paginationLink.parentElement?.classList.contains('pagination-item--disabled')
+            ) {
                 return;
             }
 
             event.preventDefault();
 
             const nextPage = Number(paginationLink.dataset.page);
-            const filteredProducts = filterProductsByCategory(activeCategory);
-            const totalPages = Math.max(1, Math.ceil(filteredProducts.length / PRODUCTS_PER_PAGE));
 
-            if (!Number.isFinite(nextPage) || nextPage < 1 || nextPage > totalPages) {
+            const filteredProducts = getSortedProducts();
+            const totalPages = getTotalPages(filteredProducts);
+
+            if (
+                !Number.isFinite(nextPage)
+                || nextPage < 1
+                || nextPage > totalPages
+            ) {
                 return;
             }
 
             goToPage(nextPage);
         });
 
-        pageControlButtons.forEach((button, index) => {
-            button.setAttribute('data-navigation', index === 0 ? 'prev' : 'next');
+        pageControlButtons.forEach((button) => {
             button.addEventListener('click', (event) => {
                 event.preventDefault();
 
@@ -576,7 +594,7 @@
                     return;
                 }
 
-                if (button.dataset.navigation === 'prev' || index === 0) {
+                if (button.dataset.navigation === 'prev') {
                     goToPreviousPage();
                     return;
                 }
@@ -612,7 +630,7 @@
         }
 
         productList.addEventListener('click', (event) => {
-            const wishButton = event.target.closest('.home-product-item__like');
+            const wishButton = event.target.closest('.product-card__like');
 
             if (!wishButton) {
                 return;
@@ -621,7 +639,7 @@
             event.preventDefault();
             event.stopPropagation();
 
-            wishButton.classList.toggle('home-product-item__like--liked');
+            wishButton.classList.toggle('product-card__like--liked');
         });
     };
 

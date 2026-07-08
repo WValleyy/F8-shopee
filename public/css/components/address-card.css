@@ -1,0 +1,99 @@
+/* ================= Address Card ================= */
+
+.address-card {
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.address-card:last-child {
+    border-bottom: none;
+}
+
+.address-card__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 12px;
+}
+
+.address-card__user {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.address-card__name {
+    margin: 0;
+    padding-right: 12px;
+    border-right: 1px solid var(--border-color);
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.6;
+}
+
+.address-card__phone {
+    margin-left: 12px;
+    color: #757575;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.address-card__actions {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+}
+
+.address-card__action {
+    padding: 0;
+    border: none;
+    background: transparent;
+    color: var(--primary-color);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.address-card__action:hover {
+    text-decoration: underline;
+}
+
+.address-card__action--danger {
+    color: #555;
+}
+
+.address-card__action--danger:hover {
+    color: var(--primary-color);
+}
+
+.address-card__line {
+    margin: 0;
+    color: #757575;
+    font-size: 1.4rem;
+    line-height: 2.2rem;
+}
+
+.address-card__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 18px;
+}
+
+.address-card__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 12px;
+    border: 1px solid var(--primary-color);
+    color: var(--primary-color);
+    font-size: 1.2rem;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.address-card__default-btn {
+    min-width: 160px;
+}

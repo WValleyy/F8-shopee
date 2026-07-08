@@ -1,0 +1,79 @@
+<!-- ================= Payment Card ================= -->
+
+<div class="payment-card <%= card.isDefault ? 'payment-card--default' : '' %>">
+
+    <div class="payment-card__content">
+
+        <div class="payment-card__header">
+
+            <div class="payment-card__header-left">
+
+                <h3 class="payment-card__holder">
+
+                    <%= card.cardholderName %>
+
+                </h3>
+
+                <div class="payment-card__brand">
+
+                    <%= card.brand.toUpperCase() %>
+
+                </div>
+
+            </div>
+
+            <% if (card.isDefault) { %>
+
+                <span class="payment-card__badge">
+
+                    Mặc định
+
+                </span>
+
+            <% } %>
+
+        </div>
+
+        <p class="payment-card__number">
+
+            •••• •••• •••• <%= card.last4 %>
+
+        </p>
+
+        <p class="payment-card__expire">
+
+            Hết hạn <%= String(card.expMonth).padStart(2, "0") %>/<%= card.expYear %>
+
+        </p>
+
+    </div>
+
+    <div class="payment-card__actions">
+
+        <% if (!card.isDefault) { %>
+
+            <button
+                type="button"
+                class="payment-card__action"
+                data-set-default
+                data-card-id="<%= card._id %>">
+
+                Đặt làm mặc định
+
+            </button>
+
+        <% } %>
+
+        <button
+            type="button"
+            class="payment-card__action payment-card__action--danger"
+            data-delete-card
+            data-card-id="<%= card._id %>">
+
+            Xóa
+
+        </button>
+
+    </div>
+
+</div>

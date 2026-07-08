@@ -91,7 +91,7 @@
 .header__navbar-user-menu {
     position: absolute;
     top: 140%;
-    right:0;
+    right: 0;
     width: 150px;
     background-color: var(--white-color);
     border: 1px solid #d3d3d3;
@@ -227,7 +227,7 @@
 .header__notify {
     position: absolute;
     top: 140%;
-    right:0;
+    right: 0;
     width: 404px;
     background-color: var(--white-color);
     border: 1px solid #d3d3d3;
@@ -275,7 +275,7 @@
 
 .header__notify-item {
     list-style: none;
-    background-color: rbga(255, 255, 255, 0.8);
+    background-color: rgba(255, 255, 255, 0.8);
     
 }
 
@@ -283,7 +283,7 @@
     background-color: #f7f7f7;
 }
 .header__notify-item--unviewed {
-    background-color: rgb(238, 75, 43, 0.08);
+    background-color: rgba(238, 75, 43, 0.08);
 }
 
 .header__notify-link {

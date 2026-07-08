@@ -1,0 +1,91 @@
+/* ================= Voucher Card ================= */
+
+.voucher-card {
+    display: flex;
+    align-items: stretch;
+    min-height: 120px;
+    margin-bottom: 16px;
+    background: var(--white-color);
+    border: 1px solid var(--border-color);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.voucher-card:last-child {
+    margin-bottom: 0;
+}
+
+.voucher-card__left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    background: var(--primary-color);
+    color: var(--white-color);
+}
+
+.voucher-card__logo {
+    text-align: center;
+}
+
+.voucher-card__logo-text {
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.voucher-card__content {
+    flex: 1;
+    padding: 20px 24px;
+}
+
+.voucher-card__title {
+    margin: 0 0 8px;
+    color: var(--text-color);
+    font-size: 1.6rem;
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.voucher-card__description {
+    margin: 0 0 12px;
+    color: #757575;
+    font-size: 1.4rem;
+    line-height: 1.6;
+}
+
+.voucher-card__expire {
+    margin: 0;
+    color: #999;
+    font-size: 1.3rem;
+}
+
+.voucher-card__right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 150px;
+    padding: 20px;
+    border-left: 1px dashed var(--border-color);
+}
+
+.voucher-card__button {
+    min-width: 110px;
+    height: 36px;
+    border: none;
+    border-radius: 2px;
+    background: var(--primary-color);
+    color: var(--white-color);
+    font-size: 1.4rem;
+    cursor: pointer;
+}
+
+.voucher-card__button:hover {
+    opacity: 0.9;
+}
+
+.voucher-card__status {
+    color: #999;
+    font-size: 1.4rem;
+    font-weight: 500;
+}

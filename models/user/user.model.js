@@ -1,7 +1,12 @@
 import mongoose, { Schema } from 'mongoose';
 
 const userSchema = new Schema(
-    {
+    {   
+        username: {
+            type: String,
+            required: true,
+            trim: true,
+        },
         name: {
             type: String,
             required: true,
@@ -32,6 +37,16 @@ const userSchema = new Schema(
             type: String,
             trim: true,
             default: '',
+        },
+        gender: {
+            type: String,
+            enum: ['male', 'female', 'other'],
+            default: 'other'
+        },
+
+        birthday: {
+            type: Date,
+            default: null
         },
 
         role: {

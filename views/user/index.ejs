@@ -1,0 +1,45 @@
+<%
+title = pageTitle || 'Tài khoản của tôi | Shopee';
+
+styles = [
+    '/css/pages/user.css',
+    '/css/components/user-sidebar.css'
+];
+
+scripts = [
+    '/js/app.js',
+    '/js/products.js',
+    '/js/auth.js',
+    '/js/account.js'
+];
+%>
+
+<main class="account-page">
+
+    <div class="grid">
+
+        <div class="grid__row">
+
+            <aside class="grid__column-2">
+
+                <%- include('../user/components/user-sidebar') %>
+
+            </aside>
+
+            <section class="grid__column-10">
+
+                <div
+                    id="account-content"
+                    class="account-content">
+
+                    <%- body %>
+
+                </div>
+
+            </section>
+
+        </div>
+
+    </div>
+
+</main>

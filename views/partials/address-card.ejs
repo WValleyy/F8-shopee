@@ -1,0 +1,93 @@
+<!-- ================= Address Card ================= -->
+
+<article class="address-card">
+
+    <div class="address-card__content">
+
+        <header class="address-card__header">
+
+            <div class="address-card__user">
+
+                <h3 class="address-card__name">
+
+                    <%= address.fullName %>
+
+                </h3>
+
+                <span class="address-card__phone">
+
+                    <%= address.phone %>
+
+                </span>
+
+            </div>
+
+            <div class="address-card__actions">
+
+                <button
+                    type="button"
+                    class="address-card__action"
+                    data-edit-address
+                    data-address-id="<%= address._id %>">
+
+                    Cập nhật
+
+                </button>
+
+                <button
+                    type="button"
+                    class="address-card__action address-card__action--danger"
+                    data-delete-address
+                    data-address-id="<%= address._id %>">
+
+                    Xóa
+
+                </button>
+
+            </div>
+
+        </header>
+
+        <p class="address-card__line">
+
+            <%= address.addressLine %>
+
+        </p>
+
+        <p class="address-card__line">
+
+            <%= address.ward %>,
+            <%= address.district %>,
+            <%= address.province %>
+
+        </p>
+
+        <footer class="address-card__footer">
+
+            <% if (address.isDefault) { %>
+
+                <span class="address-card__badge">
+
+                    Mặc định
+
+                </span>
+
+            <% } else { %>
+
+                <button
+                    type="button"
+                    class="btn address-card__default-btn"
+                    data-set-default-address
+                    data-address-id="<%= address._id %>">
+
+                    Thiết lập mặc định
+
+                </button>
+
+            <% } %>
+
+        </footer>
+
+    </div>
+
+</article>

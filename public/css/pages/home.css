@@ -1,5 +1,3 @@
-
-
 /* App container */
 
 .app__container {
@@ -9,6 +7,8 @@
 .app__content {
     padding-top: 36px;
 }
+
+/* Category */
 
 .category {
     background-color: var(--white-color);
@@ -131,7 +131,39 @@
     font-size: 1.4rem;
 }
 
+/* Home product */
 
+.home-product {
+    margin-bottom: 10px;
+}
+
+.home-product__pagination {
+    margin: 48px 0 32px 0;
+}
+
+.home-product__empty-state {
+    height: 600px;
+    flex: 0 0 calc(100% - 10px);
+    margin: 10px 5px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--white-color);
+    border-radius: 2px;
+}
+
+.home-product__empty-state-img {
+    width: 100px;
+    height: 100px;
+}
+
+.home-product__empty-state-heading {
+    font-size: 1.8rem;
+    color: var(--text-color);
+    font-weight: 400;
+}
 
 
 

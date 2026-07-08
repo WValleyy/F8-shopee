@@ -1,0 +1,136 @@
+<%
+title = "Shopee Việt Nam | Mua sắm Online";
+
+styles = [
+    "/css/components/user-sidebar.css",
+    "/css/pages/user/purchase.css"
+];
+
+scripts = [
+    "/js/app.js",
+    "/js/products.js",
+    "/js/auth.js",
+    "/js/home.js"
+];
+%>
+
+ <main class="purchase-page">
+
+    <div class="grid">
+
+        <div class="grid__row">
+
+            <!-- ================= Sidebar ================= -->
+
+            <div class="grid__column-2">
+                <%- include("../../partials/user/user-sidebar") %>
+            </div>
+
+            <!-- ================= Purchase ================= -->
+
+            <section class="grid__column-10 purchase-content">
+
+                <!-- Filter -->
+
+                <div class="purchase-filter">
+
+                    <button
+                        class="purchase-filter__item purchase-filter__item--active">
+
+                        Tất cả
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Chờ thanh toán
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Vận chuyển
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Chờ giao hàng
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Hoàn thành
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Đã hủy
+
+                    </button>
+
+                    <button class="purchase-filter__item">
+
+                        Trả hàng / Hoàn tiền
+
+                    </button>
+
+                </div>
+
+                <!-- Search -->
+
+                <div class="purchase-search">
+
+                    <i
+                        class="fa-solid fa-magnifying-glass purchase-search__icon">
+                    </i>
+
+                    <input
+                        type="text"
+                        class="purchase-search__input"
+                        placeholder="Bạn có thể tìm kiếm theo Tên Shop, ID đơn hàng hoặc Tên Sản phẩm">
+
+                </div>
+
+                <% if (hasOrders) { %>
+                    <!-- Purchase List -->
+
+                    <div class="purchase-list">
+
+                        <%- include("./order-card", { status: "shipping" }) %>
+
+                        <%- include("./order-card", { status: "delivered" }) %>
+
+                        <%- include("./order-card", { status: "deliveredReviewed" }) %>
+
+                    </div>
+
+                <% } else { %>
+
+                    <div class="purchase-content__no-purchase">
+
+                        <img
+                            src="/img/shopee_icon/no_purchase.png"
+                            alt="No purchase"
+                            class="purchase-content__no-purchase-img">
+
+                        <h3 class="purchase-content__no-purchase-heading">
+                            Chưa có đơn hàng
+                        </h3>
+
+                    </div>
+
+                <% } %>
+            </section>
+
+
+
+        </div>
+
+    </div>
+
+</main>
+        
+ 

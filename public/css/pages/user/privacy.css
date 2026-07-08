@@ -1,0 +1,54 @@
+/* ================= Privacy ================= */
+
+.privacy {
+    padding-top: 24px;
+}
+
+.privacy-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    padding: 24px 0;
+}
+
+.privacy-card__content {
+    flex: 1;
+}
+
+.privacy-card__title {
+    margin: 0 0 16px;
+    color: var(--text-color);
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.privacy-card__description {
+    margin: 0 0 20px;
+    color: #555;
+    font-size: 1.4rem;
+    line-height: 1.7;
+}
+
+.privacy-card__list {
+    margin: 0;
+    padding-left: 18px;
+}
+
+.privacy-card__list li {
+    margin-bottom: 10px;
+    color: #757575;
+    font-size: 1.4rem;
+    line-height: 1.7;
+}
+
+.privacy-card__actions {
+    flex-shrink: 0;
+}
+
+.auth-form__text {
+    margin-bottom: 20px;
+    color: #555;
+    font-size: 1.4rem;
+    line-height: 1.7;
+}

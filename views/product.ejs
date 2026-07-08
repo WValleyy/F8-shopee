@@ -1,0 +1,371 @@
+<%
+title = "Shopee Việt Nam | Mua sắm Online";
+
+styles = [
+    "/css/pages/product.css",
+    "/css/components/dropdown.css",
+    "/css/components/product-card.css",
+    "/css/components/pagination.css"
+];
+
+scripts = [
+    "/js/app.js",
+    "/js/products.js",
+    "/js/auth.js",
+    "/js/home.js"
+];
+%>
+
+<main class="product-page">
+    <div class="grid">
+        <nav class="product-breadcrumb" aria-label="Breadcrumb">
+            <ul class="product-breadcrumb__list">
+                <li class="product-breadcrumb__item">
+                    <a href="index.html" class="product-breadcrumb__link">Shopee</a>
+                </li>
+
+                <li class="product-breadcrumb__item">
+                    <a href="#" class="product-breadcrumb__link">Thời Trang Nam</a>
+                </li>
+
+                <li class="product-breadcrumb__item">
+                    <a href="#" class="product-breadcrumb__link">Quần Short</a>
+                </li>
+
+                <li class="product-breadcrumb__item">
+                    <a href="#" class="product-breadcrumb__link">Quần Đùi/Quần Short</a>
+                </li>
+
+                <li class="product-breadcrumb__item product-breadcrumb__item--current">
+                    <span class="product-breadcrumb__current">
+                        Quần đùi nam, quần ngủ thun co giãn mềm mịn cao cấp
+                    </span>
+                </li>
+            </ul>
+        </nav>
+
+        <section class="product-overview">
+            <div class="grid__row">
+                <div class="grid__column-5 product-gallery">
+                    <div class="product-gallery__main">
+                        <img src="img/cart_img.jpg" alt="Quần đùi nam họa tiết" class="product-gallery__main-img">
+                    </div>
+
+                    <div class="product-gallery__thumbs">
+                        <button class="product-gallery__arrow product-gallery__arrow--left" type="button" aria-label="Ảnh trước">
+                            <i class="fa-solid fa-chevron-left"></i>
+                        </button>
+                        <ul class="product-gallery__list">
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb product-gallery__thumb--active" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 1" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 2" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 3" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 4" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 5" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 5" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                            <li class="product-gallery__item">
+                                <button class="product-gallery__thumb" type="button">
+                                    <img src="img/cart_img.jpg" alt="Ảnh sản phẩm 5" class="product-gallery__thumb-img">
+                                </button>
+                            </li>
+                        </ul>
+                        <button class="product-gallery__arrow product-gallery__arrow--right" type="button" aria-label="Ảnh tiếp theo">
+                            <i class="fa-solid fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <div class="product-gallery__socials">
+                        <div class="product-gallery__share">
+                            <span>Chia sẻ:</span>
+
+                            <a href="" class="product-gallery__social product-gallery__social--messenger"
+                                aria-label="Chia sẻ qua Messenger">
+                                <i class="fa-brands fa-facebook-messenger"></i>
+                            </a>
+
+                            <a href="" class="product-gallery__social product-gallery__social--facebook"
+                                aria-label="Chia sẻ qua Facebook">
+                                <i class="fa-brands fa-facebook"></i>
+                            </a>
+
+                            <a href="" class="product-gallery__social product-gallery__social--pinterest"
+                                aria-label="Chia sẻ qua Pinterest">
+                                <i class="fa-brands fa-pinterest"></i>
+                            </a>
+                        </div>
+
+                        <button class="product-gallery__like" type="button">
+                            <i class="fa-regular fa-heart"></i>
+                            Đã thích (4,1k)
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid__column-7 product-info">
+                    <h1 class="product-info__name"><span class="product-info__favorite">Yêu thích</span> Quần đùi nam, quần ngủ thun co giãn mềm mịn cao cấp</h1>
+                    <div class="product-info__meta">
+                        <a href="#product-reviews" class="product-info__rating-score">4.9</a>
+                        <span class="product-info__stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                        </span>
+                        
+                        <a href="#product-reviews" class="product-info__meta-link"><strong>9k</strong> Đánh Giá</a>
+                        
+                        <span class="product-info__sold"><strong>80k+</strong> Đã Bán</span>
+                        <button class="product-info__report" type="button">Tố cáo</button>
+                    </div>
+
+                    <div class="product-info__price-box">
+                        <span class="product-info__price">36.000<sup>đ</sup> - 47.400<sup>đ</sup></span>
+                        <span class="product-info__old-price">60.000đ - 79.000đ</span>
+                        <span class="product-info__discount">-40%</span>
+                    </div>
+
+                    <div class="product-info__options">
+                        <div class="product-info__option-row">
+                            <span class="product-info__option-label">Combo Khuyến Mãi</span>
+                            <button class="product-info__voucher" type="button">Mua 4 &amp; giảm 4.000đ</button>
+                        </div>
+                        <div class="product-info__option-row" >
+                            <span class="product-info__option-label">Vận Chuyển</span>
+                            <div class="product-info__option-content product-info__option-content--shipping">
+                                <i class="product-info__shipping-icon fa-regular fa-truck"></i>
+                                <div class="product-info__option-content-text">
+                                    <span class="product-info__shipping-text">Giao hàng miễn phí</span>
+                                    <div> Nhận từ 25 Th06 - 26 Th06 <i class="fa-solid fa-chevron-right product-info__chevron"></i></div>
+                                    <div class="product-info__shipping-fee">Phí ship 0đ</div>
+                                    <small>Tặng Voucher 15.000đ nếu đơn giao sau thời gian trên.</small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="product-info__option-row">
+                            <span class="product-info__option-label">An Tâm Mua Sắm Cùng Shopee</span>
+                            <div class="product-info__option-content product-info__option-content--center"><i class="product-info__shield-icon fa-solid fa-shield-halved"></i> Trả hàng miễn phí 15 ngày · Bảo hiểm Thời trang</div>
+                        </div>
+                        <div class="product-info__option-row">
+                            <span class="product-info__option-label">Màu Sắc</span>
+                            <div class="product-info__variants">
+                                <button class="product-info__variant product-info__variant--selected" type="button"><img src="img/cart_img.jpg" alt=""> Ngẫu nhiên tối</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL001</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL002</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL003</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL004</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL005</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL006</button>
+                                <button class="product-info__variant" type="button"><img src="img/cart_img.jpg" alt=""> TL007</button>
+                            </div>
+                        </div>
+                        <div class="product-info__option-row">
+                            <span class="product-info__option-label">Size</span>
+                            <div class="product-info__variants">
+                                <button class="product-info__variant" type="button">L (dưới 55kg)</button>
+                                <button class="product-info__variant" type="button">XL (55 - 65kg)</button>
+                                <button class="product-info__variant" type="button">2XL (65 - 72kg)</button>
+                                <button class="product-info__variant" type="button">3XL (72 - 80kg)</button>
+                                <button class="product-info__variant" type="button">4XL (80 - dưới 90kg)</button>
+                            </div>
+                        </div>
+                        <a href="" class="product-info__size-guide">Bảng Quy Đổi Kích Cỡ <i class="fa-solid fa-chevron-right"></i></a>
+                        <div class="product-info__option-row product-info__quantity-row">
+                            <span class="product-info__option-label">Số Lượng</span>
+                            <div class="product-info__quantity">
+                                <button type="button" aria-label="Giảm số lượng">−</button><input type="text" value="1" aria-label="Số lượng"><button type="button" aria-label="Tăng số lượng">+</button>
+                            </div>
+                            <span class="product-info__stock">CÒN HÀNG</span>
+                        </div>
+                    </div>
+
+                    <div class="product-info__actions">
+                        <button class="product-info__add-cart" type="button"><i class="fa-solid fa-cart-plus"></i> Thêm Vào Giỏ Hàng</button>
+                        <button class="product-info__buy-now btn btn--primary" type="button">Mua Ngay</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <div class="product-body grid__row">
+            <div class="grid__column-10">
+                <section class="product-section product-detail">
+                    <h2 class="product-section__heading">CHI TIẾT SẢN PHẨM</h2>
+                    <dl class="product-detail__list">
+                        <dt>Danh Mục</dt><dd><a href="">Shopee</a> <i class="fa-solid fa-chevron-right"></i> <a href="">Thời Trang Nam</a> <i class="fa-solid fa-chevron-right"></i> <a href="">Quần Short</a></dd>
+                        <dt>Kho</dt><dd>CÒN HÀNG</dd>
+                        <dt>Mẫu</dt><dd>Họa tiết, Sọc caro, Hoa, Trơn, In</dd>
+                        <dt>Phong cách</dt><dd>Thể thao, Cơ bản, Hàn Quốc, Nhiệt đới</dd>
+                        <dt>Xuất xứ</dt><dd>Việt Nam</dd>
+                        <dt>Chất liệu</dt><dd>Thun cotton</dd>
+                        <dt>Gửi từ</dt><dd>Thành phố Hồ Chí Minh</dd>
+                    </dl>
+                    <h2 class="product-section__heading">MÔ TẢ SẢN PHẨM</h2>
+                    <div class="product-detail__description">
+                        <p>Quần đùi nam, quần ngủ thun cotton cao cấp.</p>
+                        <p>Shop sẽ giao mẫu bất kỳ hiện có tại shop. Chất thun cotton mặc mát, đường may chắc chắn, phù hợp mặc ở nhà hoặc đi biển.</p>
+                        <p>Mẫu quần trẻ trung, co giãn tốt, dễ giặt và nhanh khô. Vui lòng tham khảo bảng quy đổi kích cỡ trước khi đặt hàng.</p>
+                        <p>#quanduinam #quanngunam #quanshortnam #cotton #thoitrangnam</p>
+                    </div>
+                </section>
+
+                <section class="product-section product-reviews" id="product-reviews">
+                    <h2 class="product-reviews__heading">ĐÁNH GIÁ SẢN PHẨM</h2>
+                    <div class="product-reviews__summary">
+                        <div class="product-reviews__briefing">
+                            <div class="product-reviews__score-wrapper">
+                                <span class="product-reviews__rating-score">4.9</span> 
+                                <span class="product-reviews__rating-score-out-of">trên 5</span>
+                            </div>
+                            <div class="product-reviews__score">
+                                <div class="product-reviews__stars">
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="product-reviews__filters">
+                            <button class="product-reviews__filter product-reviews__filter--active" type="button">Tất Cả</button>
+                            <button class="product-reviews__filter" type="button">5 Sao (8,4k)</button>
+                            <button class="product-reviews__filter" type="button">4 Sao (362)</button>
+                            <button class="product-reviews__filter" type="button">3 Sao (135)</button>
+                            <button class="product-reviews__filter" type="button">Có Hình Ảnh / Video (1,6k)</button>
+                        </div>
+                    </div>
+                    <article class="product-review">
+                        <img src="img/cart_img.jpg" alt="Ảnh đại diện alexatran" class="product-review__avatar">
+                        <div class="product-review__content">
+                            <h3 class="product-review__user">alexatran</h3>
+                            <div class="product-reviews__stars">
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+                            </div>
+                            <p class="product-review__meta">2022-10-19 12:39 | Phân loại hàng: TL004, L (dưới 55kg)</p>
+                            <p class="product-review__description">Chất thun cotton, màu đẹp, đường may đẹp. Đúng như hình mẫu, giao hàng nhanh và đóng gói cẩn thận.</p>
+                            <div class="product-review__images"><img src="img/cart_img.jpg" alt="Ảnh đánh giá 1"><img src="img/cart_img.jpg" alt="Ảnh đánh giá 2"><img src="img/cart_img.jpg" alt="Ảnh đánh giá 3"></div>
+                            <span class="product-review__helpful"><i class="fa-regular fa-thumbs-up"></i> 67</span>
+                        </div>
+                    </article>
+                    <article class="product-review">
+                        <img src="img/cart_img.jpg" alt="Ảnh đại diện người mua" class="product-review__avatar">
+                        <div class="product-review__content">
+                            <h3 class="product-review__user">tranthituyetminh.320199</h3>
+                            <div class="product-reviews__stars">
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+
+                                    <svg viewBox="0 0 15 15" class="product-reviews__star">
+                                        <polygon points="7.5 .8 9.7 5.4 14.5 5.9 10.7 9.1 11.8 14.2 7.5 11.6 3.2 14.2 4.3 9.1 .5 5.9 5.3 5.4"></polygon>
+                                    </svg>
+                            </div>
+                            <p class="product-review__meta">2022-10-24 17:22 | Phân loại hàng: TL006, 3XL</p>
+                            <p class="product-review__description">Chất liệu thun, màu sắc dễ thương, đúng với mô tả. Giao hàng nhanh bất ngờ.</p>
+                        </div>
+                    </article>
+                    <%- include("partials/shared/pagination") %>
+                </section>
+            </div>
+
+            <aside class="grid__column-2 product-sidebar">
+                <div class="product-sidebar__hot-sales">
+                    <h2 class="product-sidebar__heading">Top Sản Phẩm Nổi Bật</h2>
+                    <ul class="product-sidebar__list">
+                        <li class="product-sidebar__item">
+                            <a href="" class="product-sidebar__link">
+                                <img src="https://down-vn.img.susercontent.com/file/vn-11134207-820l4-mhisxp8xob9h7c.webp" alt="Quần đùi nam">
+                                <div class="product-sidebar__content">
+                                    <span>Quần đùi thun nam mặc nggggggggggggggggggggggggggggggggggggggggủ cực mát</span>
+                                    <strong>31.999đ</strong>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+            </aside>
+        </div>
+
+        <section class="related-products grid__row">
+            <div class="grid__column-10">
+                <div class="related-products__header"><h2>CÁC SẢN PHẨM KHÁC CỦA SHOP</h2><a href="">Xem Tất Cả <i class="fa-solid fa-chevron-right"></i></a></div>
+                <div class="grid__row">
+                    <%- include('partials/product/product-card.ejs') %>
+                </div>
+            </div>
+            
+        </section>
+    </div>
+</main>
+
