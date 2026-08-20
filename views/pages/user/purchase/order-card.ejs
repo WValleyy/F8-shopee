@@ -1,0 +1,171 @@
+<%
+const statusMap = {
+    SHIPPING: {
+        shippingText: 'Đơn hàng đang được giao đến bạn',
+        statusText: 'ĐANG GIAO HÀNG',
+    },
+    COMPLETED: {
+        shippingText: 'Đơn hàng đã hoàn thành',
+        statusText: 'HOÀN THÀNH',
+    },
+    CANCELLED: {
+        shippingText: 'Đơn hàng đã bị hủy',
+        statusText: 'ĐÃ HỦY',
+    },
+};
+const isReturnRequest = order.entryType === 'RETURN_REQUEST';
+const statusInfo = isReturnRequest
+    ? {
+        shippingText: 'Yêu cầu trả hàng đã được xử lý',
+        statusText: order.totalAmount > 0
+            ? 'ĐÃ HOÀN TIỀN'
+            : 'KHÔNG CẦN HOÀN TIỀN',
+    }
+    : statusMap[order.status];
+const displayOrderId = order.orderId || order.id;
+const allowedActions = new Set(order.allowedActions || []);
+const primaryAction = allowedActions.has('complete')
+        ? 'complete'
+        : null;
+const secondaryAction = allowedActions.has('cancel')
+        ? 'cancel'
+        : allowedActions.has('return')
+            ? 'return'
+            : null;
+%>
+
+<article
+    class="order-card"
+    data-order-id="<%= displayOrderId %>"
+    data-order-card>
+    <header class="order-card__header">
+        <div class="purchase-category">
+            <div class="purchase-category__left">
+                <span class="purchase-category__name">
+                    Đơn hàng #<%= displayOrderId.slice(-8).toUpperCase() %>
+                    <% if (isReturnRequest) { %>
+                        &nbsp;- Yêu cầu trả hàng
+                        #<%= order.id.slice(-8).toUpperCase() %>
+                    <% } %>
+                </span>
+            </div>
+
+            <div class="purchase-category__right">
+                <span class="purchase-category__shipping">
+                    <span>
+                    <%= statusInfo.shippingText %>
+                    </span>
+                </span>
+
+                <span class="purchase-category__status">
+                    <span>
+                    <%= statusInfo.statusText %>
+                    </span>
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <div class="order-card__body">
+        <% order.items.forEach((item) => { %>
+            <div
+                class="purchase-product"
+                data-order-item
+                data-order-id="<%= item.orderId %>"
+                data-product-id="<%= item.productId %>"
+                data-variant-id="<%= item.variantId %>"
+                data-product-name="<%= item.productName %>"
+                data-product-image="<%= item.image || '/img/header-footer/app_gallery.png' %>"
+                data-product-classify="<%= item.options.map(option => option.value).join(', ') || 'Mặc định' %>"
+                data-returnable-quantity="<%= item.returnableQuantity || 0 %>"
+                data-review-id="<%= item.reviewId || '' %>">
+                <a
+                    class="purchase-product__link"
+                    href="/product/<%= item.productSlug %>">
+                <span class="purchase-product__image">
+                    <img
+                        src="<%= item.image || '/img/header-footer/app_gallery.png' %>"
+                        alt="<%= item.productName %>"
+                        class="purchase-product__img">
+                </span>
+
+                <div class="purchase-product__content">
+                    <span class="purchase-product__name">
+                        <%= item.productName %>
+                    </span>
+
+                    <p class="purchase-product__variation">
+                        Phân loại hàng: <%= item.options.map(option => option.value).join(', ') || 'Mặc định' %>
+                    </p>
+
+                    <span class="purchase-product__quantity">
+                        x<%= item.quantity %>
+                    </span>
+
+                    <% if (!isReturnRequest && item.returnedQuantity > 0) { %>
+                        <span class="purchase-product__returned">
+                Đã trả <%= item.returnedQuantity %>/<%= item.originalQuantity %>
+                        </span>
+                    <% } %>
+                </div>
+                </a>
+
+                <div class="purchase-product__aside">
+                    <div class="purchase-product__price">
+                        <span class="purchase-product__current-price">
+                            <% if (isReturnRequest) { %>
+                                Hoàn: <%= formatCurrency(item.total) %>
+                            <% } else { %>
+                                <%= formatCurrency(item.total) %>
+                            <% } %>
+                        </span>
+                    </div>
+
+                    <% if (
+                        !isReturnRequest
+                        && order.status === 'COMPLETED'
+                        && item.returnableQuantity > 0
+                        && item.productId
+                        && !item.reviewId
+                    ) { %>
+                        <button
+                            class="btn btn--primary purchase-product__review-btn"
+                            type="button"
+                            data-open-review-modal>
+                            Đánh giá
+                        </button>
+                    <% } %>
+                </div>
+            </div>
+        <% }) %>
+    </div>
+
+    <footer class="order-card__footer">
+        <div class="order-card__summary">
+            <span><%= isReturnRequest ? 'Số tiền cần hoàn:' : 'Thành tiền:' %></span>
+            <strong><%= formatCurrency(order.totalAmount) %></strong>
+        </div>
+
+        <div class="order-card__actions">
+            <% if (primaryAction) { %>
+                <button
+                    class="btn btn--primary"
+                    type="button"
+                    data-order-action="<%= primaryAction %>"
+                    data-order-id="<%= order.id %>">
+                    <%= orderActionLabels[primaryAction] %>
+                </button>
+            <% } %>
+
+            <% if (secondaryAction) { %>
+                <button
+                    class="btn"
+                    type="button"
+                    data-order-action="<%= secondaryAction %>"
+                    data-order-id="<%= order.id %>">
+                    <%= orderActionLabels[secondaryAction] %>
+                </button>
+            <% } %>
+        </div>
+    </footer>
+</article>

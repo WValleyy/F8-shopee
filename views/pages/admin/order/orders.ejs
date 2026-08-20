@@ -1,0 +1,38 @@
+<section class="admin-page" data-admin-collection="orders">
+    <div class="admin-page__heading">
+        <div>
+            <p class="admin-eyebrow">Bán hàng</p>
+            <h2>Tất cả đơn hàng</h2>
+        </div>
+    </div>
+
+    <form class="admin-filters admin-filters--orders" method="get" action="/admin/orders" data-admin-filter-form>
+        <label class="admin-search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="form-control" type="search" name="q" value="<%= filters.q %>" placeholder="Tìm mã đơn, khách hàng hoặc sản phẩm">
+        </label>
+        <label>
+            <span>Trạng thái</span>
+            <select class="form-control" name="status">
+                <option value="all">Tất cả</option>
+                <% const statusLabels = {
+                    SHIPPING: 'Đang giao',
+                    COMPLETED: 'Hoàn thành',
+                    REFUNDED: 'Hoàn tiền',
+                    CANCELLED: 'Đã hủy',
+                }; %>
+                <% Object.entries(statusLabels).forEach(([value, label]) => { %>
+                    <option value="<%= value %>" <%= filters.status === value ? 'selected' : '' %>><%= label %></option>
+                <% }) %>
+            </select>
+        </label>
+    </form>
+
+    <div data-collection-results>
+        <%- include('./orders-results', {
+            orders,
+        }) %>
+    </div>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>

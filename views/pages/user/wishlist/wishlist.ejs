@@ -1,0 +1,38 @@
+<%- include("../shared/user-header", {
+    title: "Sản phẩm yêu thích",
+    description: "Lưu lại các sản phẩm bạn muốn xem lại hoặc mua sau.",
+}) %>
+
+<%
+const currentSearchQuery = currentQuery || '';
+%>
+
+<section class="wishlist">
+    <form class="wishlist__search" data-user-search-form="wishlist" action="/user/wishlist" method="get">
+        <div class="wishlist__search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                class="form-control"
+                type="search"
+                name="q"
+                value="<%= currentSearchQuery %>"
+                placeholder="Tìm theo tên sản phẩm">
+        </div>
+        <button type="submit" class="btn btn--primary wishlist__search-button">
+            Tìm kiếm
+        </button>
+    </form>
+
+    <div data-collection-results>
+        <%- include('./wishlist-results') %>
+    </div>
+</section>
+
+<div
+    class="wishlist__pagination"
+    data-pagination-root="wishlist">
+</div>
+
+<script type="application/json" data-page-initial-state>
+    <%- serializeJsonForHtml({ pagination }) %>
+</script>

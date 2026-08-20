@@ -1,0 +1,65 @@
+/* ==========================================================================
+   Confirm Modal
+   ==========================================================================
+*/
+
+.confirm-modal {
+  width: 440px;
+  max-width: calc(100vw - 32px);
+  color: var(--text-color);
+}
+
+.confirm-modal__header {
+  display: flex;
+  min-height: 64px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.confirm-modal__header h3,
+.confirm-modal__message {
+  margin: 0;
+}
+
+.confirm-modal__header h3 {
+  font-size: 1.8rem;
+}
+
+.confirm-modal__close {
+  display: grid;
+  width: 36px;
+  height: 36px;
+  flex: 0 0 36px;
+  place-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  background: var(--white-color);
+  font: inherit;
+  cursor: pointer;
+}
+
+.confirm-modal__message {
+  padding: 20px 24px 4px;
+  color: var(--text-secondary-color);
+  line-height: 1.6;
+}
+
+.confirm-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  padding: 20px 24px;
+}
+
+.confirm-modal__button {
+  min-width: 96px;
+}
+
+.confirm-modal__close:hover {
+  border-color: var(--border-color);
+  background: var(--background-color);
+}

@@ -1,16 +1,20 @@
 import mongoose, { Schema } from 'mongoose';
-
+import inputLimits from '../../config/input-limits.js';
+import { normalizePhone } from '../../utils/phone.js';
 const userSchema = new Schema(
     {   
-        username: {
+        userName: {
             type: String,
             required: true,
             trim: true,
+            minlength: inputLimits.user.userNameMinLength,
+            maxlength: inputLimits.user.userNameMaxLength,
         },
         name: {
             type: String,
             required: true,
             trim: true,
+            maxlength: inputLimits.user.nameMaxLength,
         },
 
         email: {
@@ -19,10 +23,10 @@ const userSchema = new Schema(
             trim: true,
             lowercase: true,
             unique: true,
-            index: true,
+            maxlength: inputLimits.user.emailMaxLength,
         },
 
-        password: {
+        passwordHash: {
             type: String,
             required: true,
             select: false,
@@ -33,10 +37,17 @@ const userSchema = new Schema(
             default: '',
         },
 
+        avatarPublicId: {
+            type: String,
+            default: '',
+        },
+
         phone: {
             type: String,
             trim: true,
+            set: normalizePhone,
             default: '',
+            maxlength: inputLimits.user.phoneMaxLength,
         },
         gender: {
             type: String,
@@ -65,10 +76,17 @@ const userSchema = new Schema(
             default: true,
         },
 
+        purgeAfter: {
+            type: Date,
+            default: null,
+            index: true,
+        },
+
         lastLoginAt: {
             type: Date,
             default: null,
         },
+
     },
     {
         timestamps: true,

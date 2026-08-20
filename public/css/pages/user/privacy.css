@@ -1,54 +1,101 @@
-/* ================= Privacy ================= */
+/* ==========================================================================
+   Privacy
+   ==========================================================================
+*/
 
 .privacy {
-    padding-top: 24px;
+  padding-top: 24px;
 }
 
 .privacy-card {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    gap: 32px;
-    padding: 24px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 32px;
+  padding: 24px 0;
 }
 
 .privacy-card__content {
-    flex: 1;
+  flex: 1;
 }
 
 .privacy-card__title {
-    margin: 0 0 16px;
-    color: var(--text-color);
-    font-size: 1.8rem;
-    font-weight: 500;
+  margin: 0 0 16px;
+  color: var(--text-color);
+  font-size: 1.8rem;
+  font-weight: 500;
 }
 
 .privacy-card__description {
-    margin: 0 0 20px;
-    color: #555;
-    font-size: 1.4rem;
-    line-height: 1.7;
+  margin: 0 0 20px;
+  color: #555;
+  font-size: 1.4rem;
+  line-height: 1.7;
 }
 
 .privacy-card__list {
-    margin: 0;
-    padding-left: 18px;
+  margin: 0;
+  padding-left: 18px;
 }
 
 .privacy-card__list li {
-    margin-bottom: 10px;
-    color: #757575;
-    font-size: 1.4rem;
-    line-height: 1.7;
+  margin-bottom: 10px;
+  color: #757575;
+  font-size: 1.4rem;
+  line-height: 1.7;
 }
 
 .privacy-card__actions {
-    flex-shrink: 0;
+  flex-shrink: 0;
 }
 
-.auth-form__text {
-    margin-bottom: 20px;
-    color: #555;
-    font-size: 1.4rem;
-    line-height: 1.7;
+.privacy-card--sessions {
+  border-bottom: 1px solid #eee;
+}
+
+.privacy-sessions {
+  border: 1px solid #e5e5e5;
+}
+
+.privacy-session {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 72px;
+  padding: 14px 16px;
+}
+
+.privacy-session + .privacy-session {
+  border-top: 1px solid #eee;
+}
+
+.privacy-session__details {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  min-width: 0;
+}
+
+.privacy-session__name {
+  overflow: hidden;
+  color: var(--text-color);
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.privacy-session__meta {
+  color: #757575;
+  font-size: 1.3rem;
+}
+
+.privacy-session__current {
+  color: var(--primary-color);
+  font-size: 1.3rem;
+}
+
+.privacy-session__revoke {
+  flex-shrink: 0;
 }

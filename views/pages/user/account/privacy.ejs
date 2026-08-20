@@ -1,0 +1,184 @@
+<%- include("../shared/user-header", {
+    title: "Những thiết lập riêng tư"
+}) %>
+
+<section class="privacy">
+
+    <div class="privacy-card privacy-card--sessions">
+        <div class="privacy-card__content">
+            <h3 class="privacy-card__title">Phiên đăng nhập</h3>
+            <p class="privacy-card__description">
+                Quản lý các trình duyệt đang truy cập tài khoản của bạn.
+            </p>
+
+            <div class="privacy-sessions">
+                <% (authSessions || []).forEach((session) => { %>
+                    <div class="privacy-session">
+                        <div class="privacy-session__details">
+                            <strong class="privacy-session__name">
+                                <%= session.deviceLabel || session.userAgent || 'Trình duyệt' %>
+                            </strong>
+                            <span class="privacy-session__meta">
+                                Hoạt động gần đây:
+                                <%= formatDate(session.lastUsedAt) %>
+                            </span>
+                            <% if (session.current) { %>
+                                <span class="privacy-session__current">Phiên hiện tại</span>
+                            <% } %>
+                        </div>
+
+                        <button
+                            type="button"
+                            class="btn privacy-session__revoke"
+                            data-revoke-auth-session="<%= session.id %>">
+                            Thu hồi
+                        </button>
+                    </div>
+                <% }) %>
+            </div>
+        </div>
+
+        <div class="privacy-card__actions">
+            <button type="button" class="btn" data-logout-all-sessions>
+                Đăng xuất tất cả
+            </button>
+        </div>
+    </div>
+
+    <div class="privacy-card">
+
+        <div class="privacy-card__content">
+
+            <h3 class="privacy-card__title">
+
+                Yêu cầu xóa tài khoản
+
+            </h3>
+
+            <p class="privacy-card__description">
+
+                Tài khoản sẽ bị vô hiệu hóa ngay. Sau 20 phút, quản trị viên có thể
+                xóa vĩnh viễn dữ liệu và thao tác này không thể hoàn tác.
+
+            </p>
+
+            <ul class="privacy-card__list">
+
+                <li>
+
+                    Thông tin cá nhân sẽ bị xóa.
+
+                </li>
+
+                <li>
+
+                    Đơn hàng và lịch sử giao dịch có thể không còn truy cập được.
+
+                </li>
+
+                <li>
+
+                    Bạn sẽ không thể đăng nhập bằng tài khoản này.
+
+                </li>
+
+            </ul>
+
+        </div>
+
+        <div class="privacy-card__actions">
+
+            <button
+                type="button"
+                id="btn-delete-user"
+                class="btn btn--danger">
+
+                Xóa tài khoản
+
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- ================= Delete Account Modal ================= -->
+
+<div
+    id="delete-user-modal"
+    class="modal"
+    data-modal
+    hidden>
+
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <form
+            id="delete-user-form"
+            class="modal-dialog">
+
+            <div class="modal-dialog__container">
+
+                <div class="modal-dialog__header">
+
+                    <h3 class="modal-dialog__title">
+
+                        Xóa tài khoản
+
+                    </h3>
+
+                </div>
+
+                <div class="form-stack">
+
+                    <p class="modal-dialog__text">
+
+                        Tài khoản sẽ bị vô hiệu hóa ngay và chờ xóa vĩnh viễn sau 20 phút.
+                        Vui lòng nhập mật khẩu để xác nhận.
+
+                    </p>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+
+                        <input
+                            type="password"
+                            name="password"
+                            class="form-control"
+                            placeholder="Nhập mật khẩu">
+
+                    </div>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+
+                    <button
+                        type="button"
+                        class="btn btn--secondary"
+                        data-modal-close>
+
+                        Hủy
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--danger">
+
+                        Xóa tài khoản
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

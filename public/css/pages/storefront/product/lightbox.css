@@ -1,0 +1,120 @@
+/* ==========================================================================
+   Product Lightbox
+   ==========================================================================
+*/
+
+.product-lightbox {
+  overflow: hidden;
+  padding: 16px;
+}
+
+.product-lightbox__overlay {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.product-lightbox__dialog {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 320px;
+  width: 900px;
+  height: min(600px, calc(100vh - 32px));
+  overflow: hidden;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: 0 16px 48px rgba(0, 0, 0, 0.22);
+}
+
+.product-lightbox__main {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 0;
+  min-height: 0;
+  padding: 14px;
+  background: #fff;
+}
+
+.product-lightbox__image {
+  display: block;
+  width: min(100%, 560px);
+  max-width: 100%;
+  height: min(100%, 560px);
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.product-lightbox__sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  min-width: 0;
+  padding: 22px 20px;
+  background: #fff;
+  border-left: 1px solid #f0f0f0;
+}
+
+.product-lightbox__title {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-color);
+  font-size: 1.7rem;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  text-overflow: ellipsis;
+}
+
+.product-lightbox__thumbs {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  overflow: auto;
+  align-content: start;
+  padding-right: 2px;
+}
+
+.product-lightbox__thumb {
+  padding: 0;
+  border: 2px solid transparent;
+  background: transparent;
+  cursor: pointer;
+}
+
+.product-lightbox__thumb img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.product-lightbox__thumb[aria-pressed="true"] {
+  border-color: var(--primary-color);
+}
+
+.product-lightbox__nav {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 72px;
+  border: 0;
+  background: rgba(0, 0, 0, 0.55);
+  color: #fff;
+  cursor: pointer;
+  transform: translateY(-50%);
+  font-size: 2rem;
+}
+
+.product-lightbox__nav--prev {
+  left: 0;
+}
+
+.product-lightbox__nav--next {
+  right: 0;
+}

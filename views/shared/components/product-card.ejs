@@ -1,0 +1,51 @@
+<%
+const hasDiscount = product.originalPrice > product.price;
+const discountPercent = hasDiscount
+    ? Math.round(
+        ((product.originalPrice - product.price) / product.originalPrice) * 100,
+    )
+    : 0;
+%>
+
+<article class="product-card">
+    <a class="product-card__link" href="/product/<%= product.slug %>">
+        <div class="product-card__img" style="background-image: url('<%= product.image %>');"></div>
+        <h4 class="product-card__name"><%= product.name %></h4>
+        <div class="product-card__price">
+            <% if (hasDiscount) { %>
+                <span class="product-card__price-old"><%= formatCurrency(product.originalPrice) %></span>
+            <% } %>
+            <span class="product-card__price-current"><%= formatCurrency(product.price) %></span>
+        </div>
+        <div class="product-card__favorite" aria-label="Sản phẩm yêu thích">
+            <i class="fa-solid fa-check"></i>
+            <span class="product-card__favorite-msg">Yêu thích</span>
+        </div>
+        <% if (hasDiscount) { %>
+            <div class="product-card__sale-off">
+                <span class="product-card__sale-off-percent"><%= Math.max(1, discountPercent) %>%</span>
+                <span class="product-card__sale-off-label">GIẢM</span>
+            </div>
+        <% } %>
+    </a>
+    <div class="product-card__action">
+        <button
+            type="button"
+            class="product-card__like"
+            aria-pressed="<%= product.isWishlisted ? 'true' : 'false' %>"
+            data-product-card-wishlist
+            data-product-id="<%= product.id %>">
+            <i class="product-card__like-icon fa-solid fa-heart"></i>
+            <i class="product-card__like-icon fa-regular fa-heart"></i>
+        </button>
+        <span class="product-card__rating">
+            <%- include(
+                './rating-star',
+                {
+                    rating: product.rating,
+                }
+            ) %>
+        </span>
+        <span class="product-card__sold"><%= product.sold %> đã bán</span>
+    </div>
+</article>

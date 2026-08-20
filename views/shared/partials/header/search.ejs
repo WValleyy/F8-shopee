@@ -1,0 +1,58 @@
+<div class="header__search-section">
+    <div class="shopee-searchbar-wrapper" data-header-search-root>
+        <form autocomplete="off" class="shopee-searchbar" data-header-search action="/" method="get">
+            <div class="shopee-searchbar__main">
+                <div class="shopee-searchbar-input">
+                    <input
+                        type="text"
+                        name="q"
+                        class="shopee-searchbar-input__input"
+                        data-header-search-input
+                        placeholder="Shopee bao ship 0Đ - Đăng ký ngay!"
+                        maxlength="128"
+                        autocomplete="off"
+                    >
+                </div>
+            </div>
+            <button class="shopee-searchbar__submit btn btn--primary" type="submit">
+                <i class="shopee-searchbar__submit-icon fa-solid fa-magnifying-glass"></i>
+            </button>
+        </form>
+        <div class="searchbar-history" data-search-results hidden>
+            <section class="searchbar-suggestions" data-search-suggestions hidden>
+                <h3 class="searchbar-history__heading">Gợi ý sản phẩm</h3>
+                <ul class="searchbar-suggestions__list" data-search-suggestions-list></ul>
+            </section>
+            <section class="searchbar-history__content" data-search-history>
+            <h3 class="searchbar-history__heading">
+                Lịch sử tìm kiếm
+            </h3>
+            <ul class="searchbar-history__list" data-search-history-list>
+            </ul>
+            </section>
+        </div>
+
+        <template data-search-suggestion-template>
+            <li class="searchbar-suggestions__item">
+                <a class="searchbar-suggestions__link" data-search-suggestion-link>
+                    <img class="searchbar-suggestions__image" data-search-suggestion-image alt="" loading="lazy">
+                    <span class="searchbar-suggestions__content">
+                        <span class="searchbar-suggestions__name" data-search-suggestion-name></span>
+                        <span class="searchbar-suggestions__price" data-search-suggestion-price></span>
+                    </span>
+                </a>
+            </li>
+        </template>
+        <template data-search-empty-template>
+            <li class="searchbar-suggestions__empty">Không tìm thấy sản phẩm phù hợp</li>
+        </template>
+        <template data-search-history-item-template>
+            <li class="searchbar-history__item" data-search-history-item>
+                <a data-search-history-link></a>
+                <button type="button" class="searchbar-history__remove" data-search-history-remove>Xóa</button>
+            </li>
+        </template>
+    </div>
+
+
+</div>

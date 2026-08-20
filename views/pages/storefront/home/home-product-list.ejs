@@ -1,0 +1,12 @@
+<% if (products && products.length) { %>
+    <% products.forEach(product => { %>
+        <div class="grid__column-2-4">
+            <%- include('../../../shared/components/product-card', { product }) %>
+        </div>
+    <% }) %>
+<% } else { %>
+    <div class="home-product__empty-state empty-state">
+        <img src="/img/shopee_icon/no_purchase.png" alt="Không có sản phẩm" class="empty-state__image">
+        <strong>Chưa có sản phẩm</strong>
+    </div>
+<% } %>

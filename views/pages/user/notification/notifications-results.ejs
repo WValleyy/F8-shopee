@@ -1,0 +1,49 @@
+<section class="notifications">
+    <% if (notifications.length) { %>
+        <div class="notifications__list">
+            <% notifications.forEach(notification => { %>
+                <a
+                    href="<%= notificationPresentation.getNotificationUrl(
+                        notification.type,
+                    ) %>"
+                    class="notifications__item"
+                    data-unread="<%= !notification.readAt ? 'true' : 'false' %>"
+                    data-notification-link
+                    data-notification-id="<%= notification.id %>">
+
+                    <div class="notifications__marker"></div>
+
+                    <div class="notifications__body">
+                        <div class="notifications__meta">
+                            <h3 class="notifications__title">
+                                <%= notification.title %>
+                            </h3>
+
+                            <span class="notifications__time">
+                                <%= formatDate(
+                                    notification.createdAt,
+                                ) %>
+                            </span>
+                        </div>
+
+                        <p class="notifications__description">
+                            <%= notification.description %>
+                        </p>
+                    </div>
+                </a>
+            <% }) %>
+        </div>
+    <% } else { %>
+        <div class="notifications__empty empty-state empty-state--bordered">
+            <i class="fa-regular fa-bell"></i>
+
+            <strong>
+                Chưa có thông báo
+            </strong>
+
+            <span>
+                Khi có cập nhật mới, bạn sẽ thấy tại đây.
+            </span>
+        </div>
+    <% } %>
+</section>

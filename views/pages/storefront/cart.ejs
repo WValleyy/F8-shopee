@@ -1,0 +1,162 @@
+<%
+const cartItems = cart.items;
+const hasItems = cartItems.length > 0;
+const unavailableLabels = {
+    VARIANT_NOT_FOUND: 'Sản phẩm không còn tồn tại',
+    VARIANT_HIDDEN: 'Phân loại này đã ngừng bán',
+    PRODUCT_HIDDEN: 'Sản phẩm này đã ngừng bán',
+    CATEGORY_UNAVAILABLE: 'Sản phẩm này hiện không khả dụng',
+    INSUFFICIENT_STOCK: 'Số lượng trong kho không còn đủ',
+};
+%>
+
+<main class="cart-page" data-cart-page>
+    <div class="grid">
+        <section class="cart" data-cart-items>
+            <div class="cart__header" data-cart-header <%= hasItems ? '' : 'hidden' %>>
+                <label class="cart__header-product">
+                    <input
+                        type="checkbox"
+                        class="cart__checkbox" data-cart-select-all>
+                    <span>Sản phẩm</span>
+                </label>
+
+                <span>Đơn giá</span>
+                <span>Số lượng</span>
+                <span>Số tiền</span>
+                <span>Thao tác</span>
+            </div>
+
+            <% if (hasItems) { %>
+                <% cartItems.forEach(item => {
+                    const optionValues = item.options.map(option => option.value);
+                    const optionText = optionValues.length
+                        ? optionValues.join(', ')
+                        : 'Mặc định';
+                %>
+                    <div
+                        class="cart__item<%= item.isAvailable ? '' : ' cart__item--unavailable' %>"
+                        data-cart-item
+                        data-variant-id="<%= item.variantId %>"
+                        data-available="<%= item.isAvailable %>"
+                        data-max-quantity="<%= item.maxQuantity || 0 %>"
+                        data-price="<%= item.price || 0 %>">
+
+                        <div class="cart__product">
+                            <input
+                                type="checkbox"
+                                class="cart__checkbox"
+                                data-cart-item-select
+                                <%= item.isAvailable ? '' : 'disabled' %>>
+
+                            <% if (item.productSlug) { %>
+                                <a
+                                    class="cart__product-link"
+                                    href="/product/<%= item.productSlug %>">
+                            <% } %>
+
+                            <img
+                                src="<%= item.image || '/img/header-footer/app_gallery.png' %>"
+                                alt="<%= item.productName || 'Sản phẩm không còn tồn tại' %>"
+                                class="cart__product-img">
+
+                            <div class="cart__product-info">
+                                <h3 class="cart__product-name">
+                                    <%= item.productName || 'Sản phẩm không còn tồn tại' %>
+                                </h3>
+
+                                <p class="cart__product-classify">
+                                    Phân loại: <%= optionText %>
+                                </p>
+
+                                <% if (!item.isAvailable) { %>
+                                    <p class="cart__product-unavailable">
+                                        <%= unavailableLabels[item.unavailableReason] %>
+                                    </p>
+                                <% } %>
+                            </div>
+
+                            <% if (item.productSlug) { %>
+                                </a>
+                            <% } %>
+                        </div>
+
+                        <div class="cart__price">
+                            <% if (item.price !== null) { %>
+                                <%= formatCurrency(item.price) %>
+                            <% } else { %>
+                                --
+                            <% } %>
+                        </div>
+
+                        <div class="cart__quantity" data-cart-quantity>
+                            <button
+                                type="button"
+                                data-cart-decrease
+                                <%= item.isAvailable && item.quantity > 1 ? '' : 'disabled' %>>-</button>
+                            <input
+                                type="text"
+                                data-cart-quantity-input
+                                value="<%= item.quantity %>"
+                                <%= item.isAvailable ? '' : 'disabled' %>>
+                            <button
+                                type="button"
+                                data-cart-increase
+                                <%= item.isAvailable && item.quantity < item.maxQuantity ? '' : 'disabled' %>>+</button>
+                        </div>
+
+                        <div class="cart__total" data-cart-item-total>
+                            <% if (item.total !== null) { %>
+                                <%= formatCurrency(item.total) %>
+                            <% } else { %>
+                                --
+                            <% } %>
+                        </div>
+
+                        <div class="cart__action">
+                            <button type="button" data-cart-remove-item>Xóa</button>
+                        </div>
+                    </div>
+                <% }) %>
+            <% } else { %>
+                <div class="empty-state">
+                    <img
+                        src="/img/shopee_icon/no_purchase.png"
+                        alt="Giỏ hàng trống"
+                        class="empty-state__image">
+
+                    <strong>
+                        <%= isGuestCart ? 'Đăng nhập để lưu giỏ hàng' : 'Giỏ hàng của bạn đang trống' %>
+                    </strong>
+                </div>
+            <% } %>
+        </section>
+
+        <section class="cart-footer" data-cart-footer <%= hasItems ? '' : 'hidden' %>>
+            <div class="cart-footer__left">
+                <span
+                    class="cart-footer__selected-count"
+                    data-cart-selected-count>Đã chọn (0)</span>
+                <input
+                    type="checkbox"
+                    class="cart__checkbox" data-cart-select-all>
+
+                <span data-cart-select-all-label>Chọn tất cả (<%= cart.itemCount %>)</span>
+
+                <button type="button" data-cart-remove-selected>Xóa</button>
+            </div>
+
+            <div class="cart-footer__right">
+                <span>Tổng cộng:</span>
+                <strong data-cart-total><%= formatCurrency(0) %></strong>
+
+                <button
+                    type="button"
+                    class="btn btn--primary"
+                    data-cart-checkout
+                    disabled>Mua hàng
+                </button>
+            </div>
+        </section>
+    </div>
+</main>

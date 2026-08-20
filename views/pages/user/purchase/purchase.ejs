@@ -1,0 +1,326 @@
+<%- include("../shared/user-header", {
+    title: "Đơn mua"
+}) %>
+
+<%
+const activePurchaseTab = currentTab || 'all';
+const currentPurchaseQuery = currentQuery || '';
+const buildPurchaseUrl = (tab = activePurchaseTab, page = 1, query = currentPurchaseQuery) => {
+    const params = new URLSearchParams();
+
+    if (tab && tab !== 'all') {
+        params.set('tab', tab);
+    }
+
+    if (query) {
+        params.set('q', query);
+    }
+
+    if (Number(page) > 1) {
+        params.set('page', String(page));
+    }
+
+    const queryString = params.toString();
+
+    return queryString
+        ? `/user/purchase?${queryString}`
+        : '/user/purchase';
+};
+%>
+
+<section class="purchase-content">
+
+    <div class="purchase-filter">
+        <a
+            href="<%= buildPurchaseUrl('all') %>"
+            class="purchase-filter__item"
+            aria-current="<%= activePurchaseTab === 'all' ? 'page' : 'false' %>"
+            data-purchase-tab="all"
+            data-collection-navigation-link>
+            Tất cả
+        </a>
+
+        <a
+            href="<%= buildPurchaseUrl('delivering') %>"
+            class="purchase-filter__item"
+            aria-current="<%= activePurchaseTab === 'delivering' ? 'page' : 'false' %>"
+            data-purchase-tab="delivering"
+            data-collection-navigation-link>
+            Chờ giao hàng
+        </a>
+
+        <a
+            href="<%= buildPurchaseUrl('completed') %>"
+            class="purchase-filter__item"
+            aria-current="<%= activePurchaseTab === 'completed' ? 'page' : 'false' %>"
+            data-purchase-tab="completed"
+            data-collection-navigation-link>
+            Hoàn thành
+        </a>
+
+        <a
+            href="<%= buildPurchaseUrl('cancelled') %>"
+            class="purchase-filter__item"
+            aria-current="<%= activePurchaseTab === 'cancelled' ? 'page' : 'false' %>"
+            data-purchase-tab="cancelled"
+            data-collection-navigation-link>
+            Đã hủy
+        </a>
+
+        <a
+            href="<%= buildPurchaseUrl('return-refund') %>"
+            class="purchase-filter__item"
+            aria-current="<%= activePurchaseTab === 'return-refund' ? 'page' : 'false' %>"
+            data-purchase-tab="return-refund"
+            data-collection-navigation-link>
+            Trả hàng / Hoàn tiền
+        </a>
+    </div>
+
+    <form
+        class="purchase-search"
+        action="/user/purchase"
+        method="get"
+        data-user-search-form="purchase">
+        <i class="fa-solid fa-magnifying-glass purchase-search__icon"></i>
+
+        <% if (activePurchaseTab !== 'all') { %>
+            <input
+                type="hidden"
+                name="tab"
+                value="<%= activePurchaseTab %>">
+        <% } %>
+
+        <input
+            type="text"
+            class="purchase-search__input"
+            name="q"
+            placeholder="Tìm theo mã đơn hoặc tên sản phẩm"
+            value="<%= currentPurchaseQuery %>">
+    </form>
+
+        <div data-collection-results>
+        <%- include('./purchase-results') %>
+    </div>
+
+    <div
+        class="pagination"
+        data-pagination-root="purchase">
+    </div>
+
+    <script type="application/json" data-page-initial-state>
+        <%- serializeJsonForHtml({ pagination }) %>
+    </script>
+
+</section>
+
+<div
+    id="purchase-return-modal"
+    class="modal"
+    data-modal
+    hidden>
+
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <form
+            id="purchase-return-form"
+        class="modal-dialog"
+            novalidate>
+
+            <input type="hidden" name="orderId" value="">
+
+            <div class="modal-dialog__container">
+                <div class="modal-dialog__header">
+                    <h3
+                        class="modal-dialog__title"
+                        >
+                        Chọn sản phẩm trả lại
+                    </h3>
+                </div>
+
+                <div
+                    class="purchase-return-modal__items"
+                    data-purchase-return-items></div>
+
+                <p
+                    class="form-field__message"
+                    data-form-message
+                    data-purchase-return-error
+                    hidden></p>
+
+                <div class="modal-dialog__actions">
+                    <button
+                        type="button"
+                        class="btn btn--secondary"
+                        data-modal-close>
+                        Trở lại
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary"
+                        data-purchase-return-submit>
+                        Xác nhận trả hàng
+                    </button>
+
+                    <button
+                        type="button"
+                        class="btn btn--primary"
+                        data-purchase-return-reload
+                        hidden>
+                        Tải lại trang
+                    </button>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div
+    id="purchase-review-modal"
+    class="modal"
+    data-modal
+    hidden>
+
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <form
+            id="purchase-review-form"
+            class="modal-dialog">
+
+            <input
+                type="hidden"
+                name="productId"
+                value="">
+
+            <input
+                type="hidden"
+                name="orderId"
+                value="">
+
+            <input
+                type="hidden"
+                name="variantId"
+                value="">
+
+            <input
+                type="hidden"
+                name="rating"
+                value="5">
+
+            <div class="modal-dialog__container">
+
+                <div class="modal-dialog__header">
+
+                    <h3
+                        class="modal-dialog__title"
+                        data-purchase-review-title>
+                        Đánh giá sản phẩm
+                    </h3>
+
+                </div>
+
+                <div class="purchase-review-modal__product">
+                    <img
+                        src="/img/header-footer/app_gallery.png"
+                        alt=""
+                        class="purchase-review-modal__image"
+                        data-purchase-review-image>
+
+                    <div class="purchase-review-modal__product-info">
+                        <strong data-purchase-review-name>Sản phẩm</strong>
+                        <span data-purchase-review-classify>Phân loại hàng: Mặc định</span>
+                    </div>
+                </div>
+
+                <div class="form-stack">
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <span class="purchase-review-modal__label">Số sao đánh giá</span>
+                        <div class="purchase-review-modal__rating">
+                            <% for (let rating = 5; rating >= 1; rating -= 1) { %>
+                                <button
+                                    type="button"
+                                    class="purchase-review-modal__star"
+                                    aria-pressed="<%= rating === 5 ? 'true' : 'false' %>"
+                                    data-rating-value="<%= rating %>">
+                                    <i class="fa-solid fa-star"></i>
+                                    <span><%= rating %></span>
+                                </button>
+                            <% } %>
+                        </div>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <textarea
+                            name="content"
+                            class="form-control form-control--textarea"
+                            rows="5"
+                            maxlength="<%= inputLimits.review.contentMaxLength %>"
+                            placeholder="Hãy chia sẻ cảm nhận của bạn về sản phẩm"></textarea>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <span class="purchase-review-modal__label">Ảnh đánh giá (tối đa 3 ảnh)</span>
+                        <div class="purchase-review-modal__upload-row">
+                            <label
+                                class="btn purchase-review-modal__upload-btn"
+                                for="purchase-review-files">
+                                Chọn tệp ảnh
+                            </label>
+
+                            <input
+                                id="purchase-review-files"
+                                type="file"
+                                name="imageFiles"
+                                accept="image/*"
+                                multiple
+                                hidden>
+
+                            <span class="purchase-review-modal__upload-note">
+                                JPEG, PNG, WEBP. Tối đa 1 MB mỗi ảnh.
+                            </span>
+                        </div>
+
+                        <div
+                            class="purchase-review-modal__image-list"
+                            data-purchase-review-image-list
+                            hidden></div>
+                    </div>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+
+                    <button
+                        type="button"
+                        class="btn btn--secondary"
+                        data-modal-close>
+                        Trở lại
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary"
+                        data-purchase-review-submit>
+                        Gửi đánh giá
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

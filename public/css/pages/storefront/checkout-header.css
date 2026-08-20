@@ -1,0 +1,84 @@
+/* ==========================================================================
+   Checkout Header
+   ==========================================================================
+*/
+
+.header--checkout {
+  height: calc(var(--header-height) + 10px);
+}
+
+.header--checkout .header__navbar-wrapper {
+  background-image: linear-gradient(0, #ff6633, #f53d2d);
+  height: calc(var(--navbar-height) + 10px);
+}
+
+.header--checkout .header-with-search-wrapper {
+  background-color: var(--white-color);
+}
+
+.header--checkout .header-with-search {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header--checkout .header__logo {
+  padding-left: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 34px;
+  width: auto;
+}
+
+.header--checkout .header__logo-img {
+  margin: 0 0 7px;
+  width: 120px;
+}
+
+.header--checkout .header__page-name {
+  position: relative;
+  font-size: 2.1rem;
+  font-weight: 400;
+  color: var(--primary-color);
+  min-width: 150px;
+}
+
+.header--checkout .header__page-name::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: -17px;
+  width: 1px;
+  height: 30px;
+  background: var(--primary-color);
+  transform: translateY(-50%);
+}
+
+.header--checkout .shopee-searchbar {
+  height: 38px;
+}
+
+.header--checkout .header__search-section {
+  max-width: 620px;
+}
+
+.header--checkout .shopee-searchbar-wrapper {
+  border: 2px solid var(--primary-color);
+  border-radius: 2px;
+}
+
+.header--checkout .shopee-searchbar__submit {
+  height: 100%;
+  border-radius: 0;
+  min-width: 45px;
+  width: 80px;
+}
+
+.header--checkout .shopee-searchbar {
+  padding: 0;
+}
+
+.header--checkout .shopee-searchbar__main {
+  padding: 0 10px;
+}

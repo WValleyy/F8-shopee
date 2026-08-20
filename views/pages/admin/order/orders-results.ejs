@@ -1,0 +1,137 @@
+<%
+const statusLabels = {
+    SHIPPING: 'Đang giao',
+    COMPLETED: 'Hoàn thành',
+    CANCELLED: 'Đã hủy',
+};
+const actionLabels = {
+    cancel: 'Hủy đơn',
+    complete: 'Hoàn thành',
+};
+%>
+<div class="admin-order-list">
+    <div class="admin-order-columns" role="row">
+        <span></span>
+        <span>Mã đơn hàng</span>
+        <span>Thông tin khách hàng</span>
+        <span>Số lượng sản phẩm</span>
+        <span>Tổng số tiền</span>
+        <span>Trạng thái đơn hàng</span>
+        <span>Tổng tiền hoàn</span>
+        <span>Thao tác</span>
+    </div>
+
+    <% orders.forEach(order => { %>
+        <article class="admin-order" data-admin-order-id="<%= order.id %>">
+            <div class="admin-order__summary">
+                <button
+                    class="admin-order__toggle"
+                    type="button"
+                    data-order-details-toggle
+                    data-tooltip="Xem chi tiết">
+                    <i class="fa-solid fa-chevron-right"></i>
+                </button>
+                <span class="admin-order__identity">
+                    <strong>#<%= order.id.slice(-8).toUpperCase() %></strong>
+                    <small><%= formatDate(order.createdAt) %></small>
+                </span>
+                <span class="admin-order__customer">
+                    <strong><%= order.userName || 'Người dùng đã xóa' %></strong>
+                    <small><%= order.userEmail %></small>
+                </span>
+                <span><%= order.itemCount %> sản phẩm</span>
+                <strong><%= formatCurrency(order.totalAmount) %></strong>
+                <span class="admin-status admin-status--<%= order.status.toLowerCase() %>">
+                    <%= statusLabels[order.status] || order.status %>
+                </span>
+                <strong>
+                    <%= formatCurrency(order.returnTotal) %>
+                </strong>
+                <div class="admin-order__actions">
+                    <% order.actions.forEach(action => { %>
+                        <button
+                            class="btn <%= action === 'cancel' ? 'btn--danger' : '' %> btn--size-s"
+                            type="button"
+                            data-admin-order-action="<%= action %>">
+                            <%= actionLabels[action] || action %>
+                        </button>
+                    <% }) %>
+                </div>
+            </div>
+
+            <div class="admin-order__details" data-order-details hidden>
+                <div class="admin-order__address">
+                    <strong>Địa chỉ nhận hàng</strong>
+                    <span><%= order.shippingAddress.fullName %> - <%= order.shippingAddress.phone %></span>
+                    <span>
+                        <%= [
+                            order.shippingAddress.detail,
+                            order.shippingAddress.ward,
+                            order.shippingAddress.province,
+                            ].filter(Boolean).join(', ') %>
+                    </span>
+                </div>
+
+                <div class="admin-order__items">
+                    <strong class="admin-order__section-title">Đơn mua</strong>
+                    <% order.items.forEach(item => { %>
+                        <div class="admin-order-item">
+                            <img src="<%= item.image %>" alt="">
+                            <span>
+                                <strong><%= item.productName %></strong>
+                                <small>
+                                    <%= (item.options || []).map(option => `${option.name}: ${option.value}`).join(', ') || 'Mặc định' %>
+                                </small>
+                            </span>
+                            <span>x<%= item.quantity %></span>
+                            <strong><%= formatCurrency(item.price) %></strong>
+                        </div>
+                    <% }) %>
+                </div>
+
+                <% if (order.returns.length) { %>
+                    <div class="admin-order__returns">
+                        <strong class="admin-order__section-title">Lịch sử hoàn trả</strong>
+                        <% order.returns.forEach(returnEntry => { %>
+                            <div class="admin-order__return">
+                                <div class="admin-order__return-details">
+                                    <div class="admin-order__return-items">
+                                        <% returnEntry.items.forEach(item => { %>
+                                            <div class="admin-order-item">
+                                                <img src="<%= item.image %>" alt="">
+                                                <span>
+                                                    <strong><%= item.productName %></strong>
+                                                    <small>
+                                                        <%= (item.options || []).map(option => `${option.name}: ${option.value}`).join(', ') || 'Mặc định' %>
+                                                    </small>
+                                                </span>
+                                                <span>x<%= item.quantity %></span>
+                                                <strong><%= formatCurrency(item.price) %></strong>
+                                            </div>
+                                        <% }) %>
+                                    </div>
+                                </div>
+                                <div class="admin-order__return-meta">
+                                    <time class="admin-order__return-time" datetime="<%= returnEntry.createdAt.toISOString() %>">
+                                        <%= formatDate(returnEntry.createdAt) %>
+                                    </time>
+                                    <strong class="admin-order__return-amount">
+                                        Tổng tiền hoàn: <%= formatCurrency(returnEntry.amount) %>
+                                    </strong>
+                                </div>
+                            </div>
+                        <% }) %>
+                    </div>
+                <% } %>
+            </div>
+        </article>
+    <% }) %>
+
+    <% if (!orders.length) { %>
+        <div class="empty-state">
+            <i class="fa-solid fa-receipt"></i>
+            <strong>Không tìm thấy đơn hàng</strong>
+            <span>Thử thay đổi từ khóa hoặc bộ lọc hiện tại.</span>
+        </div>
+    <% } %>
+</div>

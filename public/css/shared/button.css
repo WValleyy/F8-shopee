@@ -1,0 +1,74 @@
+/* ==========================================================================
+   Button
+   ==========================================================================
+*/
+
+.btn {
+  height: 34px;
+  text-decoration: none;
+  border-radius: 3px;
+  border: none;
+  font-size: 1.3rem;
+  cursor: pointer;
+  color: var(--text-color);
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2px 5px 0;
+}
+
+.btn.btn--secondary {
+  background-color: var(--background-color);
+}
+
+.btn.btn--secondary:hover {
+  background-color: color-mix(in srgb, var(--background-color) 90%, black 10%);
+}
+
+.btn:not(.btn--no-hover):not(.btn--primary):not(.btn--danger):hover {
+  background-color: rgba(0, 0, 0, 0.15);
+}
+
+.btn.btn--primary:hover,
+.btn[data-tone="primary"]:hover {
+  background-color: var(--primary-color-hover);
+}
+
+.btn.btn--primary,
+.btn[data-tone="primary"] {
+  background-color: var(--primary-color);
+  color: var(--white-color);
+  border: none;
+}
+
+.btn.btn--danger,
+.btn[data-tone="danger"] {
+  background-color: var(--danger-color);
+  color: var(--white-color);
+}
+
+.btn.btn--danger:hover,
+.btn[data-tone="danger"]:hover {
+  background-color: color-mix(in srgb, var(--danger-color) 90%, black 10%);
+}
+
+.btn.btn--size-s {
+  font-size: 1.2rem;
+  height: 30px;
+  padding: 0 8px;
+}
+
+.btn.btn--size-l {
+  min-height: 38px;
+  padding: 0 14px;
+}
+
+.btn.btn--block {
+  width: 100%;
+}
+
+.btn:disabled {
+  cursor: default;
+  opacity: 0.55;
+  pointer-events: none;
+}

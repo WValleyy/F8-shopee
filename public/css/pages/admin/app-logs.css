@@ -1,0 +1,180 @@
+/* ==========================================================================
+   Admin App Logs
+   ==========================================================================
+*/
+
+.admin-filters--app-logs {
+  grid-template-columns:
+    minmax(240px, 1fr) minmax(150px, 190px) minmax(150px, 180px)
+    minmax(180px, 240px) auto;
+}
+
+.admin-log-list {
+  display: grid;
+  gap: 10px;
+}
+
+.admin-log-entry {
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+  border-left: 4px solid #7d8795;
+  border-radius: 6px;
+  background: var(--white-color);
+}
+
+.admin-log-entry--error {
+  border-left-color: #c62828;
+}
+
+.admin-log-entry--warning {
+  border-left-color: #b26a00;
+}
+
+.admin-log-entry--info {
+  border-left-color: #2470a0;
+}
+
+.admin-log-entry__header {
+  display: flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 14px;
+  border-bottom: 1px solid #eaecf0;
+  background: #fafbfc;
+}
+
+.admin-log-entry__identity {
+  display: flex;
+  min-width: 0;
+  align-items: center;
+  gap: 9px;
+}
+
+.admin-log-entry__identity code {
+  overflow-wrap: anywhere;
+  color: #3e4652;
+  font-size: 1.4rem;
+}
+
+.admin-log-entry__header time {
+  display: flex;
+  flex: 0 0 auto;
+  align-items: baseline;
+  gap: 7px;
+  color: var(--text-secondary-color);
+  font-size: 1.4rem;
+}
+
+.admin-log-entry__header time strong {
+  color: var(--text-color);
+  font-size: 1.5rem;
+}
+
+.admin-log-level {
+  display: inline-flex;
+  min-width: 58px;
+  min-height: 23px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 7px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.admin-log-level--error {
+  color: #9e1f1f;
+  background: #fbe9e9;
+}
+
+.admin-log-level--warning {
+  color: #865000;
+  background: #fff1d8;
+}
+
+.admin-log-level--info {
+  color: #1f5d82;
+  background: #e5f1f8;
+}
+
+.admin-log-entry__summary {
+  margin: 0;
+  padding: 14px;
+  color: var(--text-color);
+  font-weight: 600;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+  font-size: 1.1rem;
+}
+
+.admin-log-metadata {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1px;
+  margin: 0 14px 14px;
+  border: 1px solid #e4e7eb;
+  background: #e4e7eb;
+}
+
+.admin-log-metadata > div {
+  min-width: 0;
+  padding: 9px 10px;
+  background: var(--white-color);
+}
+
+.admin-log-metadata dt {
+  margin-bottom: 4px;
+  color: var(--text-secondary-color);
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+.admin-log-metadata dd {
+  margin: 0;
+  color: #333b47;
+  font-family: Consolas, "Courier New", monospace;
+  font-size: 1.4rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+  white-space: pre-wrap;
+}
+
+.admin-log-stack {
+  margin: 0 14px 14px;
+  border-top: 1px solid #e4e7eb;
+}
+
+.admin-log-stack summary {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding-top: 10px;
+  color: #59616d;
+  cursor: pointer;
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+.admin-log-stack pre {
+  overflow: auto;
+  max-height: 360px;
+  margin: 10px 0 0;
+  padding: 12px;
+  border: 1px solid #dfe3e8;
+  border-radius: 4px;
+  color: #27313d;
+  background: var(--background-color);
+  font:
+    14px/1.55 Consolas,
+    "Courier New",
+    monospace;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.admin-log-empty span {
+  font-size: 1.4rem;
+}

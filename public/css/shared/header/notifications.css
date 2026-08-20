@@ -1,0 +1,110 @@
+/* ==========================================================================
+   Header Notifications
+   ==========================================================================
+*/
+
+.header__notify {
+  position: absolute;
+  top: 140%;
+  right: 0;
+  width: 404px;
+  background-color: var(--white-color);
+  border: 1px solid #d3d3d3;
+  border-radius: 3px;
+  cursor: default;
+  display: none;
+  transform-origin: calc(100% - 20px) top;
+  animation: popUp 0.25s ease-in;
+  z-index: 2;
+}
+
+.header__notify::before {
+  content: "";
+  border-width: 20px 25px;
+  border-style: solid;
+  border-color: transparent transparent var(--white-color) transparent;
+  position: absolute;
+  top: -28px;
+  right: 13px;
+}
+
+.header__navbar-item--has-notify:hover .header__notify {
+  display: block;
+}
+
+.header__notify-header {
+  height: 40px;
+  background-color: var(--white-color);
+}
+
+.header__notify-header h3 {
+  color: var(--text-muted-color);
+  font-weight: 400;
+  font-size: 1.3rem;
+  line-height: 40px;
+  margin: 0 0 0 12px;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.header__notify-list {
+  padding-left: 0px;
+}
+
+.header__notify-items {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.header__notify-item {
+  list-style: none;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.header__notify-item:hover {
+  background-color: #f7f7f7;
+}
+
+.header__notify-item[data-unread="true"] {
+  background-color: rgba(238, 75, 43, 0.08);
+}
+
+.header__notify-link {
+  display: flex;
+  padding: 12px;
+  text-decoration: none;
+  color: var(--text-color);
+  width: 100%;
+}
+
+.header__notify-item-name {
+  display: block;
+  font-size: 1.4rem;
+  color: var(--black-color);
+  font-weight: 400;
+}
+
+.header__notify-item-des {
+  display: block;
+  font-size: 1.2rem;
+  color: #756f6e;
+  line-height: 1.6rem;
+  margin-top: 4px;
+}
+
+.header__notify-footer {
+  display: flex;
+}
+
+.header__notify-footer-btn {
+  border: 0;
+  background: transparent;
+  padding: 8px 0;
+  color: var(--text-color);
+  font: inherit;
+  text-decoration: none;
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+}

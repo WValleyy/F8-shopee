@@ -1,0 +1,102 @@
+/* ==========================================================================
+   Admin Dashboard
+   ==========================================================================
+*/
+
+.admin-metrics {
+  display: grid;
+  overflow-x: auto;
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
+  gap: 14px;
+  margin-bottom: 22px;
+}
+
+.admin-metric {
+  position: relative;
+  display: grid;
+  min-height: 112px;
+  align-content: center;
+  gap: 8px;
+  overflow: hidden;
+  padding: 18px;
+  border: 1px solid var(--border-color);
+  color: inherit;
+  background: var(--white-color);
+  text-decoration: none;
+}
+
+.admin-metric span {
+  color: var(--text-secondary-color);
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+
+.admin-metric strong {
+  font-size: 2.5rem;
+}
+
+.admin-metric i {
+  position: absolute;
+  right: 16px;
+  bottom: 38px;
+  color: #d9dde3;
+  font-size: 3rem;
+}
+
+.admin-metric--revenue {
+  grid-column: span 2;
+}
+
+.admin-dashboard-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.2fr) minmax(300px, 0.8fr);
+  gap: 18px;
+}
+
+.admin-compact-row {
+  display: flex;
+  min-height: 66px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 10px 16px;
+  border-bottom: 1px solid #eceef1;
+  color: inherit;
+  text-decoration: none;
+  font-size: 1.5rem;
+}
+
+.admin-compact-row:last-child {
+  border-bottom: 0;
+}
+
+.admin-compact-row > span:last-child {
+  text-align: right;
+}
+
+.admin-compact-row strong,
+.admin-compact-row small,
+.admin-cell-note {
+  display: block;
+}
+
+.admin-compact-row small,
+.admin-cell-note {
+  margin-top: 4px;
+  color: var(--text-secondary-color);
+  font-size: 1.3rem;
+}
+
+.admin-stock-count {
+  min-width: 30px;
+  padding: 6px 11px 5px 8px;
+  border-radius: 3px;
+  color: #9a6500;
+  background: #fff2cc;
+  text-align: center;
+}
+
+.admin-stock-count.is-empty {
+  color: #a83232;
+  background: #fbe7e7;
+}

@@ -1,0 +1,52 @@
+/* ==========================================================================
+   Admin Users
+   ==========================================================================
+*/
+
+.admin-user-cell {
+  display: flex;
+  min-width: 260px;
+  align-items: center;
+  gap: 10px;
+}
+
+.admin-user-cell small {
+  display: block;
+  margin-top: 4px;
+  color: var(--text-secondary-color);
+  font-size: 1.4rem;
+}
+
+.admin-current-user {
+  color: var(--text-secondary-color);
+  font-size: 1.4rem;
+  white-space: nowrap;
+}
+
+.admin-page[data-admin-collection="users"] .admin-filters label > span {
+  font-size: 1.4rem;
+}
+
+.admin-page[data-admin-collection="users"] .admin-table th {
+  position: sticky;
+  z-index: 2;
+  top: 0;
+  font-size: 1.4rem;
+  background: var(--white-color);
+}
+
+.admin-page[data-admin-collection="users"] .admin-table-wrap {
+  overflow: visible;
+}
+
+.admin-page[data-admin-collection="users"] .admin-table td {
+  font-size: 1.5rem;
+}
+
+.admin-page[data-admin-collection="users"] .admin-table td small {
+  font-size: 1.4rem;
+}
+
+.admin-page[data-admin-collection="users"] .admin-status {
+  font-size: 1.3rem;
+}

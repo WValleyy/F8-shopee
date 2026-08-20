@@ -1,0 +1,14 @@
+<section class="admin-page" data-admin-collection="users">
+    <div class="admin-page__heading"><div><p class="admin-eyebrow">Tài khoản</p><h2>Người dùng</h2></div></div>
+    <form class="admin-filters" method="get" action="/admin/users" data-admin-filter-form>
+        <label class="admin-search-field"><i class="fa-solid fa-magnifying-glass"></i><input class="form-control" type="search" name="q" value="<%= filters.q %>" placeholder="Tìm tên, tên đăng nhập hoặc email"></label>
+        <label><span>Vai trò</span><select class="form-control" name="role"><option value="all">Tất cả</option><option value="USER" <%= filters.role === 'USER' ? 'selected' : '' %>>User</option><option value="ADMIN" <%= filters.role === 'ADMIN' ? 'selected' : '' %>>Admin</option></select></label>
+        <label><span>Trạng thái</span><select class="form-control" name="status"><option value="all">Tất cả</option><option value="active" <%= filters.status === 'active' ? 'selected' : '' %>>Đang hoạt động</option><option value="blocked" <%= filters.status === 'blocked' ? 'selected' : '' %>>Đã khóa</option><option value="pending-deletion" <%= filters.status === 'pending-deletion' ? 'selected' : '' %>>Chờ xóa vĩnh viễn</option></select></label>
+        <label><span>Chi tiêu ròng từ</span><input class="form-control" type="number" name="minimumSpend" min="0" value="<%= filters.minimumSpend %>"></label>
+        <label><span>Chi tiêu ròng đến</span><input class="form-control" type="number" name="maximumSpend" min="0" value="<%= filters.maximumSpend %>"></label>
+        <button class="btn btn--primary btn--size-l" type="submit">Áp dụng</button>
+    </form>
+    <div data-collection-results><%- include('./users-results', { users, currentAdminId }) %></div>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>

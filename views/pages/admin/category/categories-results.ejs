@@ -1,0 +1,18 @@
+<div class="admin-table-wrap">
+    <table class="admin-table">
+        <thead><tr><th>Danh mục</th><th>Danh mục cha</th><th>Sản phẩm</th><th>Thứ tự</th><th>Trạng thái</th><th class="admin-table__actions">Thao tác</th></tr></thead>
+        <tbody>
+            <% categories.forEach(category => { %>
+                <tr data-admin-category-id="<%= category.id %>" data-name="<%= category.name %>" data-parent-id="<%= category.parentId %>" data-sort-order="<%= category.sortOrder %>" data-is-active="<%= category.isActive %>">
+                    <td><strong><%= category.name %></strong><small class="admin-cell-note">/<%= category.slug %></small></td>
+                    <td><%= category.parentName || 'Danh mục gốc' %></td>
+                    <td><%= category.productCount %></td>
+                    <td><%= category.sortOrder %></td>
+                    <td><span class="admin-status <%= category.isActive ? 'admin-status--success' : 'admin-status--muted' %>"><%= category.isActive ? 'Đang dùng' : 'Đã ẩn' %></span></td>
+                    <td class="admin-table__actions"><button class="admin-icon-button" type="button" data-edit-admin-category data-tooltip="Chỉnh sửa"><i class="fa-solid fa-pen"></i></button></td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% if (!categories.length) { %><div class="empty-state"><i class="fa-solid fa-layer-group"></i><strong>Không tìm thấy danh mục</strong></div><% } %>
+</div>

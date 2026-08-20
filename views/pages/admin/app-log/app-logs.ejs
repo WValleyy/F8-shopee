@@ -1,0 +1,68 @@
+<section
+    class="admin-page"
+    data-admin-collection="app-logs">
+    <div class="admin-page__heading">
+        <div>
+            <p class="admin-eyebrow">Vận hành</p>
+            <h2>Nhật ký ứng dụng</h2>
+        </div>
+    </div>
+
+    <form
+        class="admin-filters admin-filters--app-logs"
+        method="get"
+        action="/admin/app-logs"
+        data-admin-filter-form>
+        <label class="admin-search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input
+                class="form-control"
+                type="search"
+                name="q"
+                value="<%= filters.q %>"
+                maxlength="128"
+                placeholder="Tìm scope, thông báo hoặc metadata">
+        </label>
+        <label>
+            <span>Ngày</span>
+            <input class="form-control" type="date" name="date" value="<%= filters.date %>">
+        </label>
+        <label>
+            <span>Giờ</span>
+            <select class="form-control" name="hour">
+                <option value="all">Tất cả giờ</option>
+                <% for (let value = 0; value < 24; value += 1) { %>
+                    <% const hourValue = String(value).padStart(2, '0'); %>
+                    <option
+                        value="<%= hourValue %>"
+                        <%= filters.hour === hourValue ? 'selected' : '' %>>
+                        <%= hourValue %>:00–<%= hourValue %>:59
+                    </option>
+                <% } %>
+            </select>
+        </label>
+        <label>
+            <span>Scope</span>
+            <select class="form-control" name="scope">
+                <option value="all">Tất cả scope</option>
+                <% scopeOptions.forEach(scope => { %>
+                    <option
+                        value="<%= scope %>"
+                        <%= filters.scope === scope ? 'selected' : '' %>>
+                        <%= scope %>
+                    </option>
+                <% }) %>
+            </select>
+        </label>
+        <a class="btn btn--size-l" href="/admin/app-logs">
+            <i class="fa-solid fa-rotate-left"></i>
+            <span>Đặt lại</span>
+        </a>
+    </form>
+
+    <div data-collection-results>
+        <%- include('./app-logs-results', { logs }) %>
+    </div>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>

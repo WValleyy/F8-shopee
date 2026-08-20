@@ -1,0 +1,21 @@
+<svg
+    class="avatar-placeholder <%= typeof className === 'string' ? className : '' %>"
+    viewBox="0 0 15 15"
+    <%= typeof dataUserShellAvatar !== 'undefined' && dataUserShellAvatar ? 'data-user-shell-avatar' : '' %>
+    focusable="false">
+    <circle
+        cx="7.5"
+        cy="4.5"
+        r="3.8"
+        fill="none"
+        stroke="currentColor"
+        stroke-miterlimit="10">
+    </circle>
+    <path
+        d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-miterlimit="10">
+    </path>
+</svg>

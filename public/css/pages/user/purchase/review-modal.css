@@ -1,0 +1,142 @@
+/* ==========================================================================
+   Purchase Review Modal
+   ==========================================================================
+*/
+
+.purchase-review-modal__product {
+  display: grid;
+  grid-template-columns: 80px minmax(0, 1fr);
+  gap: 14px;
+  align-items: center;
+  margin-bottom: 20px;
+  padding: 16px;
+  background: #fafafa;
+  border: 1px solid #f0f0f0;
+  border-radius: 4px;
+}
+
+.purchase-review-modal__image {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+}
+
+.purchase-review-modal__product-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.purchase-review-modal__product-info strong {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
+
+.purchase-review-modal__product-info span,
+.purchase-review-modal__label {
+  color: #666;
+  font-size: 1.3rem;
+}
+
+.purchase-review-modal__rating {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.purchase-review-modal__star {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-width: 72px;
+  height: 38px;
+  border: 1px solid #e5e5e5;
+  border-radius: 4px;
+  background: #fff;
+  color: #888;
+  font-size: 1.4rem;
+  cursor: pointer;
+  transition:
+    border-color 0.2s,
+    color 0.2s,
+    background-color 0.2s;
+}
+
+.purchase-review-modal__star i {
+  color: #ffce3d;
+}
+
+.purchase-review-modal__star:hover,
+.purchase-review-modal__star[aria-pressed="true"] {
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+  background: rgba(238, 77, 45, 0.04);
+}
+
+.purchase-review-modal__upload-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+.purchase-review-modal__upload-btn {
+  min-width: 112px;
+  height: 36px;
+  border: 1px solid #e5e5e5;
+  background: #fff;
+}
+
+.purchase-review-modal__upload-note {
+  color: #888;
+  font-size: 1.2rem;
+  line-height: 1.5;
+}
+
+.purchase-review-modal__image-list {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.purchase-review-modal__image-preview {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid #ececec;
+  border-radius: 4px;
+  background: #fafafa;
+}
+
+.purchase-review-modal__image-preview img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+}
+
+.purchase-review-modal__image-remove {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.68);
+  color: #fff;
+}
+
+.purchase-review-modal__image-caption {
+  display: block;
+  overflow: hidden;
+  padding: 8px;
+  color: #666;
+  font-size: 1.2rem;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

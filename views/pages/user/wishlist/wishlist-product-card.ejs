@@ -1,0 +1,12 @@
+<div class="grid__column-2-4">
+    <article class="wishlist-card">
+        <button
+            type="button"
+            class="wishlist-card__remove"
+            data-remove-wishlist-product="<%= product.id %>">
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+
+        <%- include('../../../shared/components/product-card', { product }) %>
+    </article>
+</div>

@@ -1,0 +1,44 @@
+<%
+const hasChildren = Array.isArray(category.children) && category.children.length > 0;
+const containsActive = categoryContainsActive(category, activeCategory);
+const isActive = category.slug === activeCategory;
+const isAncestorActive = containsActive && !isActive;
+%>
+
+<li
+    class="category-item"
+    data-active="<%= isActive ? 'true' : 'false' %>"
+    data-ancestor-active="<%= isAncestorActive ? 'true' : 'false' %>"
+    data-expanded="<%= containsActive ? 'true' : 'false' %>"
+    data-category-node>
+    <div class="category-item__row" style="--category-depth: <%= depth %>">
+        <a
+            href="<%= buildHomeUrl({ category: category.slug, sort: [], page: 1 }) %>"
+            data-collection-navigation-link
+            class="category-item__link"
+            data-category-link
+            data-category="<%= category.slug %>">
+            <%= category.name %>
+        </a>
+
+        <% if (hasChildren) { %>
+            <button class="category-item__toggle" type="button" aria-expanded="<%= containsActive ? 'true' : 'false' %>" data-toggle-category>
+                <i class="fa-solid fa-chevron-down"></i>
+            </button>
+        <% } %>
+    </div>
+
+    <% if (hasChildren) { %>
+        <ul class="category-list category-list--nested" data-category-children <%= containsActive ? '' : 'hidden' %>>
+            <% category.children.forEach(child => { %>
+                <%- include('./category-tree-item', {
+                    category: child,
+                    activeCategory,
+                    depth: depth + 1,
+                    buildHomeUrl,
+                    categoryContainsActive,
+                }) %>
+            <% }) %>
+        </ul>
+    <% } %>
+</li>

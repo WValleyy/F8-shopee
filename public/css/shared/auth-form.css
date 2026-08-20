@@ -1,0 +1,128 @@
+/* ==========================================================================
+   Auth Form
+   ==========================================================================
+*/
+
+.auth-form__remember {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: var(--text-secondary-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.auth-form .form-control {
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
+}
+
+.auth-form .form-control:focus {
+  box-shadow: 0 0 0 2px rgba(238, 77, 45, 0.08);
+}
+
+.auth-form .form-control[readonly] {
+  background: var(--background-color);
+  color: var(--text-secondary-color);
+}
+
+.auth-form__aside {
+  margin-top: 18px;
+}
+
+.auth-form__policy-text {
+  padding: 0 12px;
+  color: var(--text-color);
+  font-size: 1.3rem;
+  line-height: 2rem;
+  text-align: center;
+}
+
+.auth-form__link {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.auth-form__socials {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: 30px;
+  padding: 16px 36px;
+  background-color: #d9d9d9;
+}
+
+.auth-form__socials-icon {
+  font-size: 2.2rem;
+}
+
+.auth-form__socials-text {
+  margin: 0 25px;
+}
+
+.auth-form__socials--facebook {
+  background-color: #3a5a98;
+  color: var(--white-color);
+}
+
+.auth-form__socials--google {
+  background-color: var(--white-color);
+  color: var(--text-color);
+}
+
+.auth-form__help {
+  display: flex;
+  justify-content: end;
+  margin-left: 3px;
+}
+
+.auth-form__help-link {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  font: inherit;
+  cursor: pointer;
+  color: var(--text-muted-color);
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+.auth-form__help-forgot {
+  color: var(--primary-color);
+}
+
+.auth-form__help-separate {
+  display: block;
+  height: 14px;
+  margin: 0 16px;
+  border-left: 2px solid var(--border-color);
+}
+
+.auth-form__reset-success {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 0;
+  gap: 12px;
+  margin: 0;
+  color: var(--primary-color);
+  font-size: 1.8rem;
+  font-weight: 600;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.auth-form__reset-success-icon {
+  color: #22a447;
+  font-size: 3.6rem;
+}
+
+.auth-form[data-auth-step="reset"][data-success="true"]
+  .modal-dialog__container {
+  display: grid;
+  min-height: 200px;
+  place-items: center;
+}

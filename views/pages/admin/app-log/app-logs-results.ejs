@@ -1,0 +1,100 @@
+<%
+const logTimeFormatter = new Intl.DateTimeFormat('en-CA', {
+    timeZone: 'Asia/Ho_Chi_Minh',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hourCycle: 'h23',
+});
+
+function getLogTimeParts(timestamp) {
+    const parts = Object.fromEntries(
+        logTimeFormatter
+            .formatToParts(timestamp)
+            .map(part => [part.type, part.value]),
+    );
+
+    return {
+        date: `${parts.day}/${parts.month}/${parts.year}`,
+        time: `${parts.hour}:${parts.minute}:${parts.second}`,
+    };
+}
+
+function stringifyDetailValue(value) {
+    if (value == null)
+        return '';
+
+    return typeof value === 'string' ? value : JSON.stringify(value);
+}
+
+function getLogDetails(context) {
+    const values = context && typeof context === 'object'
+        && !Array.isArray(context)
+        ? context
+        : { value: context };
+
+    return Object.entries(values)
+        .map(([key, value]) => ({
+            key,
+            value: stringifyDetailValue(value),
+        }))
+        .filter(detail => detail.value !== '');
+}
+%>
+<div class="admin-log-list">
+    <% logs.forEach(log => { %>
+        <%
+        const timestamp = new Date(log.createdAt);
+        const timeParts = getLogTimeParts(timestamp);
+        const details = getLogDetails(log.context);
+        %>
+        <article class="admin-log-entry admin-log-entry--<%= log.severity %>">
+            <header class="admin-log-entry__header">
+                <div class="admin-log-entry__identity">
+                    <span class="admin-log-level admin-log-level--<%= log.severity %>">
+                        <%= log.severity %>
+                    </span>
+                    <code><%= log.scope %></code>
+                </div>
+                <time datetime="<%= timestamp.toISOString() %>">
+                    <strong><%= timeParts.time %></strong>
+                    <span><%= timeParts.date %></span>
+                </time>
+            </header>
+
+            <p class="admin-log-entry__summary"><%= log.message || log.scope %></p>
+
+            <% if (details.length) { %>
+                <dl class="admin-log-metadata">
+                    <% details.forEach(detail => { %>
+                        <div>
+                            <dt><%= detail.key %></dt>
+                            <dd><%= detail.value %></dd>
+                        </div>
+                    <% }) %>
+                </dl>
+            <% } %>
+
+            <% if (log.stack) { %>
+                <details class="admin-log-stack">
+                    <summary>
+                        <i class="fa-solid fa-code"></i>
+                        Stack trace
+                    </summary>
+                    <pre><%= log.stack %></pre>
+                </details>
+            <% } %>
+        </article>
+    <% }) %>
+
+    <% if (!logs.length) { %>
+        <div class="empty-state empty-state--bordered admin-log-empty">
+            <i class="fa-regular fa-file-lines"></i>
+            <strong>Không tìm thấy log phù hợp</strong>
+            <span>Thử thay đổi ngày, giờ hoặc scope.</span>
+        </div>
+    <% } %>
+</div>

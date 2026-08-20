@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Image Lightbox
+   ==========================================================================
+*/
+
+.modal--image-lightbox .modal__overlay {
+  background: rgba(16, 19, 24, 0.76);
+}
+
+.image-lightbox {
+  position: relative;
+  width: min(920px, calc(100vw - 48px));
+  height: min(760px, calc(100vh - 48px));
+  padding: 22px;
+  border-radius: 4px;
+  background: var(--white-color);
+  box-shadow: 0 20px 48px rgba(0, 0, 0, 0.24);
+}
+
+.image-lightbox img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.image-lightbox__close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  width: 36px;
+  height: 36px;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  color: var(--white-color);
+  background: rgba(0, 0, 0, 0.68);
+  cursor: pointer;
+}

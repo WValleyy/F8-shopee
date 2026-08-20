@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Rating Stars
+   ==========================================================================
+*/
+
+.rating-stars {
+  display: inline-flex;
+  align-items: center;
+}
+
+.rating-stars__star {
+  color: var(--text-muted-color);
+}
+
+.rating-stars__star--active {
+  color: var(--gold-star-color);
+}

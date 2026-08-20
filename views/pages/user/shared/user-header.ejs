@@ -1,0 +1,43 @@
+<!-- ================= User Header ================= -->
+
+<header class="user-header">
+
+    <div class="user-header__content">
+
+        <div class="user-header__info">
+
+            <h1 class="user-header__title">
+
+                <%= title %>
+
+            </h1>
+
+            <% if (typeof description !== 'undefined' && description) { %>
+
+                <p class="user-header__description">
+
+                    <%= description %>
+
+                </p>
+
+            <% } %>
+
+        </div>
+
+        <% if (typeof button !== 'undefined' && button) { %>
+
+            <button
+                type="button"
+                id="<%= button.id || '' %>"
+                class="btn btn--primary user-header__button"
+                <%= button.attributes || '' %>>
+
+                <%= button.text %>
+
+            </button>
+
+        <% } %>
+
+    </div>
+
+</header>

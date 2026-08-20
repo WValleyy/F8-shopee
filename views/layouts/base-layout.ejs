@@ -1,0 +1,95 @@
+<%
+const shellUser = typeof userShellUser !== 'undefined'
+    ? userShellUser
+    : null;
+const headerCartPreview = typeof cartPreview !== 'undefined'
+    ? cartPreview
+    : {
+        itemCount: 0,
+        items: [],
+    };
+const headerNotificationPreview = typeof notificationPreview !== 'undefined'
+    ? notificationPreview
+    : {
+        unreadCount: 0,
+        items: [],
+    };
+const headerConfig = typeof header !== 'undefined' && header
+    ? header
+    : {
+        path: '../shared/partials/header/header',
+        data: {},
+    };
+const headerData = {
+    ...(headerConfig.data || {}),
+    userShellUser: shellUser,
+    cartPreview: headerCartPreview,
+    notificationPreview: headerNotificationPreview,
+};
+%>
+
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/fontawesome-free-7.2.0-web/css/all.min.css">
+
+    <link rel="stylesheet" href="/css/shared/base.css">
+    <link rel="stylesheet" href="/css/shared/grid.css">
+    <link rel="stylesheet" href="/css/shared/button.css">
+    <link rel="stylesheet" href="/css/shared/avatar-placeholder.css">
+    <link rel="stylesheet" href="/css/shared/rating-stars.css">
+    <link rel="stylesheet" href="/css/shared/form.css">
+    <link rel="stylesheet" href="/css/shared/modal.css">
+    <link rel="stylesheet" href="/css/shared/modal-dialog.css">
+    <link rel="stylesheet" href="/css/shared/header/header.css">
+    <link rel="stylesheet" href="/css/shared/header/search.css">
+    <link rel="stylesheet" href="/css/shared/header/notifications.css">
+    <link rel="stylesheet" href="/css/shared/header/cart-preview.css">
+    <link rel="stylesheet" href="/css/shared/footer.css">
+    <link rel="stylesheet" href="/css/shared/auth-form.css">
+    <link rel="stylesheet" href="/css/shared/confirm-modal.css">
+    <link rel="stylesheet" href="/css/shared/toast.css">
+
+    <% if (typeof styles !== 'undefined' && styles.length) { %>
+        <% styles.forEach(style => { %>
+            <link rel="stylesheet" href="<%= style %>">
+        <% }) %>
+    <% } %>
+
+    <link rel="stylesheet" href="/css/shared/focus.css">
+</head>
+
+<body
+    data-authenticated="<%= shellUser ? 'true' : 'false' %>">
+    <div class="app">
+
+        <%- include(headerConfig.path, headerData) %>
+
+        <%- body %>
+
+    </div>
+
+    <%- include("../shared/partials/footer") %>
+
+    <%- include("../shared/modals/auth-modal") %>
+    <%- include("../shared/modals/confirm-modal") %>
+    <%- include("../shared/components/toast") %>
+
+    <script type="module" src="<%= entryScript %>"></script>
+</body>
+
+</html>

@@ -1,0 +1,28 @@
+<%
+const orderActionLabels = {
+    cancel: 'Hủy đơn hàng',
+    complete: 'Đã nhận được hàng',
+    return: 'Trả hàng / Hoàn tiền',
+};
+%>
+
+<% if (hasOrders) { %>
+    <div class="purchase-list">
+        <% orders.forEach(order => { %>
+            <%- include("./order-card", { order, orderActionLabels }) %>
+        <% }) %>
+    </div>
+<% } else { %>
+    <div class="empty-state purchase-empty-state <%= currentQuery || currentTab !== 'all' ? 'empty-state--compact' : '' %>">
+        <img
+            src="/img/shopee_icon/no_purchase.png"
+            alt="Không có đơn hàng"
+            class="empty-state__image">
+
+        <strong>
+            <%= currentQuery || currentTab !== 'all'
+            ? 'Không tìm thấy đơn hàng phù hợp'
+            : 'Chưa có đơn hàng' %>
+        </strong>
+    </div>
+<% } %>

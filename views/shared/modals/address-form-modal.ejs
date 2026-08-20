@@ -1,0 +1,92 @@
+<div id="address-modal" class="modal" data-modal hidden>
+
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <form id="address-form" class="modal-dialog">
+
+            <input type="hidden" name="addressId" value="">
+
+            <div class="modal-dialog__container">
+
+                <div class="modal-dialog__header">
+                    <h3
+                        class="modal-dialog__title"
+                        data-address-form-title>Địa chỉ</h3>
+                </div>
+
+                <div class="form-stack">
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            type="text"
+                            name="fullName"
+                            class="form-control"
+                            maxlength="<%= inputLimits.address.fullNameMaxLength %>"
+                            placeholder="Họ và tên">
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            type="tel"
+                            name="phone"
+                            class="form-control"
+                            maxlength="<%= inputLimits.address.phoneMaxLength %>"
+                            data-phone-min-digits="<%= inputLimits.phone.minDigits %>"
+                            data-phone-max-digits="<%= inputLimits.phone.maxDigits %>"
+                            placeholder="Số điện thoại">
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            type="text"
+                            name="province"
+                            class="form-control"
+                            maxlength="<%= inputLimits.address.provinceMaxLength %>"
+                            placeholder="Tỉnh / Thành phố">
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            type="text"
+                            name="ward"
+                            class="form-control"
+                            maxlength="<%= inputLimits.address.wardMaxLength %>"
+                            placeholder="Phường / Xã">
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <textarea
+                            name="addressLine"
+                            class="form-control form-control--textarea"
+                            rows="4"
+                            maxlength="<%= inputLimits.address.detailMaxLength %>"
+                            placeholder="Địa chỉ cụ thể"></textarea>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <label class="form-check">
+                            <input type="checkbox" name="isDefault">
+                            <span>Đặt làm địa chỉ mặc định</span>
+                        </label>
+                    </div>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+                    <button type="button" class="btn btn--secondary" data-address-form-back>Trở lại</button>
+                    <button type="submit" class="btn btn--primary">
+                        Hoàn thành
+                    </button>
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>

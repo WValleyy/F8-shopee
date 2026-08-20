@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Đang khôi phục phiên đăng nhập</title>
+</head>
+<body>
+<script>
+(async function () {
+    try {
+        var response = await fetch('/api/auth/session/refresh', {
+            method: 'POST',
+            credentials: 'same-origin',
+            headers: { 'Accept': 'application/json' }
+        });
+
+        if (!response.ok) {
+            throw new Error('refresh_failed');
+        }
+
+        window.location.reload();
+    } catch (error) {
+        window.location.replace('/');
+    }
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<div class="modal" id="auth-modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <!-- Register -->
+        <form class="modal-dialog auth-form" data-auth-step="register">
+
+            <div class="modal-dialog__container">
+
+                <header class="modal-dialog__header">
+                    <h3 class="modal-dialog__title">Đăng ký</h3>
+
+                    <button
+                        type="button"
+                        class="form-text-button"
+                        data-switch="login">
+                        Đăng nhập
+                    </button>
+                </header>
+
+                <div class="form-stack">
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="name"
+                            type="text"
+                            class="form-control"
+                            placeholder="Tên hiển thị"
+                            maxlength="<%= inputLimits.user.nameMaxLength %>"
+                            autocomplete="name">
+                        
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="Email"
+                            maxlength="<%= inputLimits.user.emailMaxLength %>"
+                            autocomplete="email">
+
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Mật khẩu"
+                            maxlength="128"
+                            autocomplete="new-password">
+
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="confirm-password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Nhập lại mật khẩu"
+                            maxlength="128"
+                            autocomplete="new-password">
+
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                </div>
+
+                <div class="auth-form__aside">
+
+                    <p class="auth-form__policy-text">
+                        Bằng việc đăng ký, bạn đã đồng ý với Shopee về
+                        <a class="auth-form__link">
+                            Điều khoản dịch vụ
+                        </a>
+                        &
+                        <a class="auth-form__link">
+                            Chính sách bảo mật
+                        </a>
+                    </p>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+
+                    <button
+                        type="button"
+                        class="btn"
+                        data-modal-close>
+                        TRỞ LẠI
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary">
+                        ĐĂNG KÝ
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="auth-form__socials">
+
+                <a
+                    
+                    class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Facebook
+                    </span>
+
+                </a>
+
+                <a
+                    
+                    class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Google
+                    </span>
+
+                </a>
+
+            </div>
+
+        </form>
+
+        <!-- Login -->
+
+        <form class="modal-dialog auth-form" data-auth-step="login" hidden>
+
+            <div class="modal-dialog__container">
+
+                <header class="modal-dialog__header">
+
+                    <h3 class="modal-dialog__title">
+                        Đăng nhập
+                    </h3>
+
+                    <button
+                        type="button"
+                        class="form-text-button"
+                        data-switch="register">
+                        Đăng ký
+                    </button>
+
+                </header>
+
+                <div class="form-stack">
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="email"
+                            type="email"
+                            class="form-control"
+                            placeholder="Email"
+                            autocomplete="email">
+
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            name="password"
+                            type="password"
+                            class="form-control"
+                            placeholder="Mật khẩu"
+                            autocomplete="current-password">
+
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+
+                    <label class="form-check auth-form__remember">
+                        <input
+                            name="rememberMe"
+                            type="checkbox">
+                        <span>Duy trì đăng nhập</span>
+                    </label>
+
+                </div>
+
+                <div class="auth-form__aside">
+
+                    <div class="auth-form__help">
+
+                        <button
+                            type="button"
+                            data-forgot-password
+                            class="auth-form__help-link auth-form__help-forgot">
+                            Quên mật khẩu
+                        </button>
+
+                        <span class="auth-form__help-separate"></span>
+
+                        <a
+                            
+                            class="auth-form__help-link">
+                            Cần trợ giúp?
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+
+                    <button
+                        type="button"
+                        class="btn"
+                        data-modal-close>
+                        TRỞ LẠI
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary">
+                        ĐĂNG NHẬP
+                    </button>
+
+                </div>
+
+            </div>
+
+            <div class="auth-form__socials">
+
+                <a
+                    
+                    class="btn btn--size-s auth-form__socials--facebook btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-facebook"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Facebook
+                    </span>
+
+                </a>
+
+                <a
+                    
+                    class="btn btn--size-s auth-form__socials--google btn--no-hover">
+
+                    <i class="auth-form__socials-icon fa-brands fa-google"></i>
+
+                    <span class="auth-form__socials-text">
+                        Kết nối với Google
+                    </span>
+
+                </a>
+
+            </div>
+
+        </form>
+
+        <!-- Session limit -->
+        <div class="modal-dialog auth-form" data-auth-step="sessionLimit" hidden>
+            <div class="modal-dialog__container">
+                <header class="modal-dialog__header">
+                    <button type="button" class="modal-dialog__back" data-session-limit-cancel>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 class="modal-dialog__title">Giới hạn đăng nhập</h3>
+                </header>
+
+                <div class="form-stack">
+                <p class="modal-dialog__text">
+                        Tài khoản này đã đạt giới hạn phiên đăng nhập. Để tiếp tục
+                        đăng nhập trên thiết bị này, hệ thống cần đăng xuất phiên cũ nhất.
+                    </p>
+                    <span class="form-field__message" data-form-message data-session-limit-message></span>
+                </div>
+
+                <div class="modal-dialog__actions">
+                    <button type="button" class="btn" data-session-limit-cancel>
+                        Hủy
+                    </button>
+                    <button type="button" class="btn btn--primary" data-session-limit-confirm>
+                        Đăng xuất phiên cũ nhất và tiếp tục
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Forgot password -->
+        <form class="modal-dialog auth-form" data-auth-step="forgot" hidden>
+            <div class="modal-dialog__container">
+                <header class="modal-dialog__header">
+                    <button type="button" class="modal-dialog__back" data-modal-back>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 class="modal-dialog__title">Đặt lại mật khẩu</h3>
+                </header>
+                <div class="form-stack">
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="email" type="email" class="form-control" placeholder="Email" autocomplete="email">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                </div>
+                <div class="modal-dialog__actions">
+                    <button type="button" class="btn" data-modal-close>TRỞ LẠI</button>
+                    <button type="submit" class="btn btn--primary">TIẾP THEO</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- OTP -->
+        <form class="modal-dialog auth-form" data-auth-step="otp" hidden>
+            <div class="modal-dialog__container">
+                <header class="modal-dialog__header">
+                    <button type="button" class="modal-dialog__back" data-modal-back>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 class="modal-dialog__title">Nhập mã xác nhận</h3>
+                </header>
+                <p class="modal-dialog__text">Mã xác minh đã được gửi đến <strong data-otp-email></strong></p>
+                <div class="form-stack">
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="otp" class="form-control" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Nhập mã 6 số">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                    <button type="button" class="form-text-button" data-resend-password-otp>Gửi lại mã</button>
+                </div>
+                <div class="modal-dialog__actions">
+                    <button type="submit" class="btn btn--primary">KẾ TIẾP</button>
+                </div>
+            </div>
+        </form>
+
+        <!-- New password -->
+        <form class="modal-dialog auth-form" data-auth-step="reset" data-success="false" hidden>
+            <div class="modal-dialog__container">
+                <header class="modal-dialog__header" data-reset-default-content>
+                    <button type="button" class="modal-dialog__back" data-modal-back>
+                        <i class="fa-solid fa-arrow-left"></i>
+                    </button>
+                    <h3 class="modal-dialog__title" data-reset-heading>Mật khẩu mới</h3>
+                </header>
+                <div class="form-stack" data-reset-default-content>
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="password" type="password" class="form-control" autocomplete="new-password" placeholder="Mật khẩu mới">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="confirmPassword" type="password" class="form-control" autocomplete="new-password" placeholder="Nhập lại mật khẩu">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                </div>
+                <div class="modal-dialog__actions" data-reset-default-content>
+                    <button type="submit" class="btn btn--primary">XÁC NHẬN</button>
+                </div>
+                <p class="auth-form__reset-success" data-reset-success hidden>
+                    <span>Đặt lại thành công</span>
+                    <i class="fa-solid fa-circle-check auth-form__reset-success-icon" aria-hidden="true"></i>
+                </p>
+            </div>
+        </form>
+
+    </div>
+
+</div>

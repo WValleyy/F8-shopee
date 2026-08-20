@@ -1,0 +1,402 @@
+<%
+const formatPriceRange = range => (
+    range.min === range.max
+        ? formatCurrency(range.min)
+        : `${formatCurrency(range.min)} - ${formatCurrency(range.max)}`
+);
+const ratingValue = Math.max(
+    0,
+    Math.min(5, Math.round(product.ratingAverage || 0)),
+);
+const primaryImage = product.images[0];
+const categoryUrl = product.categorySlug
+    ? `/?category=${encodeURIComponent(product.categorySlug)}`
+    : '/';
+const activeVariant = product.activeVariant;
+const hasDiscount = product.variants.some(
+    variant => variant.originalPrice > variant.price,
+);
+const activeOptionMap = activeVariant?.optionMap || {};
+const canPurchase = Boolean(activeVariant && activeVariant.stock > 0);
+const stockText = activeVariant
+    ? activeVariant.stock > 0
+        ? `Còn ${activeVariant.stock} sản phẩm`
+        : 'Hết hàng'
+    : 'Vui lòng chọn phân loại';
+%>
+
+    <main class="product-page" data-product-page>
+        <div class="grid">
+            <nav class="product-breadcrumb">
+                <ul class="product-breadcrumb__list">
+                    <li class="product-breadcrumb__item">
+                        <a href="/" class="product-breadcrumb__link">Shopee</a>
+                    </li>
+
+                    <li class="product-breadcrumb__item">
+                        <a href="<%= categoryUrl %>" class="product-breadcrumb__link">
+                            <%= product.categoryName || 'Danh mục' %>
+                        </a>
+                    </li>
+
+                    <li class="product-breadcrumb__item">
+                        <span class="product-breadcrumb__current">
+                            <%= product.name %>
+                        </span>
+                    </li>
+                </ul>
+            </nav>
+
+            <section class="product-overview" data-product-detail>
+                <script type="application/json" data-page-initial-state>
+                    <%- serializeJsonForHtml({
+                        variant: {
+                            activeVariantId: activeVariant?.id || '',
+                            variants: product.variants,
+                            optionGroups: product.optionGroups,
+                            priceRange: product.priceRange,
+                            originalPriceRange: product.originalPriceRange,
+                        },
+                        review: {
+                            slug: product.slug,
+                            pagination: reviewState.pagination,
+                        },
+                    }) %>
+                </script>
+
+                <div class="grid__row">
+                    <div class="grid__column-5 product-gallery">
+                        <div class="product-gallery__main">
+                            <img src="<%= primaryImage %>" alt="<%= product.name %>" class="product-gallery__main-img"
+                                data-product-main-image>
+                        </div>
+
+                        <div class="product-gallery__thumbs" data-product-gallery-thumbs>
+                            <% if (product.images.length > 5) { %>
+                                <button
+                                    class="product-gallery__arrow product-gallery__arrow--left"
+                                    type="button"
+                                    data-gallery-nav="prev">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                            <% } %>
+                            <ul class="product-gallery__list">
+                                <% product.images.forEach((image)=> { %>
+                                    <li class="product-gallery__item">
+                                        <button
+                                            class="product-gallery__thumb"
+                                            type="button"
+                                            aria-pressed="<%= image === primaryImage ? 'true' : 'false' %>"
+                                            data-gallery-image="<%= image %>">
+                                            <img src="<%= image %>" alt="Ảnh sản phẩm <%= product.name %>"
+                                                class="product-gallery__thumb-img">
+                                        </button>
+                                    </li>
+                                    <% }) %>
+                            </ul>
+                            <% if (product.images.length > 5) { %>
+                                <button
+                                    class="product-gallery__arrow product-gallery__arrow--right"
+                                    type="button"
+                                    data-gallery-nav="next">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            <% } %>
+                        </div>
+
+                        <div class="product-gallery__socials">
+                            <div class="product-gallery__share">
+                                <span>Chia sẻ:</span>
+                                <a
+                                    
+                                    class="product-gallery__social product-gallery__social--messenger">
+                                    <i class="fa-brands fa-facebook-messenger"></i>
+                                </a>
+                                <a
+                                    
+                                    class="product-gallery__social product-gallery__social--facebook">
+                                    <i class="fa-brands fa-facebook"></i>
+                                </a>
+                                <a
+                                    
+                                    class="product-gallery__social product-gallery__social--pinterest">
+                                    <i class="fa-brands fa-pinterest"></i>
+                                </a>
+                            </div>
+                            <span class="product-gallery__social-separator"></span>
+                            <button type="button"
+                                class="product-gallery__like"
+                                aria-pressed="<%= product.isWishlisted ? 'true' : 'false' %>"
+                                data-product-wishlist data-product-id="<%= product.id %>">
+                                <i class="<%= product.isWishlisted ? 'fa-solid' : 'fa-regular' %> fa-heart"></i>
+                                <span>Đã thích (<span data-product-wishlist-count><%= product.likes %></span>)</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="grid__column-7 product-info">
+                        <h1 class="product-info__name">
+                            <span class="product-info__favorite">Yêu thích</span>
+                            <%= product.name %>
+                        </h1>
+
+                        <div class="product-info__meta">
+                            <a href="#product-reviews" class="product-info__rating-score">
+                                <%= product.ratingAverage.toFixed(1) %>
+                            </a>
+
+                            <span class="product-info__stars">
+                                <%- include( '../../../shared/components/rating-star' , { rating: ratingValue, } ) %>
+                            </span>
+
+                            <a href="#product-reviews" class="product-info__meta-link">
+                                <strong>
+                                    <%= product.ratingCount %>
+                                </strong> Đánh Giá
+                            </a>
+
+                            <span class="product-info__sold">
+                                <strong>
+                                    <%= product.sold %>
+                                </strong> Đã Bán
+                            </span>
+                            <button class="product-info__report" type="button">
+                                Tố cáo
+                            </button>
+                        </div>
+
+                        <div class="product-info__price-box">
+                            <span class="product-info__price" data-product-price>
+                                <%= formatPriceRange(product.priceRange) %>
+                            </span>
+
+                            <span
+                                class="product-info__old-price"
+                                data-product-original-price
+                                <%= hasDiscount ? '' : 'hidden' %>>
+                                <%= formatPriceRange(product.originalPriceRange) %>
+                            </span>
+                            <span class="product-info__discount" data-product-discount hidden></span>
+                        </div>
+
+                        <div class="product-info__options">
+                            <div class="product-info__option-row">
+                                <span class="product-info__option-label">Thương hiệu</span>
+                                <div class="product-info__option-content">
+                                    <%= product.brand || 'Không rõ' %>
+                                </div>
+                            </div>
+
+                            <div class="product-info__option-row">
+                                <span class="product-info__option-label">An Tâm Mua Sắm Cùng Shopee</span>
+                                <div class="product-info__option-content product-info__option-content--center">
+                                    <i class="product-info__shield-icon fa-solid fa-shield-halved"></i>
+                                    <span class="product-info__option-content-text">
+                                        Trả hàng miễn phí 7 ngày · Bảo hiểm Thời trang
+                                    </span>
+                                </div>
+                            </div>
+
+                            <% product.optionGroups.forEach(group=> { %>
+                                <div class="product-info__option-row">
+                                    <span class="product-info__option-label">
+                                        <%= group.name %>
+                                    </span>
+                                    <div class="product-info__variants">
+                                        <% group.values.forEach(value=> { %>
+                                            <button
+                                                class="product-info__variant"
+                                                aria-pressed="<%= activeOptionMap[group.name] === value ? 'true' : 'false' %>"
+                                                data-availability="available"
+                                                type="button" data-option-name="<%= group.name %>"
+                                                data-option-value="<%= value %>">
+                                                <%= value %>
+                                            </button>
+                                            <% }) %>
+                                    </div>
+                                </div>
+                                <% }) %>
+
+                                    <div class="product-info__option-row product-info__quantity-row">
+                                        <span class="product-info__option-label">Số Lượng</span>
+                                        <div class="product-info__quantity">
+                                            <button type="button"
+                                                data-product-quantity-decrease <%=canPurchase ? '' : 'disabled' %>>-</button>
+                                            <input type="text" value="1"
+                                                data-product-quantity-input <%=canPurchase ? '' : 'disabled' %>>
+                                            <button type="button"
+                                                data-product-quantity-increase <%=canPurchase ? '' : 'disabled' %>>+</button>
+                                        </div>
+
+                                        <span class="product-info__stock" data-product-stock>
+                                            <%= stockText %>
+                                        </span>
+                                    </div>
+                        </div>
+
+                        <div class="product-info__actions">
+                            <button class="product-info__add-cart btn" type="button" data-add-to-cart
+                                <%=canPurchase ? '' : 'disabled' %>>
+                                <i class="fa-solid fa-cart-plus"></i>
+                                Thêm Vào Giỏ Hàng
+                            </button>
+
+                            <button class="product-info__buy-now btn btn--primary" type="button" data-buy-now
+                                <%=canPurchase ? '' : 'disabled' %>>
+                                Mua Ngay
+                            </button>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+
+            <div class="product-body grid__row">
+                <div class="grid__column-10">
+                    <section class="product-section product-detail">
+                        <h2 class="product-section__heading">CHI TIẾT SẢN PHẨM</h2>
+                        <dl class="product-detail__list">
+                            <dt>Danh Mục</dt>
+                            <dd>
+                                <%= product.categoryName || 'Đang cập nhật' %>
+                            </dd>
+                            <dt>Thương hiệu</dt>
+                            <dd>
+                                <%= product.brand || 'Đang cập nhật' %>
+                            </dd>
+                            <dt>Kho</dt>
+                            <dd>
+                                <%= product.totalStock > 0
+                                    ? `${product.totalStock} sản phẩm`
+                                    : 'HẾT HÀNG' %>
+                            </dd>
+                            <% product.specifications.forEach((specification)=> { %>
+                                <dt>
+                                    <%= specification.name %>
+                                </dt>
+                                <dd>
+                                    <%= specification.value !== null
+                                        && specification.value !== undefined
+                                        && specification.value !== ''
+                                        ? specification.unit
+                                            ? `${specification.value} ${specification.unit}`.trim()
+                                            : specification.value
+                                        : 'Đang cập nhật' %>
+                                </dd>
+                                <% }) %>
+                        </dl>
+
+                        <h2 class="product-section__heading">MÔ TẢ SẢN PHẨM</h2>
+                        <div class="product-detail__description">
+                            <p>
+                                <%= product.description || 'Đang cập nhật mô tả sản phẩm.' %>
+                            </p>
+                        </div>
+                    </section>
+
+                    <section class="product-section product-reviews" id="product-reviews" data-product-reviews>
+                        <h2 class="product-section__heading">ĐÁNH GIÁ SẢN PHẨM</h2>
+                        <div class="product-reviews__summary">
+                            <div class="product-reviews__score-wrapper">
+                                <div class="product-reviews__rating-score">
+                                    <%= product.ratingAverage.toFixed(1) %>
+                                        <span class="product-reviews__rating-score-out-of">/5</span>
+                                </div>
+                                <div class="product-reviews__stars">
+                                    <%- include( '../../../shared/components/rating-star' , { rating: ratingValue, }
+                                        ) %>
+                                </div>
+                            </div>
+                            <div class="product-reviews__filters">
+                                <% [0, 5, 4, 3, 2, 1].forEach(rating=> { %>
+                                    <button type="button"
+                                        class="product-reviews__filter"
+                                        aria-pressed="<%= rating === 0 ? 'true' : 'false' %>"
+                                        data-review-rating="<%= rating %>">
+                                        <%= rating ? `${rating} sao` : 'Tất cả' %>
+                                    </button>
+                                    <% }) %>
+                            </div>
+                        </div>
+
+                        <div class="product-detail__description" data-product-reviews-content>
+                            <%- include('./reviews-content', {
+                                reviews: reviewState.reviews,
+                                rating: reviewState.rating,
+                            }) %>
+                        </div>
+                    </section>
+                </div>
+
+                <aside class="grid__column-2 product-sidebar">
+                    <div class="product-sidebar__hot-sales">
+                        <h2 class="product-sidebar__heading">Sản phẩm nổi bật</h2>
+                        <ul class="product-sidebar__list">
+                            <% featuredProducts.forEach(item=> { %>
+                                <li class="product-sidebar__item">
+                                    <a href="/product/<%= item.slug %>" class="product-sidebar__link">
+                                        <img src="<%= item.image %>" alt="<%= item.name %>">
+                                        <div class="product-sidebar__content">
+                                            <span>
+                                                <%= item.name %>
+                                            </span>
+                                            <strong>
+                                                <%= formatCurrency(item.price) %>
+                                            </strong>
+                                        </div>
+                                    </a>
+                                </li>
+                                <% }) %>
+                        </ul>
+                    </div>
+                </aside>
+            </div>
+
+            <section class="related-products grid__row" data-related-products>
+                <div class="grid__column-10">
+                    <div class="related-products__header">
+                        <h2>Các sản phẩm liên quan</h2>
+                        <a href="<%= categoryUrl %>">Xem tất cả</a>
+                    </div>
+
+                    <div class="grid__row">
+                        <% relatedProducts.forEach(product=> { %>
+                            <div class="grid__column-2-4">
+                                <%- include('../../../shared/components/product-card', { product }) %>
+                            </div>
+                                <% }) %>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <%- include('../../../shared/components/pagination-button') %>
+
+        <div class="modal product-lightbox" hidden data-modal data-product-lightbox>
+            <div class="modal__overlay product-lightbox__overlay" data-modal-close></div>
+
+            <div class="modal__body product-lightbox__dialog" data-modal-content>
+                <div class="product-lightbox__main">
+                    <button type="button" class="product-lightbox__nav product-lightbox__nav--prev" data-product-lightbox-nav="prev">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+
+                    <img src="<%= primaryImage %>" alt="<%= product.name %>" class="product-lightbox__image"
+                        data-product-lightbox-image>
+
+                    <button type="button" class="product-lightbox__nav product-lightbox__nav--next"
+                        data-product-lightbox-nav="next">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <div class="product-lightbox__sidebar">
+                    <div class="product-lightbox__title" data-product-lightbox-title>
+                        <%= product.name %>
+                    </div>
+
+                    <div class="product-lightbox__thumbs" data-product-lightbox-thumbs></div>
+                </div>
+            </div>
+        </div>

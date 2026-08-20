@@ -1,0 +1,548 @@
+/* ==========================================================================
+   Admin
+   ==========================================================================
+*/
+
+:root {
+  --admin-sidebar-width: 236px;
+}
+
+/* ==========================================================================
+   Admin shell
+   ==========================================================================
+*/
+
+.admin-shell {
+  min-height: 100vh;
+}
+
+.admin-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  z-index: 40;
+  display: flex;
+  width: var(--admin-sidebar-width);
+  flex-direction: column;
+  padding: 20px 14px;
+  border-right: 1px solid var(--border-color);
+  color: var(--text-color);
+  background: var(--white-color);
+}
+
+.admin-brand {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 10px 18px;
+  color: var(--text-color);
+  text-decoration: none;
+  margin-bottom: 17px;
+}
+
+.admin-brand__mark {
+  display: grid;
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+  place-items: center;
+  border: 2px solid var(--primary-color);
+  color: var(--primary-color);
+  font-size: 3rem;
+}
+
+.admin-brand strong,
+.admin-brand small {
+  display: block;
+}
+
+.admin-brand strong {
+  margin-top: 5px;
+  font-size: 2rem;
+}
+
+.admin-brand small {
+  margin-top: 3px;
+  color: var(--text-muted-color);
+  font-size: 1.3rem;
+}
+
+.admin-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-top: 10px;
+
+}
+
+.admin-nav__link,
+.admin-sidebar__store-link {
+  display: flex;
+  min-height: 42px;
+  align-items: center;
+  gap: 12px;
+  padding: 0 12px;
+  border-radius: 5px;
+  color: var(--text-secondary-color);
+  text-decoration: none;
+  font-size: 1.6rem;
+}
+
+.admin-nav__link i,
+.admin-sidebar__store-link i {
+  width: 18px;
+  text-align: center;
+}
+
+.admin-nav__link:hover,
+.admin-sidebar__store-link:hover {
+  color: var(--primary-color);
+  background: var(--background-color);
+}
+
+.admin-nav__link[aria-current="page"] {
+  color: var(--white-color);
+  background: var(--primary-color);
+}
+
+.admin-sidebar__store-link {
+  margin-top: auto;
+}
+
+/* ==========================================================================
+   Workspace
+   ==========================================================================
+*/
+
+.admin-workspace {
+  min-height: 100vh;
+  margin-left: var(--admin-sidebar-width);
+}
+
+.admin-avatar {
+  display: grid;
+  overflow: hidden;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  color: var(--text-secondary-color);
+  background: var(--background-color);
+}
+
+.admin-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.admin-avatar .avatar-placeholder {
+  width: 65%;
+  height: 65%;
+}
+
+/* ==========================================================================
+   Page shell
+   ==========================================================================
+*/
+
+.admin-main {
+  padding: 28px;
+}
+
+.admin-page {
+  width: min(1440px, 100%);
+  margin: 0 auto;
+}
+
+.admin-page__heading {
+  display: flex;
+  min-height: 54px;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.admin-page__heading h2 {
+  margin: 4px 0 0;
+  font-size: 2.5rem;
+  letter-spacing: 0;
+}
+
+.admin-eyebrow {
+  margin: 0;
+  color: var(--text-secondary-color);
+  font-size: 1.2rem;
+  text-transform: uppercase;
+  margin-bottom: 13px;
+}
+
+.admin-icon-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  color: var(--text-color);
+  background: var(--white-color);
+  cursor: pointer;
+  text-decoration: none;
+  width: 34px;
+  height: 34px;
+  padding: 0;
+}
+
+.admin-icon-button:hover {
+  border-color: var(--text-muted-color);
+  background: var(--background-color);
+}
+
+.admin-icon-button--danger {
+  color: var(--danger-color);
+}
+
+.admin-icon-button:disabled {
+  opacity: 0.55;
+}
+
+/* ==========================================================================
+   Bulk actions
+   ==========================================================================
+*/
+
+.admin-bulk-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 10px 12px;
+  border: 1px solid var(--border-color);
+  color: var(--text-secondary-color);
+  background: var(--white-color);
+  font-size: 1.3rem;
+  font-weight: 500;
+}
+
+.admin-bulk-toolbar__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+/* ==========================================================================
+   Filters and form controls
+   ==========================================================================
+*/
+
+.admin-filters {
+  display: grid;
+  overflow-x: auto;
+  grid-template-columns:
+    minmax(260px, 1fr) minmax(170px, 230px) minmax(150px, 190px)
+    auto;
+  gap: 12px;
+  align-items: end;
+  padding: 16px;
+  border: 1px solid var(--border-color);
+  border-bottom: 0;
+  background: var(--white-color);
+}
+
+.admin-filters--compact {
+  grid-template-columns: minmax(260px, 1fr) auto;
+}
+
+.admin-filters label,
+.admin-field {
+  display: grid;
+  gap: 6px;
+}
+
+.admin-filters label > span,
+.admin-field > span {
+  color: var(--text-secondary-color);
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.admin-filters input,
+.admin-filters select,
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  width: 100%;
+  min-height: 38px;
+  border: 1px solid #cfd4dc;
+  border-radius: 3px;
+  color: var(--text-color);
+  background: var(--white-color);
+}
+
+.admin-filters input,
+.admin-filters select,
+.admin-field input,
+.admin-field select,
+.admin-field textarea {
+  padding: 8px 10px;
+}
+
+.admin-filters input:focus,
+.admin-filters select:focus,
+.admin-field input:focus,
+.admin-field select:focus,
+.admin-field textarea:focus {
+  border-color: var(--primary-color);
+}
+
+.admin-search-field {
+  position: relative;
+}
+
+.admin-search-field i {
+  position: absolute;
+  bottom: 12px;
+  left: 11px;
+  color: #8b929d;
+}
+
+.admin-search-field input {
+  padding-left: 34px;
+}
+
+/* ==========================================================================
+   Data tables
+   ==========================================================================
+*/
+
+.admin-table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--border-color);
+  background: var(--white-color);
+}
+
+.admin-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.admin-table th,
+.admin-table td {
+  padding: 13px 14px;
+  border-bottom: 1px solid #eaecf0;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.admin-table th {
+  color: #5f6672;
+  background: #fafbfc;
+  font-size: 1.2rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.admin-table tbody tr:hover {
+  background: #fcfcfd;
+}
+
+.admin-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.admin-table th.admin-table__actions,
+.admin-table td.admin-table__actions {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.admin-table th.admin-table__selection,
+.admin-table td.admin-table__selection {
+  width: 42px;
+  text-align: center;
+}
+
+.admin-table__selection input {
+  width: 16px;
+  height: 16px;
+  vertical-align: middle;
+}
+
+.admin-table__actions .admin-icon-button {
+  margin-left: 4px;
+}
+
+/* ========================================================================== 
+   Status and pagination
+   ==========================================================================
+*/
+
+.admin-status {
+  display: inline-flex;
+  min-height: 25px;
+  align-items: center;
+  justify-content: center;
+  padding: 0 8px;
+  border-radius: 3px;
+  font-size: 1.2rem;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.admin-status--success,
+.admin-status--completed {
+  color: #116d47;
+  background: #e4f4ec;
+}
+
+.admin-status--muted {
+  color: #626975;
+  background: #eceef1;
+}
+
+.admin-status--danger {
+  color: #a22b2b;
+  background: #fbe9e9;
+}
+
+.admin-status--shipping,
+.admin-status--confirmed,
+.admin-status--pending {
+  color: #0d5f91;
+  background: #e3f1fa;
+}
+
+.admin-status--cancelled {
+  color: #8f3434;
+  background: #f8e8e8;
+}
+
+.admin-pagination {
+  display: flex;
+  min-height: 68px;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* ==========================================================================
+   Panels
+   ==========================================================================
+*/
+
+.admin-panel {
+  border: 1px solid var(--border-color);
+  background: var(--white-color);
+}
+
+.admin-panel > header {
+  display: flex;
+  min-height: 62px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 14px 18px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-panel h3,
+.admin-panel header p {
+  margin: 0;
+}
+
+.admin-panel h3 {
+  font-size: 1.6rem;
+}
+
+.admin-panel header p {
+  margin-top: 8px;
+  color: var(--text-secondary-color);
+  font-size: 1.2rem;
+}
+
+.admin-panel__heading {
+  display: flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-panel__heading h3 {
+  font-size: 1.8rem;
+}
+
+.admin-panel__heading a {
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  text-decoration: none;
+}
+
+/* ==========================================================================
+   Editor form
+   ==========================================================================
+*/
+
+.admin-editor-form > header,
+.admin-editor-form > footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.admin-editor-form > header h3 {
+  margin: 3px 0 0;
+}
+
+.admin-editor-form > footer {
+  justify-content: flex-end;
+  border-top: 1px solid var(--border-color);
+  border-bottom: 0;
+}
+
+.admin-editor-form .admin-form-grid {
+  padding: 20px;
+}
+
+.admin-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  padding: 18px;
+}
+
+.admin-field--full,
+.admin-field--wide {
+  grid-column: 1 / -1;
+}
+
+.admin-field textarea {
+  resize: vertical;
+}
+
+.admin-field-error,
+.admin-form-notice {
+  min-height: 18px;
+  margin: 0;
+  color: var(--danger-color);
+  font-size: 1.3rem;
+}
+
+.admin-field-error {
+  padding: 0 18px 14px;
+}
+
+.admin-form-notice {
+  min-height: 20px;
+  padding: 0 20px;
+}
+
+.admin-form-notice[data-type="success"] {
+  color: var(--success-color);
+}

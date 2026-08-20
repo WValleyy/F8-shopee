@@ -1,0 +1,77 @@
+<div class="admin-table-wrap">
+    <table class="admin-table admin-products-table">
+        <thead>
+            <tr>
+                <th class="admin-table__selection">
+                    <input type="checkbox" data-admin-product-select-page>
+                </th>
+                <th>Sản phẩm</th>
+                <th>Danh mục</th>
+                <th>Giá bán</th>
+                <th>Kho</th>
+                <th>Đã bán</th>
+                <th>Đánh giá</th>
+                <th>Trạng thái</th>
+                <th class="admin-table__actions">Thao tác</th>
+            </tr>
+        </thead>
+        <tbody>
+            <% products.forEach(product => { %>
+                <tr data-admin-product-id="<%= product.id %>">
+                    <td class="admin-table__selection">
+                    <input type="checkbox" value="<%= product.id %>" data-admin-product-selection>
+                    </td>
+                    <td>
+                        <div class="admin-product-cell">
+                            <img src="<%= product.image %>" alt="">
+                            <div>
+                                <strong><%= product.name %></strong>
+                                <small><%= product.variantCount %> phiên bản<%= product.brand ? ` · ${product.brand}` : '' %></small>
+                            </div>
+                        </div>
+                    </td>
+                    <td><%= product.categoryName %></td>
+                    <td>
+                        <% if (product.minPrice === product.maxPrice) { %>
+                            <%= formatCurrency(product.minPrice) %>
+                        <% } else { %>
+                            <%= formatCurrency(product.minPrice) %> – <%= formatCurrency(product.maxPrice) %>
+                        <% } %>
+                    </td>
+                    <td><%= product.stock %></td>
+                    <td><%= product.sold %></td>
+                    <td><%= product.ratingAverage.toFixed(1) %> (<%= product.ratingCount %>)</td>
+                    <td>
+                        <span class="admin-status <%= product.isPublished ? 'admin-status--success' : 'admin-status--muted' %>">
+                            <%= product.isPublished ? 'Đang bán' : 'Đã ẩn' %>
+                        </span>
+                    </td>
+                    <td class="admin-table__actions">
+                        <a class="admin-icon-button" href="/admin/reviews?product=<%= product.id %>" data-tooltip="Xem đánh giá">
+                            <i class="fa-regular fa-star"></i>
+                        </a>
+                        <a class="admin-icon-button" href="/admin/products/<%= product.id %>/edit" data-tooltip="Chỉnh sửa">
+                            <i class="fa-solid fa-pen"></i>
+                        </a>
+                        <% if (product.isPublished) { %>
+                            <button class="admin-icon-button" type="button" data-unpublish-product data-tooltip="Ẩn sản phẩm">
+                                <i class="fa-regular fa-eye-slash"></i>
+                            </button>
+                        <% } %>
+                        <button class="admin-icon-button admin-icon-button--danger" type="button" data-delete-product data-tooltip="Xóa vĩnh viễn">
+                            <i class="fa-solid fa-trash"></i>
+                        </button>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+
+    <% if (!products.length) { %>
+        <div class="empty-state">
+            <i class="fa-solid fa-box-open"></i>
+            <strong>Không tìm thấy sản phẩm</strong>
+            <span>Thử thay đổi từ khóa hoặc bộ lọc hiện tại.</span>
+        </div>
+    <% } %>
+</div>

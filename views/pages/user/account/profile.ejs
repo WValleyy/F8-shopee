@@ -1,0 +1,472 @@
+<%- include("../shared/user-header", {
+    title: "Hồ sơ của tôi",
+    description: "Quản lý thông tin hồ sơ để bảo mật tài khoản"
+}) %>
+
+<section class="profile">
+
+    <!-- ================= Profile Form ================= -->
+
+    <form
+        id="profile-form"
+        class="profile-form">
+
+        <!-- Username -->
+
+        <div class="profile-form__group">
+
+            <label
+                for="profile-user-name"
+                class="profile-form__label">
+
+                Tên đăng nhập
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field data-profile-edit-field="userName">
+
+                <span class="profile-form__text" data-profile-field-value>
+                    <%= currentUser.userName %>
+                </span>
+
+                <input
+                    id="profile-user-name"
+                    name="userName"
+                    type="text"
+                    class="form-control profile-form__input"
+                    value="<%= currentUser.userName %>"
+                    minlength="3"
+                    maxlength="<%= inputLimits.user.userNameMaxLength %>"
+                    data-profile-field-input
+                    hidden>
+
+                <button
+                    type="button"
+                    class="profile-form__action"
+                    data-edit-profile-field="userName">
+                    Thay đổi
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Name -->
+
+        <div class="profile-form__group">
+
+            <label
+                for="profile-name"
+                class="profile-form__label">
+
+                Tên
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field data-profile-edit-field="name">
+
+                <span class="profile-form__text" data-profile-field-value>
+                    <%= currentUser.name %>
+                </span>
+
+                <input
+                    id="profile-name"
+                    name="name"
+                    type="text"
+                    class="form-control profile-form__input"
+                    value="<%= currentUser.name %>"
+                    maxlength="<%= inputLimits.user.nameMaxLength %>"
+                    data-profile-field-input
+                    hidden>
+
+                <button
+                    type="button"
+                    class="profile-form__action"
+                    data-edit-profile-field="name">
+                    Thay đổi
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Email -->
+
+        <div class="profile-form__group">
+
+            <label class="profile-form__label">
+
+                Email
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field>
+
+                <span class="profile-form__text" data-profile-field-value>
+
+                    <%= currentUser.email %>
+
+                </span>
+
+                <button
+                    type="button"
+                    class="profile-form__action"
+                    data-profile-email-action
+                    data-<%= currentUser.isVerified ? 'change-email' : 'verify-email' %>>
+
+                    <span class="profile-form__email-action-label" data-profile-email-action-label>
+                        <%= currentUser.isVerified ? 'Thay đổi email' : 'Xác minh email' %>
+                    </span>
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <div class="profile-form__group profile-form__verification-row">
+            <div class="profile-form__label"></div>
+            <div class="profile-form__field form-field" data-form-field>
+                <span
+                    class="profile-form__verification-status"
+                    data-verified="<%= currentUser.isVerified ? 'true' : 'false' %>"
+                    data-profile-verification-status>
+                    Trạng thái xác thực:
+                    <%= currentUser.isVerified ? 'Đã xác minh' : 'Chưa xác minh' %>
+                </span>
+            </div>
+        </div>
+
+        <!-- Phone -->
+
+        <div class="profile-form__group">
+
+            <label class="profile-form__label">
+
+                Số điện thoại
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field data-profile-edit-field="phone">
+
+                <span class="profile-form__text" data-profile-field-value>
+
+                    <%= currentUser.phone || "Chưa cập nhật" %>
+
+                </span>
+
+                <input
+                    name="phone"
+                    type="tel"
+                    class="form-control profile-form__input"
+                    value="<%= currentUser.phone || '' %>"
+                    maxlength="<%= inputLimits.user.phoneMaxLength %>"
+                    data-phone-min-digits="<%= inputLimits.phone.minDigits %>"
+                    data-phone-max-digits="<%= inputLimits.phone.maxDigits %>"
+                    data-profile-field-input
+                    hidden>
+
+                <button
+                    type="button"
+                    class="profile-form__action"
+                    data-edit-profile-field="phone">
+
+                    Thay đổi
+
+                </button>
+
+            </div>
+
+        </div>
+
+        <!-- Gender -->
+
+        <div class="profile-form__group">
+
+            <label class="profile-form__label">
+
+                Giới tính
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field>
+
+                <label class="profile-form__radio">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="male"
+                        <%= currentUser.gender === "male" ? "checked" : "" %>>
+
+                    Nam
+
+                </label>
+
+                <label class="profile-form__radio">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="female"
+                        <%= currentUser.gender === "female" ? "checked" : "" %>>
+
+                    Nữ
+
+                </label>
+
+                <label class="profile-form__radio">
+
+                    <input
+                        type="radio"
+                        name="gender"
+                        value="other"
+                        <%= currentUser.gender === "other" ? "checked" : "" %>>
+
+                    Khác
+
+                </label>
+
+            </div>
+
+        </div>
+
+        <!-- Birthday -->
+
+        <div class="profile-form__group">
+
+            <label class="profile-form__label">
+
+                Ngày sinh
+
+            </label>
+
+            <div class="profile-form__field form-field" data-form-field>
+                <input
+                    id="birthday"
+                    name="birthday"
+                    type="date"
+                    class="form-control profile-form__input"
+                    value="<%= currentUser.birthday %>">
+            </div>
+
+        </div>
+
+        <!-- Submit -->
+
+        <div class="profile-form__group">
+
+            <div class="profile-form__label"></div>
+
+            <div class="profile-form__field form-field" data-form-field>
+
+                <button
+                    type="submit"
+                    class="btn btn--primary profile-form__submit">
+
+                    Lưu
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </form>
+
+    <!-- ================= Avatar ================= -->
+
+    <aside class="profile-avatar">
+
+        <div
+            class="profile-avatar__image"
+            data-profile-avatar-image
+            >
+
+            <% if (currentUser.avatar) { %>
+
+                <img
+                    src="<%= currentUser.avatar %>"
+                    alt="<%= currentUser.name %>">
+
+            <% } else { %>
+                <%- include('../../../shared/components/avatar-placeholder') %>
+
+            <% } %>
+
+        </div>
+
+        <input
+            id="avatar-input"
+            type="file"
+            accept="image/*"
+            hidden>
+
+        <button
+            type="button"
+            class="btn profile-avatar__button"
+            data-profile-avatar-button>
+
+            Chọn ảnh
+
+        </button>
+
+        <p class="profile-avatar__note">
+
+            Dung lượng tối đa 1 MB
+
+        </p>
+
+        <p class="profile-avatar__note">
+
+            Định dạng: JPEG, PNG
+
+        </p>
+
+    </aside>
+
+</section>
+
+<!-- ================= Change Email Modal ================= -->
+
+<div
+    id="change-email-modal"
+    class="modal"
+    data-modal
+    hidden>
+
+    <div class="modal__overlay" data-modal-close></div>
+
+    <div
+        class="modal__body"
+        data-modal-content>
+
+        <form
+            id="change-email-form"
+            class="modal-dialog">
+
+            <div class="modal-dialog__container">
+
+                <div class="modal-dialog__header">
+
+                    <h3 class="modal-dialog__title">
+
+                        Thay đổi Email
+
+                    </h3>
+
+                </div>
+
+                <div class="form-stack">
+
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input
+                            type="password"
+                            name="currentPassword"
+                            class="form-control"
+                            autocomplete="current-password"
+                            placeholder="Mật khẩu hiện tại">
+                    </div>
+
+                    <div class="form-field form-field--stacked" data-form-field>
+
+                        <input
+                            type="email"
+                            name="email"
+                            class="form-control"
+                            maxlength="<%= inputLimits.user.emailMaxLength %>"
+                            placeholder="Nhập email mới">
+
+                    </div>
+
+                </div>
+
+                <div class="modal-dialog__actions">
+
+                    <button
+                        type="button"
+                        class="btn btn--secondary"
+                        data-modal-close>
+
+                        Hủy
+
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn--primary">
+
+                        Xác nhận
+
+                    </button>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+
+</div>
+
+<!-- ================= Email Verification Modal ================= -->
+
+<div id="email-verification-modal" class="modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div
+        class="modal__body"
+        data-modal-content>
+        <form id="email-verification-form" class="modal-dialog">
+            <div class="modal-dialog__container">
+                <div class="modal-dialog__header">
+                    <h3 class="modal-dialog__title">Xác minh email</h3>
+                </div>
+                <p class="modal-dialog__text">Nhập mã xác minh đã được gửi đến email của bạn.</p>
+                <div class="form-stack">
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="otp" class="form-control" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Nhập mã 6 số">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                    <button type="button" class="form-text-button" data-resend-email-verification>Gửi lại mã</button>
+                </div>
+                <div class="modal-dialog__actions">
+                    <button type="button" class="btn btn--secondary" data-modal-close>Hủy</button>
+                    <button type="submit" class="btn btn--primary">Xác nhận</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- ================= Change Email OTP Modal ================= -->
+
+<div id="change-email-otp-modal" class="modal" data-modal hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div
+        class="modal__body"
+        data-modal-content>
+        <form id="change-email-otp-form" class="modal-dialog">
+            <div class="modal-dialog__container">
+                <div class="modal-dialog__header">
+                    <h3 class="modal-dialog__title">Nhập mã xác nhận</h3>
+                </div>
+                <p class="modal-dialog__text">
+                    Nhập mã đã được gửi đến
+                    <strong data-email-change-target></strong>.
+                </p>
+                <div class="form-stack">
+                    <div class="form-field form-field--stacked" data-form-field>
+                        <input name="otp" class="form-control" inputmode="numeric" maxlength="6" autocomplete="one-time-code" placeholder="Nhập mã 6 số">
+                        <span class="form-field__message" data-form-message></span>
+                    </div>
+                    <button type="button" class="form-text-button" data-resend-email-change>Gửi lại mã</button>
+                </div>
+                <div class="modal-dialog__actions">
+                    <button type="button" class="btn btn--secondary" data-modal-back>Quay lại</button>
+                    <button type="submit" class="btn btn--primary">Xác nhận</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

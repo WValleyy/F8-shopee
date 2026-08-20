@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Checkout Address Selector
+   ==========================================================================
+*/
+
+.checkout-selector {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-selector__header {
+  align-items: center;
+}
+
+.checkout-selector__close {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: #666;
+  font-size: 2.2rem;
+  cursor: pointer;
+}
+
+.checkout-selector__body {
+  overflow: auto;
+}
+
+.checkout-selector__list {
+  display: flex;
+  flex-direction: column;
+}
+
+.checkout-selector__controls {
+  justify-content: flex-end;
+  padding-top: 18px;
+  border-top: 1px solid #f0f0f0;
+}

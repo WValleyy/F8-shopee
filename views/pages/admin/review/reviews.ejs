@@ -1,0 +1,65 @@
+<section class="admin-page" data-admin-collection="reviews">
+    <div class="admin-page__heading">
+        <div>
+            <p class="admin-eyebrow">Kiểm duyệt nội dung</p>
+            <h2>Đánh giá sản phẩm</h2>
+        </div>
+    </div>
+
+    <form class="admin-filters admin-filters--reviews" method="get" action="/admin/reviews" data-admin-filter-form>
+        <label class="admin-search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="form-control" type="search" name="q" value="<%= filters.q %>" placeholder="Tìm sản phẩm, nội dung hoặc mã đơn">
+        </label>
+        <label>
+            <span>Sản phẩm</span>
+            <select class="form-control" name="product">
+                <option value="">Tất cả sản phẩm</option>
+                <% products.forEach(product => { %>
+                    <option value="<%= product.id %>" <%= filters.product === product.id ? 'selected' : '' %>><%= product.name %></option>
+                <% }) %>
+            </select>
+        </label>
+        <label>
+            <span>Số sao</span>
+            <select class="form-control" name="rating">
+                <option value="all">Tất cả</option>
+                <% [5, 4, 3, 2, 1].forEach(value => { %>
+                    <option value="<%= value %>" <%= filters.rating === String(value) ? 'selected' : '' %>><%= value %> sao</option>
+                <% }) %>
+            </select>
+        </label>
+        <label>
+            <span>Trạng thái</span>
+            <select class="form-control" name="status">
+                <option value="all" <%= filters.status === 'all' ? 'selected' : '' %>>Tất cả</option>
+                <option value="published" <%= filters.status === 'published' ? 'selected' : '' %>>Đang hiển thị</option>
+                <option value="hidden" <%= filters.status === 'hidden' ? 'selected' : '' %>>Đã ẩn</option>
+            </select>
+        </label>
+        <label>
+            <span>Ảnh</span>
+            <select class="form-control" name="images">
+                <option value="all" <%= filters.images === 'all' ? 'selected' : '' %>>Tất cả</option>
+                <option value="with-images" <%= filters.images === 'with-images' ? 'selected' : '' %>>Có ảnh</option>
+                <option value="without-images" <%= filters.images === 'without-images' ? 'selected' : '' %>>Không ảnh</option>
+            </select>
+        </label>
+        <label>
+            <span>Sắp xếp</span>
+            <select class="form-control" name="sort">
+                <option value="newest" <%= filters.sort === 'newest' ? 'selected' : '' %>>Mới nhất</option>
+                <option value="oldest" <%= filters.sort === 'oldest' ? 'selected' : '' %>>Cũ nhất</option>
+                <option value="helpful" <%= filters.sort === 'helpful' ? 'selected' : '' %>>Hữu ích nhất</option>
+            </select>
+        </label>
+    </form>
+
+    <div data-collection-results>
+        <%- include('./reviews-results', { reviews }) %>
+    </div>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>
+
+<%- include('../../../shared/modals/image-lightbox') %>

@@ -1,0 +1,98 @@
+<% if (reviews.length) { %>
+    <% reviews.forEach((review) => { %>
+        <% const reviewerName = review.userName || 'Người dùng đã xóa'; %>
+        <article class="product-review" data-product-review data-review-id="<%= review.id %>">
+            <% if (review.userAvatar) { %>
+                <img
+                    src="<%= review.userAvatar %>"
+                    alt="<%= reviewerName %>"
+                    class="product-review__avatar">
+            <% } else { %>
+                <%- include('../../../shared/components/avatar-placeholder', { className: 'product-review__avatar' }) %>
+            <% } %>
+            <div class="product-review__content">
+                <h3 class="product-review__user"><%= reviewerName %></h3>
+                <div class="product-review__meta">
+                    <span class="product-reviews__stars">
+                        <%- include(
+                            '../../../shared/components/rating-star',
+                            {
+                                rating: review.rating,
+                            }
+                        ) %>
+                    </span>
+                    <span class="product-review__time"><%= formatDateOnly(review.createdAt) %></span>
+                </div>
+                <p class="product-review__description"><%= review.content || 'Người mua không để lại nội dung.' %></p>
+
+                <% if (review.images.length) { %>
+                    <div class="product-review__images">
+                        <% review.images.forEach((image, index) => { %>
+                            <button
+                                type="button"
+                                class="product-review__image"
+                                data-review-image
+                                data-review-image-index="<%= index %>">
+                                <img src="<%= image %>" alt="Ảnh đánh giá">
+                                <span class="product-review__image-icon product-review__image-icon--expand">
+                                    <i class="fa-solid fa-magnifying-glass-plus"></i>
+                                </span>
+                                <span class="product-review__image-icon product-review__image-icon--collapse">
+                                    <i class="fa-solid fa-magnifying-glass-minus"></i>
+                                </span>
+                            </button>
+                        <% }) %>
+                    </div>
+
+                    <div
+                        class="product-review__viewer"
+                        data-review-viewer
+                        hidden>
+                        <div class="product-review__viewer-main">
+                            <img
+                                src="<%= review.images[0] %>"
+                                alt="Ảnh đánh giá"
+                                class="product-review__viewer-image"
+                                data-review-viewer-image>
+
+                            <% if (review.images.length > 1) { %>
+                                <button
+                                    type="button"
+                                    class="product-review__viewer-nav product-review__viewer-nav--prev"
+                                    data-review-viewer-nav="prev">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+
+                                <button
+                                    type="button"
+                                    class="product-review__viewer-nav product-review__viewer-nav--next"
+                                    data-review-viewer-nav="next">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            <% } %>
+                        </div>
+                    </div>
+                <% } %>
+
+                <button
+                    type="button"
+                    class="product-review__helpful"
+                    aria-pressed="<%= review.isHelpful ? 'true' : 'false' %>"
+                    data-review-helpful
+                    data-review-id="<%= review.id %>">
+                    <i class="fa-regular fa-thumbs-up"></i>
+                    <span class="product-review__helpful-label">Hữu ích</span>
+                    <span class="product-review__helpful-count">(<span data-review-helpful-count><%= review.helpfulCount %></span>)</span>
+                </button>
+            </div>
+        </article>
+    <% }) %>
+<% } else { %>
+    <% if (rating) { %>
+        <p>Chưa có đánh giá <%= rating %> sao nào cho sản phẩm này.</p>
+    <% } else { %>
+        <p>Chưa có đánh giá nào cho sản phẩm này.</p>
+    <% } %>
+<% } %>
+
+<nav class="product-reviews__pagination" data-pagination-root></nav>

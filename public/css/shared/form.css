@@ -1,0 +1,95 @@
+/* ==========================================================================
+   Form Controls
+   ==========================================================================
+*/
+
+.form-control {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 2px;
+  color: var(--text-color);
+  background: var(--white-color);
+  font: inherit;
+  font-size: 1.6rem;
+}
+
+.form-control:focus {
+  border-color: var(--primary-color);
+}
+
+.form-control::placeholder {
+  color: var(--text-muted-color);
+}
+
+.form-control--textarea {
+  min-height: 96px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  resize: vertical;
+}
+
+.form-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-field {
+  display: flex;
+  gap: 8px;
+}
+
+.form-field--stacked {
+  flex-direction: column;
+}
+
+.form-field__message {
+  display: block;
+  min-height: 16px;
+  color: var(--primary-color);
+  font-size: 1.2rem;
+}
+
+.form-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--text-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+  user-select: none;
+}
+
+.form-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--primary-color);
+  cursor: pointer;
+}
+
+.form-text-button {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--primary-color);
+  text-align: left;
+  cursor: pointer;
+}
+
+.form-text-button:disabled {
+  color: var(--text-muted-color);
+  opacity: 0.55;
+}
+
+.form-control[aria-invalid="true"] {
+  border-color: var(--primary-color);
+}
+
+.form-notice {
+  margin: 8px 0 0;
+  color: #26aa99;
+  font-size: 1.3rem;
+  line-height: 1.6;
+}

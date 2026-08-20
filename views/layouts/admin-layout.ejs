@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.ico" type="image/x-icon">
+    <title><%= title %></title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/fontawesome-free-7.2.0-web/css/all.min.css">
+
+    <% if (styles.length) { %>
+        <% styles.forEach(style => { %>
+            <link rel="stylesheet" href="<%= style %>">
+        <% }) %>
+    <% } %>
+
+    <link rel="stylesheet" href="/css/shared/focus.css">
+</head>
+<body
+    data-current-page="<%= currentPage %>"
+    data-active-section="<%= activeSection %>">
+    <div class="admin-shell">
+        <aside class="admin-sidebar">
+            <a class="admin-brand" href="/admin">
+                <span class="admin-brand__mark">S</span>
+                <span>
+                    <strong>Shopee</strong>
+                    <small>Trung tâm quản trị</small>
+                </span>
+            </a>
+
+            <nav class="admin-nav">
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'dashboard' ? 'page' : 'false' %>" href="/admin" data-admin-link data-page-navigation-link data-section="dashboard">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Tổng quan</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'orders' ? 'page' : 'false' %>" href="/admin/orders" data-admin-link data-page-navigation-link data-section="orders">
+                    <i class="fa-solid fa-receipt"></i>
+                    <span>Đơn hàng</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'products' ? 'page' : 'false' %>" href="/admin/products" data-admin-link data-page-navigation-link data-section="products">
+                    <i class="fa-solid fa-box"></i>
+                    <span>Sản phẩm</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'reviews' ? 'page' : 'false' %>" href="/admin/reviews" data-admin-link data-page-navigation-link data-section="reviews">
+                    <i class="fa-regular fa-star"></i>
+                    <span>Đánh giá</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'categories' ? 'page' : 'false' %>" href="/admin/categories" data-admin-link data-page-navigation-link data-section="categories">
+                    <i class="fa-solid fa-layer-group"></i>
+                    <span>Danh mục</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'users' ? 'page' : 'false' %>" href="/admin/users" data-admin-link data-page-navigation-link data-section="users">
+                    <i class="fa-solid fa-users"></i>
+                    <span>Người dùng</span>
+                </a>
+                <a class="admin-nav__link" aria-current="<%= activeSection === 'app-logs' ? 'page' : 'false' %>" href="/admin/app-logs" data-admin-link data-page-navigation-link data-section="app-logs">
+                    <i class="fa-solid fa-file-waveform"></i>
+                    <span>App log</span>
+                </a>
+            </nav>
+
+            <a class="admin-sidebar__store-link" href="/">
+                <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <span>Xem cửa hàng</span>
+            </a>
+        </aside>
+
+        <div class="admin-workspace">
+            <main class="admin-main" data-admin-page data-page-content>
+                <%- body %>
+            </main>
+        </div>
+    </div>
+
+    <%- include('../shared/components/toast') %>
+    <%- include('../shared/modals/confirm-modal') %>
+
+    <%- include('../shared/components/pagination-link') %>
+    <script type="module" src="<%= entryScript %>"></script>
+</body>
+</html>

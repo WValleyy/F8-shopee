@@ -1,0 +1,109 @@
+<%
+const mode = typeof cardMode === 'string' ? cardMode : 'account';
+const isCheckoutCard = mode === 'checkout';
+const showEdit = typeof showEditAction === 'boolean' ? showEditAction : true;
+const showDelete = typeof showDeleteAction === 'boolean' ? showDeleteAction : true;
+const showSetDefault = typeof showSetDefaultAction === 'boolean'
+    ? showSetDefaultAction
+    : !isCheckoutCard;
+const isSelected = typeof isSelectedAddress !== 'undefined'
+    && Boolean(isSelectedAddress);
+%>
+
+<article
+    class="address-card <%= isCheckoutCard ? 'address-card--checkout' : '' %>"
+    data-address-card
+    data-address-id="<%= address.id %>"
+    data-address-full-name="<%= address.fullName %>"
+    data-address-phone="<%= address.phone %>"
+    data-address-province="<%= address.province %>"
+    data-address-ward="<%= address.ward %>"
+    data-address-line="<%= address.addressLine %>"
+    data-address-is-default="<%= address.isDefault ? 'true' : 'false' %>"
+    aria-pressed="<%= isCheckoutCard && isSelected ? 'true' : 'false' %>"
+    <% if (isCheckoutCard) { %>
+        data-select-address-card
+    <% } %>>
+
+    <% if (isCheckoutCard) { %>
+        <div class="address-card__radio">
+            <span class="address-card__dot"></span>
+        </div>
+    <% } %>
+
+    <div class="address-card__content">
+
+        <header class="address-card__header">
+
+            <div class="address-card__user">
+
+                <h3 class="address-card__name">
+                    <%= address.fullName %>
+                </h3>
+
+                <span class="address-card__phone">
+                    <%= address.phone %>
+                </span>
+
+            </div>
+
+            <% if (showEdit || (showDelete && !address.isDefault)) { %>
+                <div class="address-card__actions">
+
+                    <% if (showEdit) { %>
+                        <button
+                            type="button"
+                            class="address-card__action"
+                            data-address-card-action
+                            data-edit-address>
+                            Cập nhật
+                        </button>
+                    <% } %>
+
+                    <% if (showDelete && !address.isDefault) { %>
+                        <button
+                            type="button"
+                            class="address-card__action address-card__action--danger"
+                            data-address-card-action
+                            data-delete-address>
+                            Xóa
+                        </button>
+                    <% } %>
+
+                </div>
+            <% } %>
+
+        </header>
+
+        <p class="address-card__line">
+            <%= address.addressLine %>
+        </p>
+
+        <p class="address-card__line">
+            <%= address.ward %>,
+            <%= address.province %>
+        </p>
+
+        <footer class="address-card__footer">
+
+            <% if (address.isDefault) { %>
+                <span class="address-card__badge">
+                    Mặc định
+                </span>
+            <% } %>
+
+            <% if (showSetDefault && !address.isDefault) { %>
+                <button
+                    type="button"
+                    class="btn address-card__default-btn"
+                    data-address-default-action
+                    data-set-default-address>
+                    Thiết lập mặc định
+                </button>
+            <% } %>
+
+        </footer>
+
+    </div>
+
+</article>

@@ -1,0 +1,125 @@
+<% const shellUser=userShellUser; const shellUserName=shellUser?.userName || 'User' ; const
+    shellUserAvatar=shellUser?.avatar || '' ; %>
+
+    <nav class="header__navbar">
+        <ul class="header__navbar-list">
+            <li class="header__navbar-item header__navbar-item-separate">Kênh người bán</li>
+            <li class="header__navbar-item header__navbar-item-separate">Trở thành người bán Shopee</li>
+            <li class="header__navbar-item header__navbar-item--has-qr header__navbar-item-separate">
+                Tải ứng dụng
+                <div class="header__navbar-qrcode">
+                    <img src="/img/header-footer/qrcode.png" alt="qr code" class="header__navbar-qrcode-img">
+                    <div class="header__qr-apps">
+                        <a class="header__qr-link"><img src="/img/header-footer/app_store.png" alt="app store"
+                                class="header__qr-apps-img"></a>
+                        <a class="header__qr-link"><img src="/img/header-footer/google_play.png" alt="google play"
+                                class="header__qr-apps-img"></a>
+                        <a class="header__qr-link"><img src="/img/header-footer/app_gallery.png" alt="app gallery"
+                                class="header__qr-apps-img"></a>
+                    </div>
+                </div>
+            </li>
+            <li class="header__navbar-item">
+                <nav class="header__navbar-untouchable">Kết nối</nav>
+                <a class="header__navbar-icon-link"><i
+                        class="header__navbar-icon fa-brands fa-facebook"></i></a>
+                <a class="header__navbar-icon-link"><i
+                        class="header__navbar-icon fa-brands fa-instagram"></i></a>
+            </li>
+        </ul>
+
+        <ul class="header__navbar-list">
+            <li class="header__navbar-item header__navbar-item--has-notify" data-header-notification-preview>
+                <a href="/user/notifications" class="header__navbar-item-link">
+                    <i class="header__navbar-icon fa-regular fa-bell"></i>
+                    <span class="header__notify-notice" data-notification-preview-notice hidden></span>
+                    Thông báo
+                </a>
+
+                <div class="header__notify">
+                    <header class="header__notify-header">
+                        <h3>Thông báo mới nhận</h3>
+                    </header>
+
+                    <div class="header__notify-list" data-notification-preview-list hidden>
+                        <div data-notification-preview-empty>
+                            <div class="header__notify-item">
+                                <div class="header__notify-link">
+                                    <div class="header__notify-item-info">
+                                        <span class="header__notify-item-name">Chưa có thông báo</span>
+                                        <span class="header__notify-item-des">Khi có cập nhật mới, bạn sẽ thấy tại
+                                            đây.</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <ul class="header__notify-items" data-notification-preview-items hidden></ul>
+                    </div>
+
+                    <footer class="header__notify-footer">
+                        <% if (shellUser) { %>
+                            <a href="/user/notifications" class="header__notify-footer-btn">Xem tất cả</a>
+                            <% } else { %>
+                                <button type="button" class="header__notify-footer-btn" data-notification-login>
+                                    Đăng nhập để xem thông báo
+                                </button>
+                                <% } %>
+                    </footer>
+                </div>
+
+                <template data-notification-preview-item-template>
+            <li class="header__notify-item" data-notification-preview-item>
+                <a href="/user/notifications" class="header__notify-link" data-notification-link>
+                    <div class="header__notify-item-info">
+                        <span class="header__notify-item-name" data-notification-preview-title></span>
+                        <span class="header__notify-item-des" data-notification-preview-description></span>
+                    </div>
+                </a>
+            </li>
+            </template>
+
+            </li>
+
+            <li class="header__navbar-item">
+                <a class="header__navbar-item-link"><i
+                        class="header__navbar-icon fa-regular fa-circle-question"></i>Hỗ trợ</a>
+            </li>
+
+            <li class="header__navbar-item header__navbar-item--guest" data-auth-guest-item <%=shellUser ? 'hidden' : '' %>>
+                <a id="register-btn"
+                    class="header__navbar-item-link header__navbar-item-link-strong header__navbar-item-separate">Đăng
+                    ký</a>
+            </li>
+            <li class="header__navbar-item header__navbar-item--guest" data-auth-guest-item <%=shellUser ? 'hidden' : '' %>>
+                <a id="login-btn" class="header__navbar-item-link header__navbar-item-link-strong">Đăng
+                    nhập</a>
+            </li>
+
+            <li class="header__navbar-item header__navbar-item-user" data-auth-user-item <%=shellUser ? '' : 'hidden' %>>
+                <% if (shellUserAvatar) { %>
+                    <img src="<%= shellUserAvatar %>" alt="Avatar" class="header__navbar-user-avt" data-user-shell-avatar>
+                <% } else { %>
+                    <span class="header__navbar-user-avatar-placeholder"
+                        aria-hidden="true" data-user-shell-avatar>
+                        <%- include('../../components/avatar-placeholder', { className: 'header__navbar-user-avatar-icon' }) %>
+                    </span>
+                <% } %>
+                <span class="header__navbar-user-name">
+                    <span data-user-shell-name>
+                        <%= shellUserName %>
+                    </span>
+                </span>
+                <ul class="header__navbar-user-menu">
+                    <li class="header__navbar-user-item"><a href="/user/account/profile"
+                            class="header__navbar-user-link"><i
+                                class="header__navbar-user-icon fa-solid fa-user"></i><span>Tài khoản của tôi</span></a>
+                    </li>
+                    <li class="header__navbar-user-item"><a href="/user/purchase" class="header__navbar-user-link"><i
+                                class="header__navbar-user-icon fa-solid fa-box"></i><span>Đơn mua</span></a></li>
+                    <li class="header__navbar-user-item"><a id="logout-btn" class="header__navbar-user-link"><i
+                                class="header__navbar-user-icon fa-solid fa-right-from-bracket"></i><span>Đăng
+                                xuất</span></a></li>
+                </ul>
+            </li>
+        </ul>
+    </nav>

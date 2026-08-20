@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/img/favicon.ico">
+
+    <title><%= title %></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="/fonts/fontawesome-free-7.2.0-web/css/all.min.css">
+
+    <% if (typeof styles !== 'undefined' && styles.length) { %>
+        <% styles.forEach(style => { %>
+            <link rel="stylesheet" href="<%= style %>">
+        <% }) %>
+    <% } %>
+
+    <link rel="stylesheet" href="/css/shared/focus.css">
+</head>
+
+<body
+    data-authenticated="<%= userShellUser ? 'true' : 'false' %>"
+    data-current-page="<%= currentPage %>"
+    data-active-section="<%= activeSection %>">
+    <div class="app">
+
+        <%
+        const headerConfig = typeof header !== 'undefined' && header
+            ? header
+            : {
+                path: "../shared/partials/header/header",
+                data: {},
+            };
+        %>
+
+        <%- include(headerConfig.path, headerConfig.data) %>
+
+        <main class="user-page" data-user-page>
+
+            <div class="grid">
+
+                <div class="grid__row">
+
+                    <aside class="grid__column-2">
+
+                            <aside class="user-sidebar">
+                            <div class="user-sidebar__user">
+                                <div
+                                    class="user-sidebar__avatar-wrapper"
+                                    data-user-shell-avatar-container>
+                                    <% if (userShellUser.avatar) { %>
+                                        <img
+                                            src="<%= userShellUser.avatar %>"
+                                            alt="<%= userShellUser.userName || 'User' %>"
+                                            class="user-sidebar__avatar">
+                                    <% } else { %>
+                                        <svg
+                                            enable-background="new 0 0 15 15"
+                                            viewBox="0 0 15 15"
+                                            x="0"
+                                            y="0"
+                                            class="icon-headshot">
+                                            <g>
+                                                <circle
+                                                    cx="7.5"
+                                                    cy="4.5"
+                                                    r="3.8"
+                                                    fill="none"
+                                                    stroke-miterlimit="10">
+                                                </circle>
+                                                <path
+                                                    d="m1.5 14.2c0-3.3 2.7-6 6-6s6 2.7 6 6"
+                                                    fill="none"
+                                                    stroke-linecap="round"
+                                                    stroke-miterlimit="10">
+                                                </path>
+                                            </g>
+                                        </svg>
+                                    <% } %>
+                                </div>
+
+                                <div class="user-sidebar__user-info">
+                                    <p
+                                        class="user-sidebar__username"
+                                        data-user-shell-name>
+                                        <%= userShellUser.userName || 'User' %>
+                                    </p>
+
+                                    <a
+                                        href="/user/account/profile"
+                                        data-user-link data-page-navigation-link
+                                        class="user-sidebar__edit">
+                                        <svg
+                                            width="12"
+                                            height="12"
+                                            viewBox="0 0 12 12"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            >
+                                            <path
+                                                d="M8.54 0L6.987 1.56l3.46 3.48L12 3.48M0 8.52l.073 3.428L3.46 12l6.21-6.18-3.46-3.48"
+                                                fill="#9B9B9B"
+                                                fill-rule="evenodd">
+                                            </path>
+                                        </svg>
+                                        <span>Sửa Hồ sơ</span>
+                                    </a>
+                                </div>
+                            </div>
+
+                            <nav class="user-sidebar__nav">
+                                <div class="user-sidebar__group">
+                                    <a
+                                        href="/user/account/profile"
+                                        data-user-link data-page-navigation-link
+                                        class="user-sidebar__group-title">
+                                        <img
+                                                src="/img/user/user_icon.png"
+                                            alt="Icon"
+                                            class="user-sidebar__icon">
+                                        <span>Tài khoản của tôi</span>
+                                    </a>
+
+                                    <ul class="user-sidebar__submenu">
+                                        <li>
+                                            <a
+                                                href="/user/account/profile"
+                                                data-user-link data-page-navigation-link data-section="profile"
+                                                class="user-sidebar__submenu-link"
+                                                aria-current="<%= activeSection === 'profile' ? 'page' : 'false' %>">
+                                                Hồ sơ
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/user/account/address"
+                                                data-user-link data-page-navigation-link data-section="address"
+                                                class="user-sidebar__submenu-link"
+                                                aria-current="<%= activeSection === 'address' ? 'page' : 'false' %>">
+                                                Địa chỉ
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/user/account/password"
+                                                data-user-link data-page-navigation-link data-section="password"
+                                                class="user-sidebar__submenu-link"
+                                                aria-current="<%= activeSection === 'password' ? 'page' : 'false' %>">
+                                                Đổi mật khẩu
+                                            </a>
+                                        </li>
+                                        <li>
+                                            <a
+                                                href="/user/account/privacy"
+                                                data-user-link data-page-navigation-link data-section="privacy"
+                                                class="user-sidebar__submenu-link"
+                                                aria-current="<%= activeSection === 'privacy' ? 'page' : 'false' %>">
+                                                Những thiết lập riêng tư
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+
+                                <a
+                                    href="/user/purchase"
+                                    data-user-link data-page-navigation-link data-section="purchase"
+                                    class="user-sidebar__item"
+                                    aria-current="<%= activeSection === 'purchase' ? 'page' : 'false' %>">
+                                    <img
+                                        src="/img/user/purchase_icon.png"
+                                        class="user-sidebar__icon"
+                                        alt="Purchase">
+                                    <span>Đơn mua</span>
+                                </a>
+
+                                <a
+                                    href="/user/notifications"
+                                    data-user-link data-page-navigation-link data-section="notifications"
+                                    class="user-sidebar__item"
+                                    aria-current="<%= activeSection === 'notifications' ? 'page' : 'false' %>">
+                                    <img
+                                        src="/img/user/notification_icon.png"
+                                        class="user-sidebar__icon"
+                                        alt="Notification">
+                                    <span>Thông báo</span>
+                                </a>
+
+
+                                <a
+                                    href="/user/wishlist"
+                                    data-user-link data-page-navigation-link data-section="wishlist"
+                                    class="user-sidebar__item"
+                                    aria-current="<%= activeSection === 'wishlist' ? 'page' : 'false' %>">
+                                    <i class="fa-regular fa-heart user-sidebar__icon user-sidebar__wishlist-icon"></i>
+                                    <span>Yêu thích</span>
+                                </a>
+                            </nav>
+                        </aside>
+
+                    </aside>
+
+                    <section class="grid__column-10">
+
+                        <div
+                            data-page-content
+                            class="user-content">
+
+                            <%- body %>
+
+                        </div>
+
+                    </section>
+
+                </div>
+
+            </div>
+
+        </main>
+
+    </div>
+
+    <%- include("../shared/partials/footer") %>
+
+    <%- include("../shared/modals/auth-modal") %>
+    <%- include("../shared/modals/confirm-modal") %>
+    <%- include("../shared/components/toast") %>
+
+    <%- include('../shared/components/pagination-link') %>
+
+    <script type="module" src="<%= entryScript %>"></script>
+</body>
+
+</html>

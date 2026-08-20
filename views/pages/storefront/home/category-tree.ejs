@@ -1,0 +1,24 @@
+<ul class="category-list">
+    <li class="category-item" data-category-node data-active="<%= activeCategory === 'all' ? 'true' : 'false' %>" data-ancestor-active="false" data-expanded="false">
+        <div class="category-item__row" style="--category-depth: 0">
+            <a
+                href="<%= buildHomeUrl({ category: 'all', sort: [], page: 1 }) %>"
+                data-collection-navigation-link
+                class="category-item__link"
+                data-category-link
+                data-category="all">
+                Tất cả
+            </a>
+        </div>
+    </li>
+
+    <% categories.forEach(category => { %>
+        <%- include('./category-tree-item', {
+            category,
+            activeCategory,
+            depth: 0,
+            buildHomeUrl,
+            categoryContainsActive,
+        }) %>
+    <% }) %>
+</ul>

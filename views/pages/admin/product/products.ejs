@@ -1,0 +1,60 @@
+<section class="admin-page" data-admin-collection="products">
+    <div class="admin-page__heading">
+        <div>
+            <p class="admin-eyebrow">Danh mục hàng hóa</p>
+            <h2>Tất cả sản phẩm</h2>
+        </div>
+        <a href="/admin/products/new" class="btn btn--primary btn--size-l">
+            <i class="fa-solid fa-plus"></i>
+            <span>Thêm sản phẩm</span>
+        </a>
+    </div>
+
+    <form class="admin-filters" method="get" action="/admin/products" data-admin-filter-form>
+        <label class="admin-search-field">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="form-control" type="search" name="q" value="<%= filters.q %>" placeholder="Tìm tên, thương hiệu hoặc slug">
+        </label>
+        <label>
+            <span>Danh mục</span>
+            <select class="form-control" name="category">
+                <option value="all">Tất cả danh mục</option>
+                <% categories.forEach(category => { %>
+                    <option value="<%= category.id %>" <%= filters.category === category.id ? 'selected' : '' %>><%= category.name %></option>
+                <% }) %>
+            </select>
+        </label>
+        <label>
+            <span>Trạng thái</span>
+            <select class="form-control" name="status">
+                <option value="all" <%= filters.status === 'all' ? 'selected' : '' %>>Tất cả</option>
+                <option value="published" <%= filters.status === 'published' ? 'selected' : '' %>>Đang bán</option>
+                <option value="hidden" <%= filters.status === 'hidden' ? 'selected' : '' %>>Đã ẩn</option>
+            </select>
+        </label>
+    </form>
+
+    <div class="admin-bulk-toolbar" data-admin-product-bulk-toolbar hidden>
+        <span data-admin-product-selection-count>Đã chọn 0 sản phẩm</span>
+        <div class="admin-bulk-toolbar__actions">
+            <button class="btn btn--size-l" type="button" data-admin-product-bulk-action="REFRESH_RATING" disabled>
+                <i class="fa-solid fa-rotate"></i>
+                <span>Tính lại rating</span>
+            </button>
+            <button class="btn btn--size-l" type="button" data-admin-product-bulk-action="PUBLISH" disabled>
+                <i class="fa-solid fa-eye"></i>
+                <span>Hiện sản phẩm</span>
+            </button>
+            <button class="btn btn--danger btn--size-l" type="button" data-admin-product-bulk-action="UNPUBLISH" disabled>
+                <i class="fa-solid fa-eye-slash"></i>
+                <span>Ẩn sản phẩm</span>
+            </button>
+        </div>
+    </div>
+
+    <div data-collection-results>
+        <%- include('./products-results', { products }) %>
+    </div>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>

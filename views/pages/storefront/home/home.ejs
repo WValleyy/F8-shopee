@@ -1,0 +1,193 @@
+<%
+const catalogProducts = catalog?.products || [];
+const catalogCategories = catalog?.categories || [];
+const filters = catalog?.filters || {
+    category: 'all',
+    sort: 'popular',
+    q: '',
+};
+const pagination = catalog?.pagination || {
+    page: 1,
+    totalPages: 0,
+};
+const sortGroups = catalogSortGroups || {};
+const rankingSorts = Object.keys(sortGroups).filter(item => sortGroups[item] === 'ranking');
+const priceSorts = Object.keys(sortGroups).filter(item => sortGroups[item] === 'price');
+const rawSort = String(filters.sort || '').trim();
+const sortCriteria = rawSort
+    ? rawSort.split(',').map(item => item.trim()).filter(item => (
+        rankingSorts.includes(item) || priceSorts.includes(item)
+    ))
+    : filters.q
+        ? []
+        : ['popular'];
+const toggleSortCriterion = (criterion) => {
+    const group = sortGroups[criterion];
+
+    if (sortCriteria.includes(criterion)) {
+        return sortCriteria.filter(item => item !== criterion);
+    }
+
+    return [
+        ...sortCriteria.filter(item => sortGroups[item] !== group),
+        criterion,
+    ];
+};
+
+const buildHomeUrl = (overrides = {}) => {
+    const params = new URLSearchParams();
+    const nextCategory = overrides.category ?? filters.category;
+    const nextSort = overrides.sort ?? sortCriteria;
+    const nextQuery = overrides.q ?? filters.q;
+    const nextPage = overrides.page ?? pagination.page;
+
+    if (nextCategory && nextCategory !== 'all')
+        params.set('category', nextCategory);
+
+    const normalizedSort = Array.isArray(nextSort)
+        ? nextSort.join(',')
+        : String(nextSort || '').trim();
+
+    const defaultSort = nextQuery ? '' : 'popular';
+
+    if (normalizedSort && normalizedSort !== defaultSort)
+        params.set('sort', normalizedSort);
+
+    if (nextQuery)
+        params.set('q', nextQuery);
+
+    if (nextPage && Number(nextPage) > 1)
+        params.set('page', String(nextPage));
+
+    const queryString = params.toString();
+    return queryString ? `/?${queryString}` : '/';
+};
+
+const activePriceSort = sortCriteria.find(item => priceSorts.includes(item)) || '';
+const categoryContainsActive = (category, activeCategory) => (
+    category.slug === activeCategory
+    || (category.children || []).some(child => categoryContainsActive(child, activeCategory))
+);
+%>
+
+<main class="home-page" data-home-page>
+    <div class="grid">
+        <div class="grid__row app__content">
+            <div class="grid__column-2 home-category-sidebar">
+                <nav class="category">
+                    <h3 class="category__heading">
+                        <i class="category__heading-icon fa-solid fa-list"></i>
+                        Danh mục
+                    </h3>
+
+                    <%- include('./category-tree', {
+                        categories: catalogCategories,
+                        activeCategory: filters.category,
+                        buildHomeUrl,
+                        categoryContainsActive,
+                    }) %>
+                </nav>
+            </div>
+
+            <div class="grid__column-10 home-catalog-main">
+                <div class="home-filter">
+                    <div class="home-filter__right-wrapper">
+                        <span class="home-filter__label">Sắp xếp theo</span>
+                        <% [
+                            {
+                                value: 'popular',
+                                label: 'Phổ biến',
+                                description: 'Ưu tiên sản phẩm bán tốt và được đánh giá cao.',
+                            },
+                            {
+                                value: 'newest',
+                                label: 'Mới nhất',
+                                description: 'Ưu tiên sản phẩm được đăng gần đây.',
+                            },
+                            {
+                                value: 'most-liked',
+                                label: 'Lượt thích',
+                                description: 'Ưu tiên sản phẩm có nhiều lượt thích và đánh giá cao.',
+                            },
+                        ].forEach(option => { %>
+                            <a
+                                href="<%= buildHomeUrl({ sort: toggleSortCriterion(option.value), page: 1 }) %>"
+                                class="home-filter__btn btn"
+                                data-home-sort-button
+                                data-active="<%= sortCriteria.includes(option.value) ? 'true' : 'false' %>"
+                                data-collection-navigation-link
+                                data-sort="<%= option.value %>"
+                                data-tooltip="<%= option.description %>">
+                                <%= option.label %>
+                            </a>
+                        <% }) %>
+
+                        <div class="select-filter">
+                            <span class="select-filter__label" data-home-sort-label>
+                                <%= activePriceSort === 'price-asc' ? 'Giá: Thấp đến cao' : activePriceSort === 'price-desc' ? 'Giá: Cao đến thấp' : 'Giá' %>
+                            </span>
+                            <i class="fa-solid fa-chevron-down"></i>
+
+                            <ul class="select-filter__list">
+                                <li class="select-filter__item" data-sort-item data-active="<%= activePriceSort === 'price-asc' ? 'true' : 'false' %>">
+                                    <a href="<%= buildHomeUrl({ sort: toggleSortCriterion('price-asc'), page: 1 }) %>" class="select-filter__item-link" data-home-sort-link data-collection-navigation-link data-sort="price-asc" data-tooltip="Giá thấp được hiển thị trước." data-tooltip-position="right">
+                                        Giá: Thấp đến cao
+                                    </a>
+                                </li>
+                                <li class="select-filter__item" data-sort-item data-active="<%= activePriceSort === 'price-desc' ? 'true' : 'false' %>">
+                                    <a href="<%= buildHomeUrl({ sort: toggleSortCriterion('price-desc'), page: 1 }) %>" class="select-filter__item-link" data-home-sort-link data-collection-navigation-link data-sort="price-desc" data-tooltip="Giá cao được hiển thị trước." data-tooltip-position="right">
+                                        Giá: Cao đến thấp
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="home-filter__page">
+                        <span class="home-filter__page-num">
+                            <span class="home-filter__page-current" data-home-page-current><%= pagination.totalPages ? pagination.page : 0 %></span>/<span class="home-filter__page-total" data-home-page-total><%= pagination.totalPages %></span>
+                        </span>
+
+                        <div
+                            class="home-filter__page-control"
+                            data-home-top-pager
+                            <%= pagination.totalPages > 1 ? '' : 'hidden' %>>
+                            <a
+                                class="home-filter__page-btn btn btn--no-hover"
+                                data-disabled="<%= pagination.page > 1 ? 'false' : 'true' %>"
+                                href="<%= pagination.page > 1 ? buildHomeUrl({ page: pagination.page - 1 }) : '#' %>"
+                                data-collection-navigation-link
+                                data-navigation="prev">
+                                <i class="home-filter__page-icon fa-solid fa-chevron-left"></i>
+                            </a>
+                            <a
+                                class="home-filter__page-btn btn btn--no-hover"
+                                data-disabled="<%= pagination.page < pagination.totalPages ? 'false' : 'true' %>"
+                                href="<%= pagination.page < pagination.totalPages ? buildHomeUrl({ page: pagination.page + 1 }) : '#' %>"
+                                data-collection-navigation-link
+                                data-navigation="next">
+                                <i class="home-filter__page-icon fa-solid fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+
+                    <script type="application/json" data-page-initial-state>
+                        <%- serializeJsonForHtml({ pagination, sortGroups }) %>
+                    </script>
+
+                </div>
+
+                <div class="home-product">
+                    <div class="grid__row" data-collection-results>
+                    <%- include('./home-product-list', { products: catalogProducts }) %>
+                    </div>
+                </div>
+
+                <div class="home-product__pagination" data-pagination-root></div>
+            </div>
+        </div>
+    </div>
+
+</main>
+
+<%- include('../../../shared/components/pagination-link') %>

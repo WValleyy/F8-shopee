@@ -1,0 +1,46 @@
+/* ==========================================================================
+   Grid
+   ==========================================================================
+*/
+
+.grid {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.grid__row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -5px;
+  margin-right: -5px;
+}
+
+.grid__column-2 {
+  width: 16.66667%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.grid__column-2-4 {
+  width: 20%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.grid__column-10 {
+  width: 83.33333%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.grid__column-5 {
+  width: 41.66667%;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.grid__column-7 {
+  width: 58.33333%;
+  padding-left: 5px;
+  padding-right: 5px;
+}

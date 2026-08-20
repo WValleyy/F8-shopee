@@ -1,0 +1,202 @@
+/* ==========================================================================
+   Header Search
+   ==========================================================================
+*/
+
+/* ==========================================================================
+   Search Bar
+   ==========================================================================
+*/
+
+.header-with-search {
+  height: var(--header-with-search-height);
+  display: flex;
+  align-items: center;
+}
+
+.header__logo {
+  width: 200px;
+  flex: 0 0 auto;
+}
+
+.header__logo-link {
+  color: transparent;
+  text-decoration: none;
+}
+
+.header__logo-img {
+  margin-top: 10px;
+  width: 150px;
+  margin-left: 5px;
+}
+
+.shopee-searchbar-wrapper {
+  position: relative;
+}
+
+.header__search-section {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.shopee-searchbar {
+  height: 42px;
+  display: flex;
+  align-items: center;
+  background-color: var(--white-color);
+  border-radius: 3px;
+  padding: 2px 4px;
+}
+
+.shopee-searchbar__main {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.shopee-searchbar-input__input {
+  width: 100%;
+  height: 100%;
+  min-width: 0;
+  border: none;
+  font-size: 1.6rem;
+}
+
+.shopee-searchbar-input__input:focus,
+.shopee-searchbar-input__input:focus-visible {
+  outline: none;
+  box-shadow: none;
+}
+
+.shopee-searchbar:focus-within {
+  outline: 2px solid #000;
+  outline-offset: 4px;
+}
+
+.shopee-searchbar__submit-icon {
+  margin: 6px 10px;
+}
+
+/* ==========================================================================
+   Search History
+   ==========================================================================
+*/
+
+.searchbar-history {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  width: calc(100% - 80px);
+  background-color: var(--white-color);
+  border: 1px solid #d3d3d3;
+  border-top: none;
+  border-radius: 3px;
+  padding: 0px 0px;
+  overflow: hidden;
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  display: none;
+  z-index: 2;
+}
+
+.searchbar-history__heading {
+  font-size: 1.4em;
+  color: var(--text-secondary-color);
+  font-weight: 400;
+  margin: 10px 0 10px 8px;
+}
+
+.searchbar-history__list {
+  list-style: none;
+  padding-left: 0px;
+  margin: 0;
+}
+
+.searchbar-history__item {
+  height: 32px;
+  padding: 0 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.searchbar-history__item:hover {
+  background-color: #f7f7f7;
+}
+
+.searchbar-history__item a {
+  display: block;
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1.4rem;
+  line-height: 32px;
+}
+
+.searchbar-history__remove {
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: var(--text-muted-color);
+  font-size: 1.4rem;
+  padding: 4px;
+}
+
+.searchbar-history__remove:hover {
+  color: var(--primary-color);
+}
+
+.searchbar-suggestions__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.searchbar-suggestions__item:hover {
+  background-color: #f7f7f7;
+}
+
+.searchbar-suggestions__link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-height: 58px;
+  padding: 7px 10px;
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.searchbar-suggestions__image {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border: 1px solid var(--border-color);
+  object-fit: cover;
+}
+
+.searchbar-suggestions__content {
+  min-width: 0;
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.searchbar-suggestions__name {
+  overflow: hidden;
+  font-size: 1.4rem;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.searchbar-suggestions__price {
+  flex: 0 0 auto;
+  color: var(--primary-color);
+  font-size: 1.3rem;
+}
+
+.searchbar-suggestions__empty {
+  padding: 16px 10px;
+  color: var(--text-secondary-color);
+  font-size: 1.4rem;
+  text-align: center;
+}

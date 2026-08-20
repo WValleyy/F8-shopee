@@ -1,0 +1,202 @@
+/* ==========================================================================
+   User Shell
+   ==========================================================================
+*/
+
+.user-page {
+  padding: 30px 0 60px;
+  background: #f5f5f5;
+}
+
+.user-content {
+  min-height: 640px;
+  padding: 30px;
+  background: var(--white-color);
+  border-radius: 2px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+.user-header {
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-color);
+}
+
+.user-header__content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+}
+
+.user-header__title {
+  margin: 0;
+  color: var(--text-color);
+  font-size: 2rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+
+.user-header__description {
+  margin: 8px 0 0;
+  color: #777;
+  font-size: 1.4rem;
+  line-height: 1.6;
+}
+
+.user-header__button {
+  min-width: 150px;
+  height: 36px;
+  padding: 0 16px;
+}
+
+/* ==========================================================================
+   User Sidebar
+   ==========================================================================
+*/
+
+.user-sidebar {
+  font-size: 1.4rem;
+}
+
+.user-sidebar__user {
+  display: flex;
+  align-items: center;
+  padding: 20px 0;
+  border-bottom: 1px solid #efefef;
+}
+
+.user-sidebar__avatar-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  overflow: hidden;
+  color: #c6c6c6;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+}
+
+.user-sidebar__avatar-wrapper .icon-headshot {
+  width: 20px;
+  height: 20px;
+  overflow: visible;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.2;
+}
+
+.user-sidebar__avatar {
+  display: block;
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  border: 1px solid #e5e5e5;
+  border-radius: 50%;
+}
+
+.user-sidebar__user-info {
+  min-width: 0;
+  margin-left: 12px;
+}
+
+.user-sidebar__username {
+  overflow: hidden;
+  margin: 0;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  font-weight: 500;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.user-sidebar__edit {
+  display: inline-flex;
+  align-items: center;
+  margin-top: 6px;
+  color: #888;
+  font-size: 1.2rem;
+  text-decoration: none;
+}
+
+.user-sidebar__edit svg {
+  margin-right: 4px;
+}
+
+.user-sidebar__edit:hover {
+  color: var(--primary-color);
+}
+
+/* ==========================================================================
+   User Navigation
+   ==========================================================================
+*/
+
+.user-sidebar__nav {
+  margin-top: 28px;
+}
+
+.user-sidebar__group {
+  margin-bottom: 18px;
+}
+
+.user-sidebar__group-title,
+.user-sidebar__item {
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+  font-size: 1.5rem;
+  text-decoration: none;
+}
+
+.user-sidebar__item {
+  margin-bottom: 16px;
+  color: var(--text-color);
+}
+
+.user-sidebar__group-title:hover,
+.user-sidebar__item:hover,
+.user-sidebar__submenu-link:hover {
+  color: var(--primary-color);
+}
+
+.user-sidebar__item[aria-current="page"],
+.user-sidebar__submenu-link[aria-current="page"] {
+  color: var(--primary-color);
+}
+
+.user-sidebar__item[aria-current="page"] {
+  font-weight: 400;
+}
+
+.user-sidebar__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  object-fit: contain;
+}
+
+.user-sidebar__wishlist-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #ff424f;
+  font-size: 1.7rem;
+  line-height: 1;
+}
+
+.user-sidebar__submenu {
+  margin: 12px 0 0;
+  padding-left: 30px;
+  list-style: none;
+}
+
+.user-sidebar__submenu li + li {
+  margin-top: 12px;
+}
+
+.user-sidebar__submenu-link {
+  color: #555;
+  text-decoration: none;
+}

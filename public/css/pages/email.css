@@ -1,0 +1,82 @@
+.email-page {
+  margin: 0;
+  background: #f5f5f5;
+  color: #333;
+  font-family: Arial, sans-serif;
+  -webkit-text-size-adjust: 100%;
+}
+
+.email-page__outer {
+  width: 100%;
+  padding: 32px 16px;
+  background: #f5f5f5;
+}
+
+.email-page__card {
+  width: 100%;
+  max-width: 600px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+}
+
+.email-page__brand {
+  padding: 24px 32px;
+  background: #ee4d2d;
+  color: #fff;
+  font-size: 22px;
+  font-weight: 700;
+}
+
+.email-page__content {
+  padding: 32px;
+  line-height: 1.6;
+}
+
+.email-page__heading {
+  margin: 0 0 20px;
+  color: #222;
+  font-size: 24px;
+  line-height: 1.25;
+}
+
+.email-page__paragraph {
+  margin: 0 0 16px;
+}
+
+.email-page__otp {
+  margin: 8px 0 20px;
+  padding: 14px 16px;
+  border: 1px solid #f2b8aa;
+  background: #fff6f3;
+  color: #ee4d2d;
+  font-family: "Courier New", monospace;
+  font-size: 30px;
+  font-weight: 700;
+  letter-spacing: 6px;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.email-page__details {
+  width: 100%;
+  margin: 20px 0;
+  background: #fafafa;
+  border: 1px solid #eee;
+  border-collapse: collapse;
+}
+
+.email-page__detail-label,
+.email-page__detail-value {
+  padding: 8px;
+  text-align: left;
+}
+
+.email-page__detail-label {
+  color: #777;
+}
+
+.email-page__footer {
+  margin: 28px 0 0;
+  color: #777;
+  font-size: 13px;
+}

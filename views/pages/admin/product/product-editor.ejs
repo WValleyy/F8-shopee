@@ -1,0 +1,226 @@
+<section
+    class="admin-page admin-editor-page"
+    data-admin-product-editor
+    data-product-id="<%= product.id %>"
+    data-max-product-images="<%= uploadLimits.product.maxFiles %>"
+    data-max-product-upload-bytes="<%= uploadLimits.product.maxTotalBytes %>"
+    data-max-product-image-bytes="<%= uploadLimits.product.maxFileBytes %>"
+    data-max-variants="<%= inputLimits.adminProduct.maxVariants %>"
+    data-max-specifications="<%= inputLimits.adminProduct.maxSpecifications %>">
+    <form id="admin-product-form" class="admin-editor" data-product-form>
+        <div class="admin-page__heading">
+            <div>
+                <a class="admin-back-link" href="/admin/products"><i class="fa-solid fa-arrow-left"></i> Sản phẩm</a>
+                <h2><%= product.id ? 'Chỉnh sửa sản phẩm' : 'Thêm sản phẩm' %></h2>
+            </div>
+            <div class="admin-editor__actions">
+                <label class="admin-editor__publish" data-tooltip="Đăng bán: sản phẩm xuất hiện tại cửa hàng">
+                    <input type="checkbox" name="isPublished" <%= product.isPublished ? 'checked' : '' %>>
+                    <span>Đăng bán</span>
+                </label>
+                <% if (product.id) { %>
+                    <button class="btn btn--primary btn--size-l" type="button" data-refresh-product-rating data-tooltip="Tính lại rating từ toàn bộ đánh giá công khai">
+                        <i class="fa-solid fa-rotate"></i>
+                        <span>Tính lại rating</span>
+                    </button>
+                    <a class="btn btn--primary btn--size-l" href="/admin/reviews?product=<%= product.id %>" data-tooltip="Xem các đánh giá của sản phẩm">
+                        <i class="fa-regular fa-star"></i>
+                        <span>Xem đánh giá</span>
+                    </a>
+                <% } %>
+                <button class="btn btn--primary btn--size-l" type="submit">
+                    <i class="fa-solid fa-floppy-disk"></i>
+                    <span>Lưu sản phẩm</span>
+                </button>
+                <% if (product.id) { %>
+                    <button class="btn btn--danger btn--size-l" type="button" data-delete-product data-tooltip="Chỉ xóa được sản phẩm chưa từng phát sinh đơn hàng" data-tooltip-position="left">
+                        <i class="fa-solid fa-trash"></i>
+                        <span>Xóa vĩnh viễn</span>
+                    </button>
+                <% } %>
+            </div>
+        </div>
+        <div class="admin-editor__main">
+            <p class="form-notice admin-form-notice" data-form-notice></p>
+            <section class="admin-panel">
+                <header><h3>Thông tin cơ bản</h3></header>
+                <div class="admin-form-grid">
+                    <label class="admin-field admin-field--full">
+                        <span>Tên sản phẩm</span>
+                        <input class="form-control" name="name" value="<%= product.name %>" maxlength="<%= inputLimits.product.nameMaxLength %>" required>
+                    </label>
+                    <label class="admin-field">
+                        <span>Thương hiệu</span>
+                        <input class="form-control" name="brand" value="<%= product.brand %>" maxlength="<%= inputLimits.product.brandMaxLength %>">
+                    </label>
+                    <label class="admin-field">
+                        <span>Danh mục</span>
+                        <select class="form-control" name="categoryId" required>
+                            <option value="">Chọn danh mục</option>
+                            <% categories.forEach(category => { %>
+                                <option value="<%= category.id %>" <%= product.categoryId === category.id ? 'selected' : '' %> <%= category.isLeaf && category.isActive ? '' : 'disabled' %>><%= category.label || category.name %><%= category.isLeaf ? '' : ' (danh mục cha)' %><%= category.isActive ? '' : ' (đã ẩn)' %></option>
+                            <% }) %>
+                        </select>
+                    </label>
+                    <label class="admin-field admin-field--full">
+                        <span>Mô tả</span>
+                        <textarea class="form-control form-control--textarea" name="description" rows="7" maxlength="<%= inputLimits.product.descriptionMaxLength %>"><%= product.description %></textarea>
+                    </label>
+                </div>
+            </section>
+
+            <section class="admin-panel admin-specifications-panel">
+                <header>
+                    <div>
+                        <h3>Thông số sản phẩm</h3>
+                        <p>Không bắt buộc. Chọn thuộc tính phù hợp với danh mục sản phẩm.</p>
+                    </div>
+                    <button class="btn btn--size-l" type="button" data-add-specification>
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Thêm thông số</span>
+                    </button>
+                </header>
+                <div class="admin-specifications" data-specification-list>
+                    <% product.specifications.forEach(specification => { %>
+                        <div class="admin-specification-row" data-specification-row>
+                            <select class="form-control" data-specification-attribute>
+                                <option value="">Chọn thuộc tính</option>
+                                <% attributes.forEach(attribute => { %>
+                                    <option value="<%= attribute.id %>" data-category-id="<%= attribute.categoryId %>" <%= specification.attributeId === attribute.id ? 'selected' : '' %>><%= attribute.name %><%= attribute.unit ? ` (${attribute.unit})` : '' %></option>
+                                <% }) %>
+                            </select>
+                            <input class="form-control" data-specification-value value="<%= specification.value %>" placeholder="Giá trị">
+                            <button class="admin-icon-button admin-icon-button--danger" type="button" data-remove-specification data-tooltip="Xóa thông số">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    <% }) %>
+                </div>
+            </section>
+
+            <section class="admin-panel">
+                <header>
+                    <div>
+                        <h3>Ảnh sản phẩm</h3>
+                        <p>
+                            Ảnh sản phẩm không bắt buộc. Tối đa <%= uploadLimits.product.maxFiles %> ảnh,
+                            <%= uploadLimits.product.maxFileBytes / (1024 * 1024) %> MB/ảnh,
+                            mỗi lần upload không quá <%= uploadLimits.product.maxTotalBytes / (1024 * 1024) %> MB.
+                        </p>
+                    </div>
+                    <label class="btn btn--primary btn--size-l admin-upload-button">
+                        <i class="fa-solid fa-image"></i>
+                        <span>Chọn ảnh</span>
+                        <input type="file" accept="image/jpeg,image/png,image/webp" multiple data-product-images>
+                    </label>
+                </header>
+                <div class="admin-media-grid" data-product-gallery>
+                    <% product.gallery.forEach(image => { %>
+                        <div class="admin-media-item" data-image-key="<%= image.publicId %>" data-existing-image>
+                            <img src="<%= image.url %>" alt="">
+                            <button type="button" data-remove-image><i class="fa-solid fa-xmark"></i></button>
+                        </div>
+                    <% }) %>
+                </div>
+                <p class="admin-field-error" data-image-error></p>
+            </section>
+
+            <section class="admin-panel">
+                <header>
+                    <div>
+                        <h3>Phiên bản sản phẩm</h3>
+                        <p>Nhập tùy chọn theo dạng “Màu: Đen; Size: L”.</p>
+                    </div>
+                    <button class="btn btn--size-l" type="button" data-add-variant>
+                        <i class="fa-solid fa-plus"></i>
+                        <span>Thêm phiên bản</span>
+                    </button>
+                </header>
+                <div class="admin-variant-table-wrap">
+                    <table class="admin-table admin-variant-table">
+                        <thead>
+                            <tr>
+                                <th>SKU</th>
+                                <th>Tùy chọn</th>
+                                <th>Giá bán</th>
+                                <th>Giá gốc</th>
+                                <th>Kho</th>
+                                <th>Ảnh</th>
+                                <th>Hiển thị</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody data-variant-list>
+                            <% product.variants.forEach(variant => { %>
+                                <tr
+                                    data-variant-row
+                                    data-variant-id="<%= variant.id %>"
+                                    data-variant-updated-at="<%= variant.updatedAt ? new Date(variant.updatedAt).toISOString() : '' %>">
+                                    <td><input class="form-control" data-variant-field="sku" value="<%= variant.sku %>" maxlength="<%= inputLimits.productVariant.skuMaxLength %>"></td>
+                                    <td><input class="form-control" data-variant-field="options" value="<%= variant.options.map(option => `${option.name}: ${option.value}`).join('; ') %>" placeholder="Màu: Đen; Size: L"></td>
+                                    <td><input class="form-control" type="number" min="0" data-variant-field="price" value="<%= variant.price %>" required></td>
+                                    <td><input class="form-control" type="number" min="0" data-variant-field="originalPrice" value="<%= variant.originalPrice %>" required></td>
+                                    <td><input class="form-control" type="number" min="0" step="1" data-variant-field="stock" value="<%= variant.stock %>" required></td>
+                                    <td>
+                                        <div class="admin-variant-image" data-variant-image>
+                                            <img src="<%= variant.image %>" alt="" data-variant-image-preview <%= variant.image ? '' : 'hidden' %>>
+                                            <label class="btn btn--size-s">
+                                                <span data-variant-image-label><%= variant.image ? 'Thay ảnh' : 'Chọn ảnh' %></span>
+                                                <input type="file" accept="image/jpeg,image/png,image/webp" hidden data-variant-image-input>
+                                            </label>
+                                        </div>
+                                    </td>
+                                    <td><input type="checkbox" data-variant-field="isPublished" <%= variant.isPublished ? 'checked' : '' %>></td>
+                                    <td class="admin-variant-removal-actions">
+                                        <button class="admin-icon-button admin-icon-button--danger" type="button" data-remove-variant data-tooltip="Gỡ phiên bản"><i class="fa-solid fa-trash"></i></button>
+                                        <button class="admin-icon-button" type="button" data-undo-remove-variant data-tooltip="Sẽ xóa khi lưu. Nhấn để hoàn tác." hidden><i class="fa-solid fa-rotate-left"></i></button>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+
+    </form>
+
+    <template data-variant-row-template>
+        <tr data-variant-row data-variant-id="" data-variant-updated-at="">
+            <td><input class="form-control" data-variant-field="sku" maxlength="<%= inputLimits.productVariant.skuMaxLength %>"></td>
+            <td><input class="form-control" data-variant-field="options" placeholder="Màu: Đen; Size: L"></td>
+            <td><input class="form-control" type="number" min="0" data-variant-field="price" value="0" required></td>
+            <td><input class="form-control" type="number" min="0" data-variant-field="originalPrice" value="0" required></td>
+            <td><input class="form-control" type="number" min="0" step="1" data-variant-field="stock" value="0" required></td>
+            <td>
+                <div class="admin-variant-image" data-variant-image>
+                    <img src="" alt="" hidden data-variant-image-preview>
+                    <label class="btn btn--size-s">
+                        <span data-variant-image-label>Chọn ảnh</span>
+                        <input type="file" accept="image/jpeg,image/png,image/webp" hidden data-variant-image-input>
+                    </label>
+                </div>
+            </td>
+            <td><input type="checkbox" data-variant-field="isPublished" checked></td>
+            <td class="admin-variant-removal-actions">
+                <button class="admin-icon-button admin-icon-button--danger" type="button" data-remove-variant data-tooltip="Gỡ phiên bản"><i class="fa-solid fa-trash"></i></button>
+                <button class="admin-icon-button" type="button" data-undo-remove-variant data-tooltip="Sẽ xóa khi lưu. Nhấn để hoàn tác." hidden><i class="fa-solid fa-rotate-left"></i></button>
+            </td>
+        </tr>
+    </template>
+
+    <template data-specification-row-template>
+        <div class="admin-specification-row" data-specification-row>
+            <select class="form-control" data-specification-attribute>
+                <option value="">Chọn thuộc tính</option>
+                <% attributes.forEach(attribute => { %>
+                    <option value="<%= attribute.id %>" data-category-id="<%= attribute.categoryId %>"><%= attribute.name %><%= attribute.unit ? ` (${attribute.unit})` : '' %></option>
+                <% }) %>
+            </select>
+            <input class="form-control" data-specification-value placeholder="Giá trị">
+            <button class="admin-icon-button admin-icon-button--danger" type="button" data-remove-specification data-tooltip="Xóa thông số">
+                <i class="fa-solid fa-trash"></i>
+            </button>
+        </div>
+    </template>
+</section>

@@ -1,0 +1,63 @@
+<div class="admin-table-wrap">
+    <table class="admin-table">
+        <thead><tr><th>Người dùng</th><th>Vai trò</th><th>Chi tiêu</th><th>Xác minh</th><th>Đăng nhập gần nhất</th><th>Ngày tạo</th><th>Trạng thái</th><th class="admin-table__actions">Thao tác</th></tr></thead>
+        <tbody>
+            <% users.forEach(user => { %>
+                <%
+                    const isCurrentAdmin = String(user.id) === String(currentAdminId || '');
+                    const deletionScheduled = Boolean(user.purgeAfter);
+                %>
+                <tr data-user-id="<%= user.id %>">
+                    <td>
+                        <div class="admin-user-cell">
+                            <span class="admin-avatar admin-user__avatar">
+                                <% if (user.avatar) { %>
+                                    <img src="<%= user.avatar %>" alt="">
+                                <% } else { %>
+                                    <i class="fa-regular fa-user"></i>
+                                <% } %>
+                            </span>
+                            <span>
+                                <strong><%= user.name %></strong>
+                                <small>@<%= user.userName %></small>
+                                <small><%= user.email %></small>
+                            </span>
+                        </div>
+                    </td>
+                    <td><%= user.role %></td>
+                    <td>
+                        <strong><%= formatCurrency(user.netSpend) %></strong>
+                        <small>GMV <%= formatCurrency(user.grossSpend) %></small>
+                    </td>
+                    <td><%= user.isVerified ? 'Đã xác minh' : 'Chưa xác minh' %></td>
+                    <td><%= user.lastLoginAt ? formatDate(user.lastLoginAt) : 'Chưa đăng nhập' %></td>
+                    <td><%= formatDate(user.createdAt) %></td>
+                    <td>
+                        <% if (deletionScheduled) { %>
+                            <span class="admin-status <%= user.canPurge ? 'admin-status--danger' : 'admin-status--muted' %>"><%= user.canPurge ? 'Có thể xóa' : 'Chờ xóa' %></span>
+                            <small>Xóa sau <%= formatDate(user.purgeAfter) %></small>
+                        <% } else { %>
+                            <span class="admin-status <%= user.isActive ? 'admin-status--success' : 'admin-status--muted' %>"><%= user.isActive ? 'Hoạt động' : 'Đã khóa' %></span>
+                        <% } %>
+                    </td>
+                    <td class="admin-table__actions">
+                        <% if (isCurrentAdmin) { %>
+                            <span class="admin-current-user">Tài khoản hiện tại</span>
+                        <% } else if (deletionScheduled) { %>
+                            <% if (user.canPurge) { %>
+                                <button class="btn btn--danger btn--size-s" type="button" data-user-purge>Xóa vĩnh viễn</button>
+                            <% } else { %>
+                                <span class="admin-current-user">Chưa đến hạn xóa</span>
+                            <% } %>
+                        <% } else if (user.role === 'ADMIN') { %>
+                            <span class="admin-current-user">Tài khoản quản trị viên</span>
+                        <% } else { %>
+                            <button class="btn <%= user.isActive ? 'btn--danger' : '' %> btn--size-s" type="button" data-user-active="<%= user.isActive ? 'false' : 'true' %>"><%= user.isActive ? 'Khóa' : 'Mở khóa' %></button>
+                        <% } %>
+                    </td>
+                </tr>
+            <% }) %>
+        </tbody>
+    </table>
+    <% if (!users.length) { %><div class="empty-state"><i class="fa-solid fa-users"></i><strong>Không tìm thấy người dùng</strong></div><% } %>
+</div>

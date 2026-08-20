@@ -1,0 +1,12 @@
+<%
+    const normalizedRating = Math.max(
+        0,
+        Math.min(5, Math.round(Number(rating) || 0)),
+    );
+%>
+
+<span class="rating-stars">
+    <% for (let index = 0; index < 5; index += 1) { %>
+        <i class="rating-stars__star fa-solid fa-star<%= index < normalizedRating ? ' rating-stars__star--active' : '' %>"></i>
+    <% } %>
+</span>

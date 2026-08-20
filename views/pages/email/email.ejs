@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="vi">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title><%= heading %></title>
+    <style><%- emailStyles %></style>
+</head>
+<body class="email-page">
+    <table class="email-page__outer" role="presentation" cellspacing="0" cellpadding="0">
+        <tr>
+            <td align="center">
+                <table class="email-page__card" role="presentation" cellspacing="0" cellpadding="0">
+                    <tr>
+                        <td class="email-page__brand">F8 Shopee</td>
+                    </tr>
+                    <tr>
+                        <td class="email-page__content">
+                            <h1 class="email-page__heading"><%= heading %></h1>
+                            <p class="email-page__paragraph">
+                                Chào <%= userName %>,
+                            </p>
+
+                            <% if (otp) { %>
+                                <% paragraphs.slice(0, 1).forEach(paragraph => { %>
+                                    <p class="email-page__paragraph"><%= paragraph %></p>
+                                <% }) %>
+                                <div class="email-page__otp"><%= otp %></div>
+                                <% paragraphs.slice(1).forEach(paragraph => { %>
+                                    <p class="email-page__paragraph"><%= paragraph %></p>
+                                <% }) %>
+                            <% } else { %>
+                                <% paragraphs.forEach(paragraph => { %>
+                                    <p class="email-page__paragraph"><%= paragraph %></p>
+                                <% }) %>
+                            <% } %>
+
+                            <% if (details.length && !otp) { %>
+                                <table class="email-page__details" role="presentation" cellspacing="0" cellpadding="0">
+                                    <% details.forEach(detail => { %>
+                                        <tr>
+                                            <td class="email-page__detail-label"><%= detail.label %></td>
+                                            <td class="email-page__detail-value"><strong><%= detail.value %></strong></td>
+                                        </tr>
+                                    <% }) %>
+                                </table>
+                            <% } %>
+
+                            <p class="email-page__footer">
+                                Đây là email tự động từ F8 Shopee.
+                            </p>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

@@ -1,0 +1,28 @@
+<%
+const wishlistProductsList = products || [];
+const currentSearchQuery = currentQuery || '';
+%>
+
+<% if (wishlistProductsList.length) { %>
+    <div class="wishlist__summary">
+        <span><%= wishlistProductsList.length %> sản phẩm trong trang này</span>
+    </div>
+
+    <div class="wishlist__products">
+        <div class="grid__row">
+            <% wishlistProductsList.forEach((product) => { %>
+                <%- include('./wishlist-product-card', { product }) %>
+            <% }) %>
+        </div>
+    </div>
+<% } else { %>
+    <div class="wishlist__empty empty-state">
+        <i class="fa-regular fa-heart"></i>
+        <strong>
+            <%= currentSearchQuery ? 'Không tìm thấy sản phẩm phù hợp' : 'Chưa có sản phẩm yêu thích' %>
+        </strong>
+        <span>
+            <%= currentSearchQuery ? 'Thử đổi từ khóa khác để tìm lại sản phẩm.' : 'Những sản phẩm bạn lưu sẽ hiển thị tại đây.' %>
+        </span>
+    </div>
+<% } %>

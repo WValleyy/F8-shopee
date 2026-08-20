@@ -1,0 +1,45 @@
+/* ==========================================================================
+   Error Page
+   ==========================================================================
+*/
+
+.error-page {
+  display: flex;
+  min-height: 420px;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 16px;
+  background-color: #f5f5f5;
+}
+
+.error-page__content {
+  width: min(100%, 560px);
+  text-align: center;
+}
+
+.error-page__code {
+  margin: 0 0 12px;
+  color: var(--primary-color);
+  font-size: 6.4rem;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.error-page__title {
+  margin: 0 0 12px;
+  color: var(--text-color);
+  font-size: 2.6rem;
+  font-weight: 500;
+  line-height: 1.35;
+}
+
+.error-page__description {
+  margin: 0 0 28px;
+  color: var(--text-secondary-color);
+  font-size: 1.5rem;
+  line-height: 1.6;
+}
+
+.error-page__action {
+  min-width: 148px;
+}

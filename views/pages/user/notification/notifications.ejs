@@ -1,0 +1,24 @@
+<%- include("../shared/user-header", {
+    title: "Thông báo",
+    description: "Cập nhật đơn hàng và thông tin tài khoản của bạn.",
+    button: unreadNotificationCount
+        ? {
+            id: "btn-read-all-notifications",
+            text: "Đánh dấu đã đọc",
+            attributes: 'data-mark-all-notifications',
+        }
+        : null
+}) %>
+
+<div data-collection-results>
+    <%- include('./notifications-results') %>
+</div>
+
+<div
+    class="notifications__pagination"
+    data-pagination-root="notifications">
+</div>
+
+<script type="application/json" data-page-initial-state>
+    <%- serializeJsonForHtml({ pagination }) %>
+</script>

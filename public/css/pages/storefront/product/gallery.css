@@ -1,0 +1,134 @@
+/* ==========================================================================
+   Product Gallery
+   ==========================================================================
+*/
+
+.product-gallery {
+  padding: 15px;
+}
+
+.product-gallery__main {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background-color: #fafafa;
+  cursor: pointer;
+}
+
+.product-gallery__main-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+
+.product-gallery__thumbs {
+  position: relative;
+}
+
+.product-gallery__list {
+  display: flex;
+  gap: 8px;
+  overflow: hidden;
+  list-style: none;
+  padding: 0;
+  margin: 10px 0 0;
+}
+
+.product-gallery__item {
+  flex: 0 0 calc((100% - 4 * 8px) / 5);
+}
+
+.product-gallery__thumb {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  padding: 0;
+  overflow: hidden;
+  border: 2px solid transparent;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.product-gallery__thumb[aria-pressed="true"],
+.product-gallery__thumb:hover {
+  border-color: var(--primary-color);
+}
+
+.product-gallery__thumb-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-gallery__arrow {
+  position: absolute;
+  top: 50%;
+  z-index: 1;
+  width: 24px;
+  height: 42px;
+  border: 0;
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.45);
+  color: var(--white-color);
+  cursor: pointer;
+}
+
+.product-gallery__arrow--left {
+  left: 0;
+}
+
+.product-gallery__arrow--right {
+  right: 0;
+}
+
+.product-gallery__socials {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 60px;
+  font-size: 1.4rem;
+}
+
+.product-gallery__share {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.product-gallery__social-separator {
+  width: 1px;
+  height: 24px;
+  margin: 0 8px;
+  background: #ddd;
+}
+
+.product-gallery__social {
+  color: #1687f8;
+  font-size: 2.2rem;
+}
+
+.product-gallery__social--pinterest {
+  color: #df0018;
+}
+
+.product-gallery__like {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 2px;
+  border: 0;
+  background: transparent;
+  color: var(--text-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+}
+
+.product-gallery__like i {
+  color: #ff424f;
+  font-size: 2.2rem;
+}
+
+.product-gallery__like[aria-pressed="true"] {
+  color: #ff424f;
+}

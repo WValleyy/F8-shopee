@@ -1,0 +1,90 @@
+<section class="admin-page">
+    <div class="admin-page__heading">
+        <div>
+            <p class="admin-eyebrow">Hoạt động cửa hàng</p>
+            <h2>Tổng quan</h2>
+        </div>
+    </div>
+
+    <div class="admin-metrics">
+        <a class="admin-metric" href="/admin/products">
+            <span>Sản phẩm</span>
+            <strong><%= metrics.productCount %></strong>
+            <i class="fa-solid fa-box"></i>
+        </a>
+        <a class="admin-metric" href="/admin/orders">
+            <span>Đơn hàng</span>
+            <strong><%= metrics.orderCount %></strong>
+            <i class="fa-solid fa-receipt"></i>
+        </a>
+        <a class="admin-metric" href="/admin/users">
+            <span>Người dùng</span>
+            <strong><%= metrics.userCount %></strong>
+            <i class="fa-solid fa-users"></i>
+        </a>
+        <a class="admin-metric" href="/admin/reviews?status=hidden">
+            <span>Đánh giá đang ẩn</span>
+            <strong><%= metrics.hiddenReviewCount %></strong>
+            <i class="fa-regular fa-star"></i>
+        </a>
+        <div class="admin-metric admin-metric--revenue">
+            <span>GMV đơn hoàn thành</span>
+            <strong><%= formatCurrency(metrics.grossRevenue) %></strong>
+            <i class="fa-solid fa-chart-line"></i>
+        </div>
+        <div class="admin-metric admin-metric--revenue">
+            <span>Doanh thu ròng</span>
+            <strong><%= formatCurrency(metrics.netRevenue) %></strong>
+            <i class="fa-solid fa-coins"></i>
+        </div>
+    </div>
+
+    <div class="admin-dashboard-grid">
+        <section class="admin-panel">
+            <div class="admin-panel__heading">
+                <h3>Đơn hàng gần đây</h3>
+                <a href="/admin/orders">Xem tất cả</a>
+            </div>
+            <div class="admin-compact-list">
+                <% recentOrders.forEach(order => { %>
+                    <a class="admin-compact-row" href="/admin/orders?q=<%= order.id %>">
+                        <span>
+                            <strong>#<%= order.id.slice(-8).toUpperCase() %></strong>
+                            <small><%= order.userName || 'Người dùng đã xóa' %> · <%= formatDate(order.createdAt) %></small>
+                        </span>
+                        <span>
+                            <strong><%= formatCurrency(order.totalAmount) %></strong>
+                            <small><%= order.status %></small>
+                        </span>
+                    </a>
+                <% }) %>
+                <% if (!recentOrders.length) { %>
+                    <div class="empty-state empty-state--compact">Chưa có đơn hàng.</div>
+                <% } %>
+            </div>
+        </section>
+
+        <section class="admin-panel">
+            <div class="admin-panel__heading">
+                <h3>Sắp hết hàng</h3>
+                <a href="/admin/products">Quản lý sản phẩm</a>
+            </div>
+            <div class="admin-compact-list">
+                <% lowStockVariants.forEach(variant => { %>
+                    <a class="admin-compact-row" href="/admin/products/<%= variant.productId %>/edit">
+                        <span>
+                            <strong><%= variant.productName %></strong>
+                            <small><%= variant.sku || 'Chưa có SKU' %></small>
+                        </span>
+                        <span class="admin-stock-count <%= variant.stock === 0 ? 'is-empty' : '' %>">
+                            <%= variant.stock %>
+                        </span>
+                    </a>
+                <% }) %>
+                <% if (!lowStockVariants.length) { %>
+                    <div class="empty-state empty-state--compact">Không có phiên bản sắp hết hàng.</div>
+                <% } %>
+            </div>
+        </section>
+    </div>
+</section>

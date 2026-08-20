@@ -1,0 +1,29 @@
+<header class="header header--checkout">
+    <div class="header__navbar-wrapper">
+        <div class="grid">
+            <%- include("../../../shared/partials/header/navbar") %>
+        </div>
+    </div>
+
+    <div class="header-with-search-wrapper">
+        <div class="grid">
+            <div class="header-with-search">
+                <div class="header__logo">
+                    <a href="/" class="header__logo-link">
+                    <%- include("../../../shared/partials/header/shopee-logo", { color: "#ee4d2d" }) %>
+                    </a>
+
+                    <div class="header__page-name">
+                        <%= pageName %>
+                    </div>
+                </div>
+
+                <% if (showSearch) { %>
+                    <%- include("../../../shared/partials/header/search") %>
+                <% } %>
+            </div>
+        </div>
+    </div>
+
+    <script type="application/json" data-header-state><%- serializeJsonForHtml({ cartPreview, notificationPreview }) %></script>
+</header>

@@ -1,0 +1,32 @@
+<section class="admin-page" data-admin-collection="categories">
+    <div class="admin-page__heading">
+        <div><p class="admin-eyebrow">Cấu trúc hàng hóa</p><h2>Danh mục</h2></div>
+        <button class="btn btn--primary btn--size-l" type="button" data-open-admin-editor="category"><i class="fa-solid fa-plus"></i><span>Thêm danh mục</span></button>
+    </div>
+    <form class="admin-filters admin-filters--compact" method="get" action="/admin/categories" data-admin-filter-form>
+        <label class="admin-search-field"><i class="fa-solid fa-magnifying-glass"></i><input class="form-control" type="search" name="q" value="<%= filters.q %>" placeholder="Tìm tên danh mục"></label>
+        <label><span>Trạng thái</span><select class="form-control" name="status"><option value="all">Tất cả</option><option value="active" <%= filters.status === 'active' ? 'selected' : '' %>>Đang dùng</option><option value="hidden" <%= filters.status === 'hidden' ? 'selected' : '' %>>Đã ẩn</option></select></label>
+    </form>
+    <div data-collection-results><%- include('./categories-results', { categories }) %></div>
+    <p class="admin-form-notice">Nên giữ cây danh mục tối đa khoảng 3 cấp. Cây quá sâu làm sidebar khó đọc và giảm trải nghiệm người dùng.</p>
+    <div class="admin-pagination" data-pagination-root></div>
+    <script type="application/json" data-page-initial-state><%- serializeJsonForHtml({ pagination }) %></script>
+</section>
+
+<div class="modal" data-modal data-admin-editor-dialog="category" hidden>
+    <div class="modal__overlay" data-modal-close></div>
+    <div class="modal__body" data-modal-content>
+    <form class="modal-dialog admin-editor-form" data-admin-editor-form="category">
+        <header><div><p class="admin-eyebrow">Cấu trúc hàng hóa</p><h3 data-editor-title>Thêm danh mục</h3></div><button class="admin-icon-button" type="button" data-modal-close><i class="fa-solid fa-xmark"></i></button></header>
+        <input type="hidden" name="id">
+        <div class="admin-form-grid">
+            <label class="admin-field admin-field--wide"><span>Tên danh mục</span><input class="form-control" name="name" maxlength="<%= inputLimits.category.nameMaxLength %>" required></label>
+            <label class="admin-field"><span>Danh mục cha</span><select class="form-control" name="parentId"><option value="">Không có</option><% categoryOptions.forEach(category => { %><option value="<%= category.id %>"><%= category.label %></option><% }) %></select></label>
+            <label class="admin-field"><span>Thứ tự</span><input class="form-control" type="number" name="sortOrder" step="1" value="0" required></label>
+            <label class="admin-check admin-field--wide"><input type="checkbox" name="isActive" checked><span>Active</span></label>
+        </div>
+        <p class="form-notice admin-form-notice" data-form-notice></p>
+        <footer><button class="btn btn--size-l" type="button" data-modal-close>Hủy</button><button class="btn btn--primary btn--size-l" type="submit">Lưu danh mục</button></footer>
+    </form>
+    </div>
+</div>

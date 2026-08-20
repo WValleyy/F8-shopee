@@ -1,0 +1,16 @@
+<% if (addresses.length) { %>
+    <div class="checkout-selector__list">
+        <% addresses.forEach(address => { %>
+            <%- include("../../../shared/components/address-card", {
+                address,
+                cardMode: "checkout",
+                showEditAction: true,
+                showDeleteAction: false,
+                showSetDefaultAction: true,
+                isSelectedAddress: selectedAddressId === address.id,
+            }) %>
+        <% }) %>
+    </div>
+<% } else { %>
+    <p class="checkout-manage__empty-text">Bạn chưa có địa chỉ nào.</p>
+<% } %>

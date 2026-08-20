@@ -1,0 +1,72 @@
+<div class="admin-review-list">
+    <% reviews.forEach(review => { %>
+        <article class="admin-review" data-review-id="<%= review.id %>">
+            <div class="admin-review__product">
+                <div>
+                    <a href="/admin/products/<%= review.productId %>/edit"><%= review.productName %></a>
+                    <small>Đơn #<%= review.orderId %></small>
+                </div>
+                <img src="<%= review.productImage %>" alt="">
+            </div>
+
+            <div class="admin-review__body">
+                <div class="admin-review__meta">
+                    <span class="admin-avatar admin-review__avatar">
+                        <% if (review.userAvatar) { %>
+                            <img src="<%= review.userAvatar %>" alt="">
+                        <% } else { %>
+                            <%- include(
+                                '../../../shared/components/avatar-placeholder',
+                                { className: 'admin-review__avatar-placeholder' }
+                            ) %>
+                        <% } %>
+                    </span>
+                    <strong><%= review.userName || 'Người dùng đã xóa' %></strong>
+                    <span class="admin-review__stars">
+                        <%- include(
+                            '../../../shared/components/rating-star',
+                            { rating: review.rating }
+                        ) %>
+                    </span>
+                    <time><%= formatDate(review.createdAt) %></time>
+                </div>
+                <p><%= review.content || 'Người dùng không để lại nội dung.' %></p>
+                <% if (review.images.length) { %>
+                    <div class="admin-review__images">
+                        <% review.images.forEach(image => { %>
+                            <button
+                                type="button"
+                                data-image-lightbox-src="<%= image %>"
+                                data-image-lightbox-alt="Ảnh đánh giá">
+                                <img src="<%= image %>" alt="">
+                            </button>
+                        <% }) %>
+                    </div>
+                <% } %>
+                <div class="admin-review__summary">
+                    <span><i class="fa-regular fa-thumbs-up"></i> <%= review.helpfulCount %> hữu ích</span>
+                    <span class="admin-status <%= review.isPublished ? 'admin-status--success' : 'admin-status--muted' %>">
+                        <%= review.isPublished ? 'Đang hiển thị' : 'Đã ẩn' %>
+                    </span>
+                </div>
+            </div>
+
+            <button
+                type="button"
+                class="btn <%= review.isPublished ? 'btn--danger' : 'btn--primary' %> btn--size-s"
+                data-review-publication
+                data-next-published="<%= review.isPublished ? 'false' : 'true' %>">
+                <i class="fa-solid <%= review.isPublished ? 'fa-eye-slash' : 'fa-eye' %>"></i>
+                <span><%= review.isPublished ? 'Ẩn đánh giá' : 'Hiện lại' %></span>
+            </button>
+        </article>
+    <% }) %>
+
+    <% if (!reviews.length) { %>
+        <div class="empty-state">
+            <i class="fa-regular fa-star"></i>
+            <strong>Không tìm thấy đánh giá</strong>
+            <span>Thử thay đổi sản phẩm hoặc bộ lọc hiện tại.</span>
+        </div>
+    <% } %>
+</div>

@@ -1,175 +1,193 @@
-/* ================= Profile ================= */
-
-.profile-content {
-    padding: 30px;
-    background: var(--white-color);
-}
+/* ==========================================================================
+   Profile
+   ==========================================================================
+*/
 
 .profile {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    padding-top: 30px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  padding-top: 30px;
 }
 
-/* ================= Form ================= */
+/* ==========================================================================
+   Profile Form
+   ==========================================================================
+*/
 
 .profile-form {
-    flex: 1;
-    max-width: 700px;
+  flex: 1;
+  max-width: 700px;
 }
 
 .profile-form__group {
-    display: flex;
-    align-items: center;
-    margin-bottom: 24px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
 }
 
 .profile-form__label {
-    width: 120px;
-    padding-right: 20px;
-    color: #555;
-    font-size: 1.4rem;
-    text-align: right;
+  width: 120px;
+  padding-right: 20px;
+  color: #555;
+  font-size: 1.4rem;
+  text-align: right;
+}
+
+.profile-form__group:has(.profile-form__input:not([hidden])) {
+  align-items: flex-start;
+}
+
+.profile-form__group:has(.profile-form__input:not([hidden]))
+  .profile-form__label {
+  padding-top: 10px;
 }
 
 .profile-form__field {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    flex: 1;
-    gap: 16px;
-}
-
-.profile-form__input,
-.profile-form__select {
-    height: 40px;
-    padding: 0 12px;
-    border: 1px solid var(--border-color);
-    border-radius: 2px;
-    outline: none;
-    font-size: 1.4rem;
-    background: var(--white-color);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  flex: 1;
+  gap: 16px;
 }
 
 .profile-form__input {
-    width: 100%;
-    max-width: 400px;
-}
-
-.profile-form__select {
-    width: 130px;
-}
-
-.profile-form__input:focus,
-.profile-form__select:focus {
-    border-color: #999;
+  width: 100%;
+  max-width: 400px;
 }
 
 .profile-form__text {
-    font-size: 1.4rem;
-    color: var(--text-color);
+  font-size: 1.4rem;
+  color: var(--text-color);
 }
 
 .profile-form__action {
-    padding: 0;
-    border: none;
-    background: transparent;
-    color: var(--primary-color);
-    font-size: 1.4rem;
-    cursor: pointer;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: var(--primary-color);
+  font-size: 1.4rem;
+  cursor: pointer;
+  position: relative;
 }
 
 .profile-form__action:hover {
-    opacity: 0.8;
+  opacity: 0.8;
+}
+
+.profile-form__action[data-loading="true"] {
+  min-width: 104px;
+  min-height: 20px;
+  cursor: wait;
+}
+
+.profile-form__action[data-loading="true"] .profile-form__email-action-label {
+  visibility: hidden;
+}
+
+.profile-form__action[data-loading="true"]::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 14px;
+  height: 14px;
+  margin: -8px 0 0 -8px;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: profile-email-loading 0.7s linear infinite;
+}
+
+@keyframes profile-email-loading {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .profile-form__radio {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    margin-right: 24px;
-    font-size: 1.4rem;
-    cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-right: 24px;
+  font-size: 1.4rem;
+  cursor: pointer;
 }
 
 .profile-form__radio input {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .profile-form__submit {
-    min-width: 100px;
+  min-width: 100px;
 }
 
-/* ================= Avatar ================= */
+/* ==========================================================================
+   Profile Avatar
+   ==========================================================================
+*/
 
 .profile-avatar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 280px;
-    margin-left: 50px;
-    padding-left: 50px;
-    border-left: 1px solid var(--border-color);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 280px;
+  margin-left: 50px;
+  padding-left: 50px;
+  border-left: 1px solid var(--border-color);
 }
 
 .profile-avatar__image {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100px;
-    height: 100px;
-    margin-bottom: 20px;
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+  border: 1px solid var(--border-color);
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .profile-avatar__image svg {
-    width: 60px;
-    height: 60px;
-    stroke: #c6c6c6;
+  width: 60px;
+  height: 60px;
+  stroke: #c6c6c6;
+}
+
+.profile-avatar__image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .profile-avatar__button {
-    min-width: 120px;
-    margin-bottom: 16px;
+  min-width: 120px;
+  margin-bottom: 16px;
 }
 
 .profile-avatar__note {
-    margin: 4px 0;
-    color: #999;
-    font-size: 1.2rem;
-    line-height: 1.6;
-    text-align: center;
+  margin: 4px 0;
+  color: #999;
+  font-size: 1.2rem;
+  line-height: 1.6;
+  text-align: center;
 }
 
-/* ================= Account Header ================= */
-
-.account-header {
-    padding-bottom: 20px;
-    border-bottom: 1px solid var(--border-color);
+.profile-form__verification-row .profile-form__field {
+  align-items: flex-start;
 }
 
-.account-header__content {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
+.profile-form__verification-status {
+  color: #777;
+  font-size: 1.3rem;
 }
 
-.account-header__title {
-    margin: 0;
-    color: var(--text-color);
-    font-size: 2rem;
-    font-weight: 400;
+.profile-form__verification-status[data-verified="true"] {
+  color: #ee4d2d;
 }
 
-.account-header__description {
-    margin-top: 8px;
-    color: #999;
-    font-size: 1.4rem;
-}
-
-.account-header__button {
-    min-width: 150px;
+.profile-form__email-action-label {
+  font-size: 1.4rem;
 }

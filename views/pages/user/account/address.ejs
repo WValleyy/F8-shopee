@@ -1,0 +1,44 @@
+<%- include("../shared/user-header", {
+    title: "Địa chỉ của tôi",
+    button: {
+        id: "btn-add-address",
+        text: "+ Thêm địa chỉ"
+    }
+}) %>
+
+<% if (addresses.length) { %>
+    <section class="address">
+        <div class="address__list">
+            <% addresses.forEach(address => { %>
+                <%- include("../../../shared/components/address-card", {
+                    address
+                }) %>
+            <% }) %>
+        </div>
+    </section>
+<% } else { %>
+    <section class="address address--empty">
+        <div class="address__empty">
+            <svg
+                class="address__empty-icon"
+                viewBox="0 0 24 24">
+                <path
+                    d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z">
+                </path>
+            </svg>
+
+            <p class="address__empty-text">
+                Bạn chưa có địa chỉ nào.
+            </p>
+
+            <button
+                type="button"
+                id="btn-add-address-empty"
+                class="btn btn--primary">
+                Thêm địa chỉ
+            </button>
+        </div>
+    </section>
+<% } %>
+
+<%- include("../../../shared/modals/address-form-modal") %>
