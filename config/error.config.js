@@ -23,7 +23,7 @@ const ERROR_CONFIG = Object.freeze({
     IMAGE_FILE_TOO_LARGE: freezeDefinition(413, ({ limitMegabytes }) => (
         `Dung lượng mỗi ảnh không được vượt quá ${limitMegabytes} MB.`
     )),
-    CSRF_VALIDATION_FAILED: freezeDefinition(403, 'Nguồn gửi yêu cầu không được phép.'),
+    CSRF_VALIDATION_FAILED: freezeDefinition(403, 'Bạn đang gửi yêu cầu từ một domain không hợp lệ.'),
     ADMIN_ROLE_REQUIRED: freezeDefinition(403, 'Tài khoản hiện tại không có vai trò quản trị viên.'),
     CUSTOMER_ACCOUNT_REQUIRED: freezeDefinition(403, 'Chức năng này chỉ dành cho tài khoản khách hàng.'),
     CHECKOUT_USER_UNAVAILABLE: freezeDefinition(403, 'Tài khoản không thể thực hiện thanh toán.'),
