@@ -6,6 +6,13 @@ Express, EJS và MongoDB, tham khảo thiết kế của Shopee.
 > README này là entry point để cài đặt, chạy và giới thiệu repository. Tài liệu kỹ thuật
 > chi tiết nằm tại [`docs/README.md`](./docs/README.md).
 
+## Live demo
+
+- Website: [Mở trang cửa hàng](https://f8-shopee-ten.vercel.app)
+- Admin: [Mở trang quản trị](https://f8-shopee-ten.vercel.app/admin)
+
+Trang quản trị yêu cầu đăng nhập bằng tài khoản có role `ADMIN`. Thông tin tài khoản demo nằm trong phần [Seed data](#seed-data).
+
 ## Tech stack
 
 | Area | Current implementation |
