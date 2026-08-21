@@ -6,8 +6,8 @@ const mocks = vi.hoisted(() => ({
     buildCatalogEligibilityPipeline: vi.fn(),
     findProduct: vi.fn(),
     findVariants: vi.fn(),
+    getCategoryAssignmentState: vi.fn(),
     getEffectiveActiveLeafCategoryIds: vi.fn(),
-    isCategoryEffectivelyActiveLeaf: vi.fn(),
     isProductWishlisted: vi.fn(),
     mapWishlistedState: vi.fn(),
 }));
@@ -26,8 +26,8 @@ vi.mock('../../../models/catalog/product-variant.model.js', () => ({
 }));
 
 vi.mock('../../../services/catalog/category.service.js', () => ({
+    getCategoryAssignmentState: mocks.getCategoryAssignmentState,
     getEffectiveActiveLeafCategoryIds: mocks.getEffectiveActiveLeafCategoryIds,
-    isCategoryEffectivelyActiveLeaf: mocks.isCategoryEffectivelyActiveLeaf,
 }));
 
 vi.mock('../../../services/user/wishlist.service.js', () => ({
@@ -94,6 +94,18 @@ function variantFixture(options = []) {
     };
 }
 
+function categoryAssignmentState() {
+    return {
+        exists: true,
+        isEffectivelyActive: true,
+        isLeaf: true,
+        categoryPath: [
+            { id: 'category-root', name: 'Fashion', slug: 'fashion' },
+            { id: 'category-1', name: 'Phones', slug: 'phones' },
+        ],
+    };
+}
+
 // Product queries compose catalog eligibility and wishlist presentation state.
 describe('storefront product detail query', () => {
     afterEach(() => {
@@ -106,20 +118,28 @@ describe('storefront product detail query', () => {
         ]);
         mocks.findProduct.mockReturnValue(productQuery(productFixture()));
         mocks.findVariants.mockReturnValue(query);
-        mocks.isCategoryEffectivelyActiveLeaf.mockResolvedValue(true);
+        mocks.getCategoryAssignmentState.mockResolvedValue(
+            categoryAssignmentState(),
+        );
         mocks.isProductWishlisted.mockResolvedValue(false);
 
         const product = await getProductDetailBySlug('phone');
 
         expect(product.activeVariant).toBeNull();
         expect(product.categorySlug).toBe('phones');
+        expect(product.categoryPath).toEqual([
+            { id: 'category-root', name: 'Fashion', slug: 'fashion' },
+            { id: 'category-1', name: 'Phones', slug: 'phones' },
+        ]);
         expect(query.sort).toHaveBeenCalledWith({ createdAt: 1, _id: 1 });
     });
 
     it('preselects the only variant when it has no options', async () => {
         mocks.findProduct.mockReturnValue(productQuery(productFixture()));
         mocks.findVariants.mockReturnValue(variantQuery([variantFixture()]));
-        mocks.isCategoryEffectivelyActiveLeaf.mockResolvedValue(true);
+        mocks.getCategoryAssignmentState.mockResolvedValue(
+            categoryAssignmentState(),
+        );
         mocks.isProductWishlisted.mockResolvedValue(false);
 
         const product = await getProductDetailBySlug('phone');
@@ -133,7 +153,9 @@ describe('storefront product detail query', () => {
             ...variantFixture(),
             image: { url: '/phone.jpg' },
         }]));
-        mocks.isCategoryEffectivelyActiveLeaf.mockResolvedValue(true);
+        mocks.getCategoryAssignmentState.mockResolvedValue(
+            categoryAssignmentState(),
+        );
         mocks.isProductWishlisted.mockResolvedValue(false);
 
         const product = await getProductDetailBySlug('phone');
@@ -152,7 +174,9 @@ describe('storefront product detail query', () => {
         mocks.findVariants.mockReturnValue(
             variantQuery([variantFixture()]),
         );
-        mocks.isCategoryEffectivelyActiveLeaf.mockResolvedValue(true);
+        mocks.getCategoryAssignmentState.mockResolvedValue(
+            categoryAssignmentState(),
+        );
         mocks.isProductWishlisted.mockResolvedValue(false);
 
         const product = await getProductDetailBySlug('phone');

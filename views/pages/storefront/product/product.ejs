@@ -33,11 +33,15 @@ const stockText = activeVariant
                         <a href="/" class="product-breadcrumb__link">Shopee</a>
                     </li>
 
-                    <li class="product-breadcrumb__item">
-                        <a href="<%= categoryUrl %>" class="product-breadcrumb__link">
-                            <%= product.categoryName || 'Danh mục' %>
-                        </a>
-                    </li>
+                    <% product.categoryPath.forEach(category => { %>
+                        <li class="product-breadcrumb__item">
+                            <a
+                                href="/?category=<%= encodeURIComponent(category.slug) %>"
+                                class="product-breadcrumb__link">
+                                <%= category.name %>
+                            </a>
+                        </li>
+                    <% }) %>
 
                     <li class="product-breadcrumb__item">
                         <span class="product-breadcrumb__current">

@@ -21,7 +21,9 @@ async function getCategoryAssignmentState(categoryId, options = {}) {
     const {
         session,
     } = options;
-    const query = Category.find({}).select('_id parent isActive').lean();
+    const query = Category.find({})
+        .select('_id parent name slug isActive')
+        .lean();
 
     if (session)
         query.session(session);
@@ -42,6 +44,9 @@ async function getCategoryAssignmentState(categoryId, options = {}) {
         exists,
         isEffectivelyActive: activeIds.has(selectedCategoryId),
         isLeaf: exists && !parentIds.has(selectedCategoryId),
+        categoryPath: exists
+            ? buildCategoryPath(categories, selectedCategoryId)
+            : [],
     };
 }
 
@@ -95,6 +100,27 @@ function buildEffectiveActiveCategoryIds(categories = []) {
     return new Set([...byId.keys()].filter(categoryId => isActive(categoryId)));
 }
 
+function buildCategoryPath(categories, selectedCategoryId) {
+    const byId = new Map(
+        categories.map(category => [categoryIdOf(category), category]),
+    );
+    const categoryPath = [];
+    let category = byId.get(String(selectedCategoryId));
+
+    while (category) {
+        categoryPath.unshift({
+            id: categoryIdOf(category),
+            name: category.name,
+            slug: category.slug,
+        });
+
+        const parentId = parentIdOf(category);
+        category = parentId ? byId.get(parentId) : null;
+    }
+
+    return categoryPath;
+}
+
 function categoryIdOf(category) {
     return String(category._id);
 }
@@ -104,6 +130,7 @@ function parentIdOf(category) {
 }
 
 export {
+    buildCategoryPath,
     buildEffectiveActiveCategoryIds,
     buildEffectiveActiveLeafCategoryIds,
     getCategoryAssignmentState,

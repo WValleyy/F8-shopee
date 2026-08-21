@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
 import {
+    buildCategoryPath,
     buildEffectiveActiveLeafCategoryIds,
 } from '../../../services/catalog/category.service.js';
 
@@ -43,5 +44,36 @@ describe('category effective active leaves', () => {
             { _id: 'root', parent: null, isActive: true },
             { _id: 'inactive-child', parent: 'root', isActive: false },
         ])).toEqual([]);
+    });
+});
+
+describe('category path', () => {
+    it('orders categories from the root to the selected category', () => {
+        const categories = [
+            {
+                _id: 'root',
+                name: 'Fashion',
+                slug: 'fashion',
+                parent: null,
+            },
+            {
+                _id: 'child',
+                name: 'Shirts',
+                slug: 'shirts',
+                parent: 'root',
+            },
+            {
+                _id: 'leaf',
+                name: 'T-shirts',
+                slug: 't-shirts',
+                parent: 'child',
+            },
+        ];
+
+        expect(buildCategoryPath(categories, 'leaf')).toEqual([
+            { id: 'root', name: 'Fashion', slug: 'fashion' },
+            { id: 'child', name: 'Shirts', slug: 'shirts' },
+            { id: 'leaf', name: 'T-shirts', slug: 't-shirts' },
+        ]);
     });
 });

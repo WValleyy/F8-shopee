@@ -10,8 +10,8 @@ import {
 } from '../user/wishlist.service.js';
 
 import {
+    getCategoryAssignmentState,
     getEffectiveActiveLeafCategoryIds,
-    isCategoryEffectivelyActiveLeaf,
 } from './category.service.js';
 import { buildCatalogEligibilityPipeline } from './catalog-query-pipeline.js';
 import { toProductCardViewModel } from './product-view-model.js';
@@ -32,10 +32,11 @@ async function getProductDetailBySlug(slug, options = {}) {
     if (!product)
         return null;
 
-    if (
-        !product.category.isActive
-        || !await isCategoryEffectivelyActiveLeaf(product.category._id)
-    ) {
+    const categoryState = await getCategoryAssignmentState(
+        product.category._id,
+    );
+
+    if (!categoryState.isEffectivelyActive || !categoryState.isLeaf) {
         return null;
     }
 
@@ -101,6 +102,7 @@ async function getProductDetailBySlug(slug, options = {}) {
         categoryId: product.category._id.toString(),
         categoryName: product.category.name,
         categorySlug: product.category.slug,
+        categoryPath: categoryState.categoryPath,
         isWishlisted: wishlisted,
         images: productImages,
         likes: product.likes,
