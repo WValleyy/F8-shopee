@@ -140,7 +140,7 @@ Chạy full seed pipeline:
 npm run seed
 ```
 
-> **Note** seed hiện là destructive reset đối với các collection được application
+> **Note**: seed hiện là destructive reset đối với các collection được application
 > quản lý. Không chạy command này trên database có dữ liệu cần giữ.
 
 Seed tạo catalog, user và business activity phục vụ phát triển/demo. Sau khi seed thành
@@ -164,7 +164,7 @@ Chi tiết pipeline, nguồn dữ liệu và invariant được kiểm tra sau s
 | `npm start` | Chạy Node server thông thường |
 | `npm run dev` | Chạy local với Nodemon tự restart khi backend thay đổi |
 | `npm run seed` | Reset và seed dữ liệu development/demo |
-| `npm run test:unit` | Chạy unit suite tường minh |
+| `npm run test:unit` | Chạy unit suite |
 | `npm run test:integration` | Chạy integration suite với MongoDB test riêng |
 | `npm run test:all` | Chạy unit suite, sau đó integration suite |
 | `npm run lint` | Chạy ESLint cho source frontend/backend |
