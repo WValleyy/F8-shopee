@@ -23,9 +23,7 @@ function requireSameOrigin(req, res, next) {
 
     try {
         requestOrigin = new URL(origin).origin;
-        expectedOrigin = new URL(
-            env.appOrigin || `${req.protocol}://${req.get('host')}`,
-        ).origin;
+        expectedOrigin = new URL(env.appOrigin).origin;
     } catch {
         return next(requestError('CSRF_VALIDATION_FAILED'));
     }
