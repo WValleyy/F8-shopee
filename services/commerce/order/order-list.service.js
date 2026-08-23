@@ -40,23 +40,6 @@ async function listOrdersPage(userId, options = {}) {
         };
     }
 
-    if (currentTab === 'completed') {
-        orderQuery.$expr = {
-            $anyElementTrue: {
-                $map: {
-                    input: '$items',
-                    as: 'item',
-                    in: {
-                        $lt: [
-                            { $ifNull: ['$$item.returnedQuantity', 0] },
-                            '$$item.quantity',
-                        ],
-                    },
-                },
-            },
-        };
-    }
-
     const keywordConditions = buildKeywordQuery(
         normalizedKeyword,
         ['items.productName'],
@@ -77,11 +60,6 @@ async function listOrdersPage(userId, options = {}) {
     const normalizedOrders = orders.map(order => toOrderViewModel(
         order,
         reviewByItemKey,
-        {
-            itemMode: currentTab === 'completed'
-                ? 'remaining'
-                : 'all',
-        },
     ));
 
     return {
@@ -104,28 +82,18 @@ function buildPurchaseReviewKey(orderId, productId, variantId) {
 function toOrderViewModel(
     order,
     reviewByItemKey = new Map(),
-    options = {},
 ) {
-    const itemMode = options.itemMode === 'remaining'
-        ? 'remaining'
-        : 'all';
-    const normalizedItems = order.items
-        .map((item) => {
-            const quantity = item.quantity;
-            const returnedQuantity = item.returnedQuantity;
-            const returnableQuantity = quantity - returnedQuantity;
+    const normalizedItems = order.items.map((item) => {
+        const quantity = item.quantity;
+        const returnedQuantity = item.returnedQuantity;
 
-            return {
-                item,
-                quantity,
-                returnedQuantity,
-                returnableQuantity,
-                displayQuantity: itemMode === 'remaining'
-                    ? returnableQuantity
-                    : quantity,
-            };
-        })
-        .filter(item => item.displayQuantity > 0);
+        return {
+            item,
+            quantity,
+            returnedQuantity,
+            returnableQuantity: quantity - returnedQuantity,
+        };
+    });
     const availableActions = listAllowedOrderActions(order.status, 'USER');
 
     if (
@@ -162,12 +130,12 @@ function toOrderViewModel(
                 productSlug: item.productSlug,
                 image: item.image,
                 options: item.options,
-                quantity: normalizedItem.displayQuantity,
+                quantity: normalizedItem.quantity,
                 originalQuantity: normalizedItem.quantity,
                 returnedQuantity: normalizedItem.returnedQuantity,
                 returnableQuantity: normalizedItem.returnableQuantity,
                 price: item.price,
-                total: item.price * normalizedItem.displayQuantity,
+                total: item.price * normalizedItem.quantity,
                 reviewId: review ? review._id.toString() : '',
             };
         }),
