@@ -112,9 +112,8 @@ describe('order return integration', { concurrency: false }, () => {
         return { order, product, user, variant };
     }
 
-    function returnData(requestKey, variantId, quantity = 1) {
+    function returnData(variantId, quantity = 1) {
         return {
-            requestKey,
             items: [{ variantId: variantId.toString(), quantity }],
         };
     }
@@ -125,7 +124,7 @@ describe('order return integration', { concurrency: false }, () => {
         await createOrderReturnRequest(
             fixture.user._id,
             fixture.order._id,
-            returnData(`return-${fixture.order._id}`, fixture.variant._id),
+            returnData(fixture.variant._id),
         );
 
         const [request, order, product, variant] = await Promise.all([
@@ -142,34 +141,6 @@ describe('order return integration', { concurrency: false }, () => {
         assert.equal(variant.stock, 1);
     });
 
-    it('allows only one concurrent return for a reused request key', async () => {
-        const fixture = await createFixture();
-        const data = returnData(`duplicate-${fixture.order._id}`, fixture.variant._id);
-
-        const results = await Promise.allSettled([
-            createOrderReturnRequest(fixture.user._id, fixture.order._id, data),
-            createOrderReturnRequest(fixture.user._id, fixture.order._id, data),
-        ]);
-        const fulfilled = results.filter(result => result.status === 'fulfilled');
-        const rejected = results.filter(result => result.status === 'rejected');
-
-        assert.equal(fulfilled.length, 1);
-        assert.equal(rejected.length, 1);
-        assert.equal(rejected[0].reason.code, 'RETURN_REQUEST_KEY_USED');
-        assert.equal(
-            await OrderReturnRequest.countDocuments({ order: fixture.order._id }),
-            1,
-        );
-        const [order, product, variant] = await Promise.all([
-            Order.findById(fixture.order._id),
-            Product.findById(fixture.product._id),
-            ProductVariant.findById(fixture.variant._id),
-        ]);
-        assert.equal(order.items[0].returnedQuantity, 1);
-        assert.equal(product.sold, 1);
-        assert.equal(variant.stock, 1);
-    });
-
     it('rolls back the return when inventory restoration fails', async () => {
         const fixture = await createFixture();
         const updateSpy = vi
@@ -181,7 +152,7 @@ describe('order return integration', { concurrency: false }, () => {
                 () => createOrderReturnRequest(
                     fixture.user._id,
                     fixture.order._id,
-                    returnData(`rollback-${fixture.order._id}`, fixture.variant._id),
+                    returnData(fixture.variant._id),
                 ),
                 error => error?.code === 'RETURN_INVENTORY_RESTORE_FAILED',
             );

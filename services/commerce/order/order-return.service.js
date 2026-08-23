@@ -14,10 +14,7 @@ import User from '../../../models/user/user.model.js';
 import { isOrderReturnWindowOpen } from './order-policy.js';
 
 async function createOrderReturnRequest(userId, orderId, data) {
-    const {
-        requestKey,
-        items,
-    } = data;
+    const { items } = data;
 
     if (!items.length)
         throw requestError('RETURN_ITEMS_REQUIRED');
@@ -44,16 +41,6 @@ async function createOrderReturnRequest(userId, orderId, data) {
     const selectedItems = [...quantities]
         .map(([variantId, quantity]) => ({ variantId, quantity }))
         .sort((left, right) => left.variantId.localeCompare(right.variantId));
-
-    const existingRequest = await OrderReturnRequest.findOne({
-        order: orderId,
-        user: userId,
-        requestKey,
-    }).select('_id').lean();
-
-    if (existingRequest) {
-        throw requestError('RETURN_REQUEST_KEY_USED');
-    }
 
     const session = await mongoose.startSession();
 
@@ -138,7 +125,6 @@ async function createOrderReturnRequest(userId, orderId, data) {
             await OrderReturnRequest.create([{
                 order: order._id,
                 user: order.user,
-                requestKey,
                 items: requestItems,
                 amount,
             }], { session });
@@ -172,18 +158,6 @@ async function createOrderReturnRequest(userId, orderId, data) {
             await order.save({ session });
         });
     } catch (error) {
-        if (error?.code === 11000) {
-            const duplicateRequest = await OrderReturnRequest.findOne({
-                order: orderId,
-                user: userId,
-                requestKey,
-            }).select('_id').lean();
-
-            if (duplicateRequest) {
-                throw requestError('RETURN_REQUEST_KEY_USED', { cause: error });
-            }
-        }
-
         if (isAppError(error))
             throw error;
 

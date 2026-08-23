@@ -41,10 +41,7 @@ const orderApiController = {
     },
 
     async createReturn(req, res) {
-        const input = parseReturnRequestInput(
-            req.body,
-            req.get('X-Request-Key'),
-        );
+        const input = parseReturnRequestInput(req.body);
         await createOrderReturnRequest(
             req.authUserId,
             req.params.orderId,

@@ -6,11 +6,10 @@ Tài liệu này mô tả việc hoàn trả hàng, tạo đánh giá, đánh d�
 
 ```text
 POST /api/orders/:orderId/returns
-Header: X-Request-Key
 → requireStrictApiAuth
 → requireCustomer
 → validateObjectIdParam(orderId)
-→ parseReturnRequestInput(body, requestKey)
+→ parseReturnRequestInput(body)
 → createOrderReturnRequest(userId, orderId, input)
 ```
 
@@ -34,10 +33,6 @@ xác nhận USER vẫn hoạt động và chưa được lên lịch xóa
 ```
 
 Return được áp dụng ngay, không có bước chờ admin duyệt. Bản ghi return, tồn kho, `Product.sold` và `returnedQuantity` được cập nhật trong cùng transaction.
-
-### 1.2 Idempotency
-
-`requestKey` được kiểm tra trước transaction. Unique index trên `(order, requestKey)` xử lý trường hợp hai request cùng vượt qua bước kiểm tra ban đầu. Duplicate-key error được đổi thành `RETURN_REQUEST_KEY_USED` khi đã có bản ghi return tương ứng của người dùng.
 
 ## 2. Review Creation
 

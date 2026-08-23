@@ -173,7 +173,6 @@ const ERROR_CONFIG = Object.freeze({
     ),
     RETURN_ITEM_INVALID: freezeDefinition(400, 'Sản phẩm hoàn trả không hợp lệ.'),
     RETURN_QUANTITY_INVALID: freezeDefinition(400, 'Số lượng hoàn trả không hợp lệ.'),
-    RETURN_REQUEST_KEY_USED: freezeDefinition(409, 'Mã yêu cầu này đã được sử dụng.'),
     ORDER_RETURN_NOT_ALLOWED: freezeDefinition(400, 'Chỉ đơn hàng đã hoàn thành mới có thể yêu cầu trả hàng.'),
     ORDER_RETURN_PERIOD_EXPIRED: freezeDefinition(400, 'Thời hạn yêu cầu trả hàng đã kết thúc.'),
     ORDER_RETURN_ITEM_INVALID: freezeDefinition(400, 'Sản phẩm được chọn không thuộc đơn hàng này.'),

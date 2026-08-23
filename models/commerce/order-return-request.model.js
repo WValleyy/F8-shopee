@@ -71,11 +71,6 @@ const orderReturnRequestSchema = new Schema(
             default: null,
             index: true,
         },
-        requestKey: {
-            type: String,
-            required: true,
-            trim: true,
-        },
         items: {
             type: [returnItemSchema],
             default: [],
@@ -96,10 +91,6 @@ const orderReturnRequestSchema = new Schema(
     },
 );
 
-orderReturnRequestSchema.index(
-    { order: 1, requestKey: 1 },
-    { unique: true },
-);
 orderReturnRequestSchema.index({
     user: 1,
     createdAt: -1,

@@ -103,8 +103,6 @@ Toàn bộ `/api/account` yêu cầu strict auth và role `USER`. Các path sau 
 - `PATCH /api/orders/:orderId/status`
 - `POST /api/orders/:orderId/returns`
 
-Return endpoint yêu cầu header `X-Request-Key`.
-
 ## 8. Catalog/engagement API
 
 - `GET /api/catalog/search-suggestions` — public catalog helper;

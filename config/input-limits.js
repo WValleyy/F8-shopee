@@ -62,10 +62,6 @@ const inputLimits = Object.freeze({
         noteMaxLength: 500,
     },
 
-    return: {
-        requestKeyMaxLength: 128,
-    },
-
     adminProduct: {
         bulkActionMaxItems: 100,
         maxVariants: 50,

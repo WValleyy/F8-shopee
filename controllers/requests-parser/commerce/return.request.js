@@ -1,19 +1,12 @@
-import inputLimits from '../../../config/input-limits.js';
 import { requestError } from '../../../utils/error/app-error.js';
 import {
     readNumber,
     readObjectBody,
     readObjectId,
-    readRequiredString,
 } from '../shared/request-value.js';
 
-function parseReturnRequestInput(rawBody, headerRequestKey = '') {
+function parseReturnRequestInput(rawBody) {
     const body = readObjectBody(rawBody);
-    const requestKey = readRequiredString(
-        headerRequestKey,
-        'X-Request-Key',
-        { maxLength: inputLimits.return.requestKeyMaxLength },
-    );
     if (!Array.isArray(body.items))
         throw requestError('FIELD_MUST_BE_ARRAY', {
             messageParams: { fieldLabel: 'items' },
@@ -36,7 +29,6 @@ function parseReturnRequestInput(rawBody, headerRequestKey = '') {
     });
 
     return {
-        requestKey,
         items,
     };
 }

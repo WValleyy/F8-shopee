@@ -133,13 +133,7 @@ Trạng thái hiện chỉ có `SHIPPING`, `COMPLETED`, `CANCELLED`.
 
 ### `OrderReturnRequest`
 
-Bản ghi trả hàng lưu đơn hàng, người dùng, dữ liệu mặt hàng và số tiền tại thời điểm trả; `requestKey` ngăn gửi trùng yêu cầu.
-
-Unique constraint trong database:
-
-```text
-(order, requestKey) UNIQUE
-```
+Bản ghi trả hàng lưu đơn hàng, người dùng, dữ liệu mặt hàng và số tiền tại thời điểm trả.
 
 Tác động tới tồn kho và thời hạn trả hàng nằm trong [`../domains/review-return.md`](../domains/review-return.md).
 

@@ -144,7 +144,6 @@ function mountPurchaseReturns({ root, refreshCollection, signal }) {
       setError(modal);
       submitButton.disabled = true;
 
-      const requestKey = window.crypto.randomUUID();
       let resultIsUnknown = false;
 
       try {
@@ -152,7 +151,6 @@ function mountPurchaseReturns({ root, refreshCollection, signal }) {
           `/api/orders/${form.elements.orderId.value}/returns`,
           {
             method: "POST",
-            headers: { "X-Request-Key": requestKey },
             body: {
               items: selectedItems.map((item) => ({
                 variantId: item.variantId,

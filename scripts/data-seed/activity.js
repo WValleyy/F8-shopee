@@ -310,7 +310,6 @@ function createReturnRequest(order, itemIndex, quantity, inventory, ledgers) {
         _id: new mongoose.Types.ObjectId(),
         order: order._id,
         user: order.user,
-        requestKey: `seed-return-${order._id.toString()}`,
         items: [requestItem],
         amount: requestItem.amount,
         createdAt,
