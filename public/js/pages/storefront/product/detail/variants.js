@@ -126,6 +126,7 @@ function createVariantSelection(root, initialState, { gallery }) {
   function applyVariant(variant) {
     activeVariant = variant;
     activeStock = Number(variant.stock);
+    quantityInput.value = "1";
 
     priceElement.textContent = formatPrice(variant.price);
     originalPriceElement.textContent = formatPrice(variant.originalPrice);
