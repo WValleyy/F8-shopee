@@ -22,7 +22,7 @@ Chi tiết nằm trong [`../workflows/return-review-flow.md`](../workflows/retur
 
 ## 3. Review eligibility
 
-Việc tạo review yêu cầu strict auth. Người dùng chỉ được đánh giá product hoặc variant thuộc đơn hàng đã hoàn thành và chưa bị trả lại toàn bộ.
+Việc tạo review yêu cầu strict auth. Người dùng được đánh giá product hoặc variant thuộc đơn hàng đã hoàn thành, kể cả khi item đã được trả lại toàn bộ.
 
 ## 4. Review data
 

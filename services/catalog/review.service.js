@@ -178,7 +178,7 @@ async function getPurchaseReviewGate({
     const orderQuery = Order.findOne({
         _id: orderId,
         user: userId,
-    }).select('status items.product items.variant items.quantity items.returnedQuantity');
+    }).select('status items.product items.variant');
 
     if (session)
         orderQuery.session(session);
@@ -208,13 +208,6 @@ async function getPurchaseReviewGate({
         return {
             canReview: false,
             errorCode: 'REVIEW_ITEM_NOT_PURCHASED',
-        };
-    }
-
-    if (purchasedItem.returnedQuantity >= purchasedItem.quantity) {
-        return {
-            canReview: false,
-            errorCode: 'REVIEW_ITEM_FULLY_RETURNED',
         };
     }
 

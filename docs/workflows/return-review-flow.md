@@ -49,7 +49,6 @@ POST /api/reviews/products/:productId
 
 - đơn thuộc người dùng và đã `COMPLETED`;
 - item tương ứng có trong đơn;
-- item chưa được hoàn trả toàn bộ;
 - chưa có review cho cùng item trong đơn.
 
 ### 2.1 Images and Transaction

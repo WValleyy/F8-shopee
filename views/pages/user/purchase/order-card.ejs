@@ -124,7 +124,6 @@ const secondaryAction = allowedActions.has('cancel')
                     <% if (
                         !isReturnRequest
                         && order.status === 'COMPLETED'
-                        && item.returnableQuantity > 0
                         && item.productId
                         && !item.reviewId
                     ) { %>

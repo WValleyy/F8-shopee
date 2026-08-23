@@ -122,7 +122,6 @@ const ERROR_CONFIG = Object.freeze({
     REVIEW_ORDER_NOT_FOUND: freezeDefinition(404, 'Không tìm thấy đơn hàng để đánh giá.'),
     REVIEW_ORDER_NOT_COMPLETED: freezeDefinition(400, 'Chỉ có thể đánh giá sản phẩm trong đơn hàng đã hoàn thành.'),
     REVIEW_ITEM_NOT_PURCHASED: freezeDefinition(400, 'Sản phẩm không thuộc đơn hàng này.'),
-    REVIEW_ITEM_FULLY_RETURNED: freezeDefinition(400, 'Sản phẩm đã được trả hết nên không thể đánh giá.'),
     REVIEW_ALREADY_EXISTS: freezeDefinition(409, 'Sản phẩm này đã được đánh giá trong lần mua này.'),
     PRODUCT_CATEGORY_UNAVAILABLE: freezeDefinition(400, 'Danh mục không tồn tại hoặc đã bị khóa.'),
     PRODUCT_CATEGORY_NOT_LEAF: freezeDefinition(400, 'Sản phẩm phải thuộc một danh mục cụ thể.'),

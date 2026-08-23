@@ -149,10 +149,6 @@ function validateReviews(config, activity, orderById) {
             && candidate.variant.toString() === review.variant.toString()
         ));
         assert(item, `review ${review._id} item was not purchased.`);
-        assert(
-            item.returnedQuantity < item.quantity,
-            `review ${review._id} targets a fully returned item.`,
-        );
         const key = orderItemKey(order._id, review.variant);
         assert(!reviewKeys.has(key), `duplicate review gate key ${key}.`);
         reviewKeys.add(key);
