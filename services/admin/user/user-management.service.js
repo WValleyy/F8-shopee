@@ -202,40 +202,28 @@ async function purgeUserAccount(userId, actingAdminId) {
                 .select('product')
                 .session(session)
                 .lean();
-            const wishListCountByProductId = new Map();
-
-            wishListItems.forEach((item) => {
-                const productId = item.product.toString();
-
-                wishListCountByProductId.set(
-                    productId,
-                    (wishListCountByProductId.get(productId) ?? 0) + 1,
-                );
-            });
-
-            const likeOperations = [...wishListCountByProductId.entries()]
-                .map(([productId, decrementCount]) => ({
-                    updateOne: {
-                        filter: { _id: productId },
-                        update: [
-                            {
-                                $set: {
-                                    likes: {
-                                        $max: [
-                                            0,
-                                            {
-                                                $subtract: [
-                                                    { $ifNull: ['$likes', 0] },
-                                                    decrementCount,
-                                                ],
-                                            },
-                                        ],
-                                    },
+            const likeOperations = wishListItems.map(item => ({
+                updateOne: {
+                    filter: { _id: item.product },
+                    update: [
+                        {
+                            $set: {
+                                likes: {
+                                    $max: [
+                                        0,
+                                        {
+                                            $subtract: [
+                                                { $ifNull: ['$likes', 0] },
+                                                1,
+                                            ],
+                                        },
+                                    ],
                                 },
                             },
-                        ],
-                    },
-                }));
+                        },
+                    ],
+                },
+            }));
 
             if (likeOperations.length)
                 await Product.bulkWrite(likeOperations, { session });

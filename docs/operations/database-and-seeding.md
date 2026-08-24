@@ -45,7 +45,7 @@ node scripts/data-seed/preflight.js
 Preflight chỉ đọc `product-info.json`; nó không kết nối hoặc thay đổi MongoDB. `product-info.js` kiểm tra:
 
 - uniqueness của product code, product name, slug và SKU;
-- quan hệ category parent/leaf;
+- uniqueness của category name/slug và quan hệ category parent/leaf;
 - cấu trúc image, specification và variant option;
 - kiểu dữ liệu và giới hạn của price, original price và stock.
 

@@ -8,6 +8,7 @@ const categorySchema = new Schema(
         name: {
             type: String,
             required: true,
+            unique: true,
             trim: true,
             maxlength: inputLimits.category.nameMaxLength,
         },
@@ -39,8 +40,6 @@ const categorySchema = new Schema(
         timestamps: true,
     }
 );
-
-categorySchema.index({ parent: 1, name: 1 }, { unique: true });
 
 categorySchema.pre('validate', function () {
     if (!this.slug) {

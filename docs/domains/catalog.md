@@ -4,6 +4,8 @@
 
 Category có `parent`, `name`, `slug`, `sortOrder`, `isActive`.
 
+`name` và `slug` đều unique trên toàn bộ cây danh mục. Slug được tạo từ name, vì vậy các danh mục ở những nhánh khác nhau vẫn phải dùng tên riêng biệt.
+
 Một category chỉ khả dụng khi chính nó và toàn bộ parent chain đều active. Điều kiện hiển thị product trên storefront dựa vào toàn bộ chain này, không chỉ `category.isActive` của category hiện tại.
 
 Product được gán vào leaf category. Các thao tác quản trị giữ category tree không tự tham chiếu, không tạo cycle và đồng bộ với việc chỉnh sửa product. Chi tiết nằm trong [`../workflows/admin-category-flow.md`](../workflows/admin-category-flow.md).

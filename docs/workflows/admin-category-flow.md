@@ -14,7 +14,7 @@ PATCH /api/admin/categories/:id
 → saveAdminCategory(categoryId|null, data)
 ```
 
-Parser đọc `name`, `parentId`, `sortOrder` và `isActive`. Slug được tạo từ `name` bằng `slugify` trước transaction.
+Parser đọc `name`, `parentId`, `sortOrder` và `isActive`. Slug được tạo từ `name` bằng `slugify` trước transaction. `name` và `slug` đều unique trên toàn bộ cây danh mục.
 
 ## 2. Category-tree serialization lock
 

@@ -51,7 +51,7 @@ CATEGORY_TREE = {
         "slug": "thoi-trang-nu",
         "children": {
             "Garment Upper body": {
-                "name": "Áo",
+                "name": "Áo nữ",
                 "slug": "ao-nu",
                 "sizeGroup": "adult",
                 "minColors": 4,
@@ -59,7 +59,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 129_000, "max": 699_000},
             },
             "Garment Lower body": {
-                "name": "Quần",
+                "name": "Quần nữ",
                 "slug": "quan-nu",
                 "sizeGroup": "adult",
                 "minColors": 4,
@@ -67,7 +67,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 179_000, "max": 799_000},
             },
             "Accessories": {
-                "name": "Phụ kiện",
+                "name": "Phụ kiện nữ",
                 "slug": "phu-kien-nu",
                 "sizeGroup": None,
                 "minColors": 4,
@@ -81,7 +81,7 @@ CATEGORY_TREE = {
         "slug": "thoi-trang-nam",
         "children": {
             "Garment Upper body": {
-                "name": "Áo",
+                "name": "Áo nam",
                 "slug": "ao-nam",
                 "sizeGroup": "adult",
                 "minColors": 4,
@@ -89,7 +89,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 149_000, "max": 799_000},
             },
             "Garment Lower body": {
-                "name": "Quần",
+                "name": "Quần nam",
                 "slug": "quan-nam",
                 "sizeGroup": "adult",
                 "minColors": 4,
@@ -97,7 +97,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 199_000, "max": 899_000},
             },
             "Accessories": {
-                "name": "Phụ kiện",
+                "name": "Phụ kiện nam",
                 "slug": "phu-kien-nam",
                 "sizeGroup": None,
                 "minColors": 4,
@@ -111,7 +111,7 @@ CATEGORY_TREE = {
         "slug": "thoi-trang-tre-em",
         "children": {
             "Garment Upper body": {
-                "name": "Áo",
+                "name": "Áo trẻ em",
                 "slug": "ao-tre-em",
                 "sizeGroup": "kids",
                 "minColors": 4,
@@ -119,7 +119,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 99_000, "max": 499_000},
             },
             "Garment Lower body": {
-                "name": "Quần",
+                "name": "Quần trẻ em",
                 "slug": "quan-tre-em",
                 "sizeGroup": "kids",
                 "minColors": 4,
@@ -127,7 +127,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 99_000, "max": 499_000},
             },
             "Accessories": {
-                "name": "Phụ kiện",
+                "name": "Phụ kiện trẻ em",
                 "slug": "phu-kien-tre-em",
                 "sizeGroup": None,
                 "minColors": 4,
@@ -141,7 +141,7 @@ CATEGORY_TREE = {
         "slug": "the-thao",
         "children": {
             "Garment Upper body": {
-                "name": "Áo",
+                "name": "Áo thể thao",
                 "slug": "ao-the-thao",
                 "sizeGroup": "adult",
                 "minColors": 2,
@@ -149,7 +149,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 149_000, "max": 699_000},
             },
             "Garment Lower body": {
-                "name": "Quần",
+                "name": "Quần thể thao",
                 "slug": "quan-the-thao",
                 "sizeGroup": "adult",
                 "minColors": 2,
@@ -157,7 +157,7 @@ CATEGORY_TREE = {
                 "priceRange": {"min": 169_000, "max": 749_000},
             },
             "Accessories": {
-                "name": "Phụ kiện",
+                "name": "Phụ kiện thể thao",
                 "slug": "phu-kien-the-thao",
                 "sizeGroup": None,
                 "minColors": 2,

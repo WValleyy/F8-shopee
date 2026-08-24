@@ -127,6 +127,23 @@ function validateProduct(product, index, state) {
             isNonEmptyString(category?.slug),
             `${productCode} ${categoryLabel} slug is required.`,
         );
+
+        const normalizedCategoryName = category.name
+            .trim()
+            .toLocaleLowerCase('vi-VN');
+        const knownSlug = state.categorySlugByName.get(normalizedCategoryName);
+        const knownName = state.categoryNameBySlug.get(category.slug);
+
+        assert(
+            !knownSlug || knownSlug === category.slug,
+            `duplicate category name ${category.name}.`,
+        );
+        assert(
+            !knownName || knownName === normalizedCategoryName,
+            `duplicate category slug ${category.slug}.`,
+        );
+        state.categorySlugByName.set(normalizedCategoryName, category.slug);
+        state.categoryNameBySlug.set(category.slug, normalizedCategoryName);
     }
     assert(
         parent.slug !== leaf.slug,
@@ -197,6 +214,8 @@ function validateProductInfo(products) {
         productNames: new Set(),
         slugs: new Set(),
         skus: new Set(),
+        categorySlugByName: new Map(),
+        categoryNameBySlug: new Map(),
         leafParentBySlug: new Map(),
     };
 

@@ -50,7 +50,7 @@ Service từ chối purge chính quản trị viên đang thao tác, tài khoả
 
 ### 3.1 Wishlist Counter Adjustment
 
-Service đọc các `WishList` của người dùng, nhóm theo sản phẩm rồi giảm `Product.likes`. Giá trị được chặn ở mức tối thiểu `0`. Việc điều chỉnh diễn ra trước khi xóa các wishlist.
+Service đọc các `WishList` của người dùng và giảm `Product.likes` một lần cho mỗi wishlist record. Unique index trên cặp `user + product` bảo đảm mỗi sản phẩm chỉ xuất hiện một lần trong wishlist của cùng một người dùng. Giá trị được chặn ở mức tối thiểu `0`. Việc điều chỉnh diễn ra trước khi xóa các wishlist.
 
 ### 3.2 Private and Temporary Data Deletion
 
@@ -78,7 +78,7 @@ note = ""
 updatedAt = customerDeletedAt
 ```
 
-`OrderReturnRequest` cũng được giữ lại, nhưng `user` được đặt thành `null` và `updatedAt` được cập nhật. Model này không có trường `customerDeletedAt`.
+`OrderReturnRequest` cũng được giữ lại, nhưng `user` được đặt thành `null` và `updatedAt` được cập nhật.
 
 Đối với review:
 
