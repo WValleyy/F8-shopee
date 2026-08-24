@@ -49,7 +49,6 @@ function setRowImage(row, file) {
   const previewUrl = URL.createObjectURL(file);
 
   imageStateByRow.set(row, {
-    ...current,
     file,
     previewUrl,
   });

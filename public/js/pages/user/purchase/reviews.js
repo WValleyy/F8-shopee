@@ -47,19 +47,16 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
       const removeButton = document.createElement("button");
       const removeIcon = document.createElement("i");
       const image = document.createElement("img");
-      const caption = document.createElement("span");
 
       preview.className = "purchase-review-modal__image-preview";
       removeButton.type = "button";
       removeButton.className = "btn purchase-review-modal__image-remove";
       removeButton.dataset.reviewImageRemove = String(index);
       removeIcon.className = "fa-solid fa-xmark";
-      image.src = item.preview;
+      image.src = item.previewUrl;
       image.alt = `Ảnh đánh giá ${index + 1}`;
-      caption.className = "purchase-review-modal__image-caption";
-      caption.textContent = item.label || `Ảnh ${index + 1}`;
       removeButton.append(removeIcon);
-      preview.append(removeButton, image, caption);
+      preview.append(removeButton, image);
       return preview;
     });
 
@@ -68,7 +65,7 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
   }
 
   function resetImages(context) {
-    images.forEach((item) => URL.revokeObjectURL(item.preview));
+    images.forEach((item) => URL.revokeObjectURL(item.previewUrl));
     images.length = 0;
     context.imageFilesInput.value = "";
     renderImagePreviews(context);
@@ -115,8 +112,7 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
 
       images.push({
         file,
-        preview: URL.createObjectURL(file),
-        label: file.name || `Ảnh ${images.length + 1}`,
+        previewUrl: URL.createObjectURL(file),
       });
     }
 
@@ -175,7 +171,7 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
           1,
         );
 
-        URL.revokeObjectURL(removed.preview);
+        URL.revokeObjectURL(removed.previewUrl);
         renderImagePreviews(getContext());
         return;
       }
@@ -256,7 +252,7 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
   );
 
   return () => {
-    images.forEach((item) => URL.revokeObjectURL(item.preview));
+    images.forEach((item) => URL.revokeObjectURL(item.previewUrl));
     images.length = 0;
   };
 }
