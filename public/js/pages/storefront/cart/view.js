@@ -1,9 +1,9 @@
 import { formatPrice } from "../../../shared/lib/format-price.js";
 
 function createCartView(root, state) {
-  const cartSection = root.querySelector("[data-cart-items]");
   const cartHeader = root.querySelector("[data-cart-header]");
   const cartFooter = root.querySelector("[data-cart-footer]");
+  const emptyState = root.querySelector("[data-cart-empty-state]");
   const headerSelectAll = root.querySelector("[data-cart-header] [data-cart-select-all]");
   const footerSelectAll = root.querySelector("[data-cart-footer] [data-cart-select-all]");
   const summaryLabel = root.querySelector("[data-cart-select-all-label]");
@@ -77,19 +77,7 @@ function createCartView(root, state) {
 
     cartHeader.hidden = true;
     cartFooter.hidden = true;
-
-    const emptyState = document.createElement("div");
-    emptyState.className = "empty-state";
-    emptyState.innerHTML = `
-            <img
-                src="/img/shopee_icon/no_purchase.png"
-                alt="Giỏ hàng trống"
-                class="empty-state__image">
-            <strong>
-                Giỏ hàng của bạn đang trống
-            </strong>
-        `;
-    cartSection.append(emptyState);
+    emptyState.hidden = false;
   }
 
   return {

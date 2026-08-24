@@ -30,6 +30,7 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
       contentInput: form.elements.content,
       imageFilesInput: form.elements.imageFiles,
       imageList: form.querySelector("[data-purchase-review-image-list]"),
+      imageTemplate: root.querySelector("[data-purchase-review-image-template]"),
       submitButton: form.querySelector("[data-purchase-review-submit]"),
       ratingButtons: [...form.querySelectorAll("[data-rating-value]")],
     };
@@ -43,20 +44,13 @@ function mountPurchaseReviews({ root, refreshCollection, signal }) {
     }
 
     const previews = images.map((item, index) => {
-      const preview = document.createElement("div");
-      const removeButton = document.createElement("button");
-      const removeIcon = document.createElement("i");
-      const image = document.createElement("img");
+      const preview = context.imageTemplate.content.firstElementChild.cloneNode(true);
+      const removeButton = preview.querySelector("[data-review-image-remove]");
+      const image = preview.querySelector("[data-purchase-review-image-preview]");
 
-      preview.className = "purchase-review-modal__image-preview";
-      removeButton.type = "button";
-      removeButton.className = "btn purchase-review-modal__image-remove";
       removeButton.dataset.reviewImageRemove = String(index);
-      removeIcon.className = "fa-solid fa-xmark";
       image.src = item.previewUrl;
       image.alt = `Ảnh đánh giá ${index + 1}`;
-      removeButton.append(removeIcon);
-      preview.append(removeButton, image);
       return preview;
     });
 

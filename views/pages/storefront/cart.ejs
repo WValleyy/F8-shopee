@@ -118,18 +118,18 @@ const unavailableLabels = {
                         </div>
                     </div>
                 <% }) %>
-            <% } else { %>
-                <div class="empty-state">
-                    <img
-                        src="/img/shopee_icon/no_purchase.png"
-                        alt="Giỏ hàng trống"
-                        class="empty-state__image">
-
-                    <strong>
-                        <%= isGuestCart ? 'Đăng nhập để lưu giỏ hàng' : 'Giỏ hàng của bạn đang trống' %>
-                    </strong>
-                </div>
             <% } %>
+
+            <div class="empty-state" data-cart-empty-state <%= hasItems ? 'hidden' : '' %>>
+                <img
+                    src="/img/shopee_icon/no_purchase.png"
+                    alt="Giỏ hàng trống"
+                    class="empty-state__image">
+
+                <strong>
+                    <%= isGuestCart ? 'Đăng nhập để lưu giỏ hàng' : 'Giỏ hàng của bạn đang trống' %>
+                </strong>
+            </div>
         </section>
 
         <section class="cart-footer" data-cart-footer <%= hasItems ? '' : 'hidden' %>>

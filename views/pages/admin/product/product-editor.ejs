@@ -185,6 +185,15 @@
 
     </form>
 
+    <template data-product-image-template>
+        <div class="admin-media-item" data-image-key="">
+            <img src="" alt="" data-product-image-preview>
+            <button type="button" data-remove-image>
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+    </template>
+
     <template data-variant-row-template>
         <tr data-variant-row data-variant-id="" data-variant-updated-at="">
             <td><input class="form-control" data-variant-field="sku" maxlength="<%= inputLimits.productVariant.skuMaxLength %>"></td>

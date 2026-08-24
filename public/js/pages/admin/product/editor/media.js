@@ -1,5 +1,6 @@
 function mountProductMedia({ root, signal }) {
   const gallery = root.querySelector("[data-product-gallery]");
+  const imageTemplate = root.querySelector("[data-product-image-template]");
   const input = root.querySelector("[data-product-images]");
   const errorElement = root.querySelector("[data-image-error]");
   const newImages = new Map();
@@ -20,20 +21,11 @@ function mountProductMedia({ root, signal }) {
   }
 
   function createPreview(key, previewUrl) {
-    const item = document.createElement("div");
-    const image = document.createElement("img");
-    const button = document.createElement("button");
-    const icon = document.createElement("i");
+    const item = imageTemplate.content.firstElementChild.cloneNode(true);
+    const image = item.querySelector("[data-product-image-preview]");
 
-    item.className = "admin-media-item";
     item.dataset.imageKey = key;
     image.src = previewUrl;
-    image.alt = "";
-    button.type = "button";
-    button.dataset.removeImage = "";
-    icon.className = "fa-solid fa-xmark";
-    button.append(icon);
-    item.append(image, button);
     gallery.append(item);
   }
 

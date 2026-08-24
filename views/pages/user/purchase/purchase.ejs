@@ -181,6 +181,44 @@ const buildPurchaseUrl = (tab = activePurchaseTab, page = 1, query = currentPurc
     </div>
 </div>
 
+<template data-purchase-return-item-template>
+    <label class="purchase-return-item">
+        <input
+            type="checkbox"
+            name="selectedVariant"
+            class="purchase-return-item__checkbox"
+            data-purchase-return-item-checkbox>
+        <img
+            class="purchase-return-item__image"
+            data-purchase-return-item-image>
+        <span class="purchase-return-item__content">
+            <strong data-purchase-return-item-name></strong>
+            <span data-purchase-return-item-classify></span>
+            <span data-purchase-return-item-available></span>
+        </span>
+        <input
+            type="number"
+            min="1"
+            step="1"
+            value="1"
+            class="form-control purchase-return-item__quantity"
+            data-purchase-return-item-quantity
+            disabled>
+    </label>
+</template>
+
+<template data-purchase-review-image-template>
+    <div class="purchase-review-modal__image-preview">
+        <button
+            type="button"
+            class="btn purchase-review-modal__image-remove"
+            data-review-image-remove>
+            <i class="fa-solid fa-xmark"></i>
+        </button>
+        <img data-purchase-review-image-preview>
+    </div>
+</template>
+
 <div
     id="purchase-review-modal"
     class="modal"

@@ -5,6 +5,8 @@ import {
 } from "../../../shared/ui/modal.js";
 
 function mountPurchaseReturns({ root, refreshCollection, signal }) {
+  const itemTemplate = root.querySelector("[data-purchase-return-item-template]");
+
   function setError(modal, message = "") {
     const errorElement = modal.querySelector("[data-purchase-return-error]");
 
@@ -17,37 +19,22 @@ function mountPurchaseReturns({ root, refreshCollection, signal }) {
 
     if (maxQuantity < 1) return;
 
-    const row = document.createElement("label");
-    const checkbox = document.createElement("input");
-    const image = document.createElement("img");
-    const content = document.createElement("span");
-    const name = document.createElement("strong");
-    const classify = document.createElement("span");
-    const available = document.createElement("span");
-    const quantity = document.createElement("input");
+    const row = itemTemplate.content.firstElementChild.cloneNode(true);
+    const checkbox = row.querySelector("[data-purchase-return-item-checkbox]");
+    const image = row.querySelector("[data-purchase-return-item-image]");
+    const name = row.querySelector("[data-purchase-return-item-name]");
+    const classify = row.querySelector("[data-purchase-return-item-classify]");
+    const available = row.querySelector("[data-purchase-return-item-available]");
+    const quantity = row.querySelector("[data-purchase-return-item-quantity]");
 
-    row.className = "purchase-return-item";
-    checkbox.type = "checkbox";
-    checkbox.name = "selectedVariant";
     checkbox.value = item.dataset.variantId;
-    checkbox.className = "purchase-return-item__checkbox";
     image.src = item.dataset.productImage;
     image.alt = item.dataset.productName;
-    image.className = "purchase-return-item__image";
-    content.className = "purchase-return-item__content";
     name.textContent = item.dataset.productName;
     classify.textContent = `Phân loại: ${item.dataset.productClassify}`;
     available.textContent = `Có thể trả: ${maxQuantity}`;
-    quantity.type = "number";
     quantity.name = `quantity:${checkbox.value}`;
-    quantity.min = "1";
     quantity.max = String(maxQuantity);
-    quantity.step = "1";
-    quantity.value = "1";
-    quantity.disabled = true;
-    quantity.className = "form-control purchase-return-item__quantity";
-
-    content.append(name, classify, available);
     checkbox.addEventListener(
       "change",
       () => {
@@ -57,7 +44,6 @@ function mountPurchaseReturns({ root, refreshCollection, signal }) {
       },
       { signal },
     );
-    row.append(checkbox, image, content, quantity);
     container.append(row);
   }
 
