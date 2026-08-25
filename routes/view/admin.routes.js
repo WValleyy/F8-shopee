@@ -7,13 +7,11 @@ import systemController from '../../controllers/view/admin/system.controller.js'
 import { requireAdmin } from '../../middlewares/role.middleware.js';
 import { requireStrictViewAuth } from '../../middlewares/auth.middleware.js';
 import { validateObjectIdParam } from '../../middlewares/validation.middleware.js';
-import { attachHeaderState } from '../../middlewares/view-state.middleware.js';
 
 const router = Router();
 
 router.use(
     requireStrictViewAuth,
-    attachHeaderState,
     requireAdmin,
 );
 
