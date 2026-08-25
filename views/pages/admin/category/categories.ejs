@@ -23,7 +23,7 @@
             <label class="admin-field admin-field--wide"><span>Tên danh mục</span><input class="form-control" name="name" maxlength="<%= inputLimits.category.nameMaxLength %>" required></label>
             <label class="admin-field"><span>Danh mục cha</span><select class="form-control" name="parentId"><option value="">Không có</option><% categoryOptions.forEach(category => { %><option value="<%= category.id %>"><%= category.label %></option><% }) %></select></label>
             <label class="admin-field"><span>Thứ tự</span><input class="form-control" type="number" name="sortOrder" step="1" value="0" required></label>
-            <label class="admin-check admin-field--wide"><input type="checkbox" name="isActive" checked><span>Active</span></label>
+            <label class="form-check admin-field--wide"><input type="checkbox" name="isActive" checked><span>Active</span></label>
         </div>
         <p class="form-notice admin-form-notice" data-form-notice></p>
         <footer><button class="btn btn--size-l" type="button" data-modal-close>Hủy</button><button class="btn btn--primary btn--size-l" type="submit">Lưu danh mục</button></footer>
