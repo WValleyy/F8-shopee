@@ -25,7 +25,7 @@
   background-color: color-mix(in srgb, var(--background-color) 90%, black 10%);
 }
 
-.btn:not(.btn--no-hover):not(.btn--primary):not(.btn--danger):hover {
+.btn:where(:not(.btn--no-hover)):hover {
   background-color: rgba(0, 0, 0, 0.15);
 }
 

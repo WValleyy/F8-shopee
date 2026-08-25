@@ -47,8 +47,6 @@
 }
 
 .cart__checkbox {
-  transform: scale(1.5);
-  accent-color: var(--primary-color);
   margin: 0 10px 0px 20px;
 }
 

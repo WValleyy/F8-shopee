@@ -24,12 +24,6 @@
   border-top: 1px solid #ececec;
 }
 
-.purchase-return-item__checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--primary-color);
-}
-
 .purchase-return-item__image {
   width: 64px;
   height: 64px;
