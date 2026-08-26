@@ -101,12 +101,6 @@ Xem mô tả của từng biến tại [`docs/operations/configuration.md`](./do
 npm start
 ```
 
-Command thực thi:
-
-```text
-node server.js
-```
-
 `server.js` kết nối MongoDB thành công trước khi mở HTTP listener. Port lấy từ `PORT`.
 Với `.env.example`, URL local là:
 
@@ -174,14 +168,13 @@ Chi tiết pipeline, nguồn dữ liệu và invariant được kiểm tra sau s
 | `npm run email:smoke` | Gửi email thật qua Gmail SMTP |
 
 Integration test không dùng seed data. Cấu hình `.env.test` với `MONGODB_URI` và giữ
-`MONGODB_DB_NAME` kết thúc bằng `-test`. Helper test sẽ từ chối kết nối nếu database name không
-có hậu tố này, để tránh ghi nhầm vào database development/production.
+`MONGODB_DB_NAME` kết thúc bằng `-test`. Helper test sẽ từ chối kết nối nếu database name không có hậu tố này, để tránh ghi nhầm vào database development/production.
 
 Chi tiết về test đọc thêm tại [`docs/operations/testing-and-quality.md`](./docs/operations/testing-and-quality.md).
 
 ## Product scope
 
-Các capability chính của source hiện tại:
+Các capability chính :
 
 - đăng ký, đăng nhập, JWT/session refresh và quản lý session;
 - email verification, password reset, change email/password;
