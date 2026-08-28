@@ -16,7 +16,7 @@ function isValidPhoneInput(field) {
   const maxDigits = Number(field.dataset.phoneMaxDigits);
   const pattern = new RegExp(`^\\+?\\d{${minDigits},${maxDigits}}$`);
 
-  return field.value.length <= field.maxLength && pattern.test(field.value);
+  return pattern.test(field.value);
 }
 
 function buildPhoneValidationMessage(field) {
