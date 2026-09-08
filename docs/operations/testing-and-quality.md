@@ -1,7 +1,5 @@
 # Operations: Testing and quality tooling
 
-> **Source of truth:** `package.json`, `vitest.config.js`, `vitest.integration.config.js`, `tests/` và `eslint.config.js`.
-
 ## 1. Test stack
 
 Vitest được chia thành unit suite và integration suite:
