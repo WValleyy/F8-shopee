@@ -42,19 +42,6 @@ async function placeOrder(userId, data) {
         if (!initialDraft)
             throw requestError('CHECKOUT_EXPIRED');
 
-        const shippingAddress = await prepareOrderAddress(
-            userId,
-            data.selectedAddressId,
-        );
-
-        if (!shippingAddress) {
-            throw requestError(
-                data.selectedAddressId
-                    ? 'ADDRESS_NOT_FOUND'
-                    : 'SHIPPING_ADDRESS_REQUIRED',
-            );
-        }
-
         await session.withTransaction(async () => {
             const existingOrder = await Order.findOne({
                 _id: data.draftId,
@@ -97,6 +84,21 @@ async function placeOrder(userId, data) {
                     user?.role === 'ADMIN'
                         ? 'CUSTOMER_ACCOUNT_REQUIRED'
                         : 'CHECKOUT_USER_UNAVAILABLE',
+                );
+            }
+
+            // Address mutations also claim User; read the snapshot after that shared write.
+            const shippingAddress = await prepareOrderAddress(
+                userId,
+                data.selectedAddressId,
+                { session },
+            );
+
+            if (!shippingAddress) {
+                throw createOrderPlacementError(
+                    data.selectedAddressId
+                        ? 'ADDRESS_NOT_FOUND'
+                        : 'SHIPPING_ADDRESS_REQUIRED',
                 );
             }
 
@@ -215,7 +217,7 @@ async function placeOrder(userId, data) {
     }
 }
 
-async function prepareOrderAddress(userId, selectedAddressId) {
+async function prepareOrderAddress(userId, selectedAddressId, { session }) {
     if (!selectedAddressId)
         return null;
 
@@ -224,6 +226,7 @@ async function prepareOrderAddress(userId, selectedAddressId) {
         user: userId,
     })
         .select('fullName phone province ward detail')
+        .session(session)
         .lean();
 
     if (!address)

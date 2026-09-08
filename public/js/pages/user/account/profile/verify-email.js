@@ -7,7 +7,6 @@ import { clearFormErrors, setFieldError } from "../../../../shared/ui/forms.js";
 import { confirm } from "../../../../shared/ui/confirm.js";
 import { close, open, register } from "../../../../shared/ui/modal.js";
 import { showToast } from "../../../../shared/ui/toast.js";
-import { renderHeaderNotificationPreview } from "../../../../widgets/header/notifications.js";
 
 const WORKFLOW_ID = "verify-email";
 
@@ -142,7 +141,7 @@ function mountVerifyEmail({ root, signal, tools }) {
     if (submitButton) submitButton.disabled = true;
 
     try {
-      const data = await requestJson("/api/auth/email/verify", {
+      await requestJson("/api/auth/email/verify", {
         method: "POST",
         body: { otp: otpInput.value.trim() },
         signal,
@@ -150,7 +149,6 @@ function mountVerifyEmail({ root, signal, tools }) {
       if (signal.aborted) return;
 
       setVerifiedState();
-      renderHeaderNotificationPreview(data.notificationPreview);
       close(form.closest("[data-modal]"), { reason: "success" });
     } catch (error) {
       if (isAbortError(error, signal)) return;

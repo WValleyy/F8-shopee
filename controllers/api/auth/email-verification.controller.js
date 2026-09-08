@@ -9,9 +9,6 @@ import {
     verifyEmailOtp,
 } from '../../../services/auth/auth-account.service.js';
 import {
-    getNotificationPreview,
-} from '../../../services/user/notification.service.js';
-import {
     parseOtpInput,
     parseRequestEmailChangeInput,
 } from '../../requests-parser/auth/auth.request.js';
@@ -57,13 +54,7 @@ const emailVerificationController = {
         );
 
         clearOtpCookie(res, 'VERIFY_EMAIL');
-        return res.json({
-            data: {
-                notificationPreview: await getNotificationPreview(
-                    req.authUserId,
-                ),
-            },
-        });
+        return res.json({});
     },
 
     async requestEmailChange(req, res) {
