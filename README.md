@@ -135,7 +135,7 @@ npm run seed
 ```
 
 > **Note**: seed hiện là destructive reset đối với các collection được application
-> quản lý. Không chạy command này trên database có dữ liệu cần giữ.
+> quản lý. Không chạy command này trên database có dữ liệu cần giữ. Search Index chưa được viết trong lệnh khởi tạo, cần tạo search index riêng sau khi seed data.
 
 Seed tạo catalog, user và business activity phục vụ phát triển/demo. Sau khi seed thành
 công, script in các demo credential hiện tại:

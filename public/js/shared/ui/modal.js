@@ -172,7 +172,7 @@ function register(workflowId, config) {
     history.state?.scope === MODAL_STATE_SCOPE &&
     history.state.workflowId === workflowId
   ) {
-    window.queueMicrotask(() => applyModalState(history.state));
+    applyModalState(history.state);
   }
 
   return () => {

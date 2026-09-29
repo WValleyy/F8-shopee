@@ -98,6 +98,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
         await saveAdminProduct(product._id, {
             name: product.name,
             description: 'Retained image test',
+            specifications: [],
             brand: 'F8',
             categoryId: category.id,
             isPublished: true,
@@ -165,6 +166,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
         await assert.rejects(
             () => saveAdminProduct(product._id, {
                 name: `${product.name}-stale-edit`,
+                specifications: [],
                 description: '',
                 brand: '',
                 categoryId: category.id,
@@ -269,6 +271,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
         await assert.rejects(
             () => saveAdminProduct(product._id, {
                 name: `${prefix}-order-conflict-prod-updated`,
+                specifications: [],
                 description: '',
                 brand: '',
                 categoryId: category.id,
@@ -350,6 +353,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
         await saveAdminProduct(product._id, {
             name: product.name,
             description: '',
+            specifications: [],
             brand: '',
             categoryId: category.id,
             isPublished: true,
@@ -409,6 +413,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
 
         await saveAdminProduct(product._id, {
             name: `${prefix}-upload-fail-prod-updated`,
+            specifications: [],
             description: '',
             brand: '',
             categoryId: category.id,
@@ -478,6 +483,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
 
         await assert.rejects(() => saveAdminProduct(product._id, {
             name: '',
+            specifications: [],
             description: '',
             brand: '',
             categoryId: category.id,
@@ -499,7 +505,7 @@ describe('admin product image lifecycle & transaction boundary integration', { c
                 imageFileIndex: null,
                 isPublished: true,
             }],
-        }));
+        }), error => error?.name === 'ValidationError' && Boolean(error.errors?.name));
 
         const storedProduct = await Product.findById(product._id).lean();
 

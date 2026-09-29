@@ -12,11 +12,10 @@ function mountHeaderNotifications() {
 
     if (notificationId) {
       try {
-        const data = await requestJson(
+        await requestJson(
           `/api/notifications/${notificationId}/read`,
           { method: "PATCH" },
         );
-        renderHeaderNotificationPreview(data.notificationPreview);
       } catch {
         // Navigation remains available if marking the item fails.
       }

@@ -11,8 +11,7 @@ function mountHeader() {
     document.querySelector("[data-header-state]").textContent,
   );
 
-  if (document.querySelector("[data-header-cart-preview]"))
-    renderHeaderCartPreview(initialState.cartPreview);
+  renderHeaderCartPreview(initialState.cartPreview);
 
   renderHeaderNotificationPreview(initialState.notificationPreview);
 

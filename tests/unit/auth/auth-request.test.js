@@ -1,15 +1,14 @@
 import assert from 'node:assert/strict';
 
 import {
+    afterEach,
     describe,
     it,
     vi,
 } from 'vitest';
 
 vi.stubGlobal('window', {
-    fetch: vi.fn(),
-    location: { origin: 'https://shop.example.com' },
-    dispatchEvent: vi.fn(),
+    location: { origin: 'https://shop.example.com', assign: vi.fn() },
 });
 
 const { createAuthFetch } = await import(
@@ -25,16 +24,23 @@ function jsonResponse(status, payload) {
     });
 }
 
-function createClient(nativeFetch) {
+function createClient(fetchMock) {
+    vi.stubGlobal('fetch', fetchMock);
+    vi.stubGlobal('window', {
+        location: { origin: 'https://shop.example.com', assign: vi.fn() },
+    });
+
     return createAuthFetch({
-        nativeFetch,
         origin: 'https://shop.example.com',
-        notifySessionEnded: vi.fn(),
     });
 }
 
-// Frontend auth requests refresh only when the access token is missing.
+// Frontend auth requests refresh when the access token is missing or expired.
 describe('frontend auth request', () => {
+    afterEach(() => {
+        vi.unstubAllGlobals();
+    });
+
     it('refreshes and retries once when the access token is missing', async () => {
         const nativeFetch = vi.fn()
             .mockResolvedValueOnce(jsonResponse(401, {
