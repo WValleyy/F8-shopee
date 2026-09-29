@@ -9,7 +9,6 @@ const appLogSchema = new Schema(
             required: true,
             trim: true,
             maxlength: appLogConfig.scopeMaxLength,
-            index: true,
         },
         severity: {
             type: String,

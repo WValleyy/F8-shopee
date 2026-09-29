@@ -6,14 +6,12 @@ const userNotificationSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      index: true,
     },
 
     type: {
       type: String,
       enum: ["EMAIL_VERIFICATION_REQUIRED", "ORDER_COMPLETED"],
       required: true,
-      index: true,
     },
 
     title: {

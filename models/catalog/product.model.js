@@ -49,7 +49,6 @@ const productSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Category',
             required: true,
-            index: true,
         },
 
         brand: {
@@ -123,10 +122,6 @@ const productSchema = new Schema(
 productSchema.index({
     category: 1,
     isPublished: 1,
-});
-
-productSchema.index({
-    name: 'text',
 });
 
 productSchema.pre('validate', async function () {

@@ -8,7 +8,6 @@ const reviewSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'Product',
             required: true,
-            index: true,
         },
 
         user: {
@@ -18,7 +17,6 @@ const reviewSchema = new Schema(
                 return !this.authorDeletedAt;
             },
             default: null,
-            index: true,
         },
 
         authorDeletedAt: {
@@ -37,7 +35,6 @@ const reviewSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'ProductVariant',
             required: true,
-            index: true,
         },
 
         rating: {

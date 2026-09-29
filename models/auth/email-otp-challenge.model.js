@@ -12,14 +12,12 @@ const emailOtpChallengeSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: 'User',
             required: true,
-            index: true,
         },
 
         purpose: {
             type: String,
             enum: ['VERIFY_EMAIL', 'RESET_PASSWORD', 'CHANGE_EMAIL'],
             required: true,
-            index: true,
         },
 
         otpHash: {

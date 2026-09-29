@@ -148,7 +148,6 @@ const orderSchema = new Schema(
                 return !this.customerDeletedAt;
             },
             default: null,
-            index: true,
         },
 
         customerDeletedAt: {
