@@ -6,6 +6,7 @@ import Order from '../../../models/commerce/order.model.js';
 import Product from '../../../models/catalog/product.model.js';
 import ProductVariant from '../../../models/catalog/product-variant.model.js';
 import Attribute from '../../../models/catalog/attribute.model.js';
+import Category from '../../../models/catalog/category.model.js';
 import WishList from '../../../models/user/wish-list.model.js';
 import {
     cleanupUploadedImages,
@@ -37,8 +38,35 @@ async function listAdminProductsPage(options = {}) {
         ];
     }
 
-    if (category !== 'all')
-        productQuery.category = new mongoose.Types.ObjectId(category);
+    if (category !== 'all') {
+        const categories = await Category.find({}).select('_id parent').lean();
+        const childrenByParent = new Map();
+
+        for (const item of categories) {
+            const parentId = item.parent?.toString();
+            if (!parentId)
+                continue;
+            if (!childrenByParent.has(parentId))
+                childrenByParent.set(parentId, []);
+            childrenByParent.get(parentId).push(item._id.toString());
+        }
+
+        const categoryIds = new Set();
+        const pendingIds = [new mongoose.Types.ObjectId(category).toString()];
+
+        while (pendingIds.length) {
+            const id = pendingIds.pop();
+            if (categoryIds.has(id))
+                continue;
+            categoryIds.add(id);
+            for (const childId of childrenByParent.get(id) || [])
+                pendingIds.push(childId);
+        }
+
+        productQuery.category = {
+            $in: [...categoryIds].map(id => new mongoose.Types.ObjectId(id)),
+        };
+    }
 
     if (status !== 'all')
         productQuery.isPublished = status === 'published';

@@ -58,7 +58,7 @@ describe('frontend auth request', () => {
 
     it.each([
         'ACCESS_TOKEN_INVALID',
-        'SESSION_REVOKED',
+        'SESSION_INVALID',
     ])('does not refresh for %s', async (code) => {
         const nativeFetch = vi.fn().mockResolvedValue(
             jsonResponse(401, { code }),

@@ -47,7 +47,7 @@ async function createCheckoutDraft(userId, source, items) {
             );
 
             if (userLock.matchedCount !== 1)
-                throw requestError('SESSION_REVOKED');
+                throw requestError('SESSION_INVALID');
 
             const now = new Date();
             const activeDraftFilter = {

@@ -219,7 +219,7 @@ async function refreshAccessToken(refreshToken, metadata) {
     }).lean();
 
     if (!sessionDocument)
-        throw createInvalidSessionError('SESSION_REVOKED');
+        throw createInvalidSessionError('SESSION_NOT_FOUND');
 
     if (sessionDocument.revokedAt)
         throw createInvalidSessionError('SESSION_REVOKED');
@@ -260,7 +260,7 @@ async function refreshAccessToken(refreshToken, metadata) {
     const user = await getActiveSessionUser(claims.sub);
 
     if (!user)
-        throw createInvalidSessionError('SESSION_REVOKED');
+        throw createInvalidSessionError('USER_UNAVAILABLE');
 
     const policy = getSessionPolicy(sessionDocument.rememberMe);
     const nextIdleExpiresAt = new Date(Math.min(
@@ -345,11 +345,10 @@ async function refreshAccessToken(refreshToken, metadata) {
     };
 }
 
-function createInvalidSessionError(reason, context = {}) {
+function createInvalidSessionError(reason) {
     return requestError('SESSION_INVALID', {
-        context: {
+        meta: {
             sessionReason: reason,
-            ...context,
         },
     });
 }

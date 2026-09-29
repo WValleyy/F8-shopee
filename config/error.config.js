@@ -87,7 +87,6 @@ const ERROR_CONFIG = Object.freeze({
     REFRESH_ROTATION_CONFLICT: freezeDefinition(409, 'Phiên đăng nhập vừa được làm mới. Vui lòng thử lại.'),
     SESSION_ABSOLUTE_EXPIRED: freezeDefinition(401, 'Phiên đăng nhập đã hết hạn.'),
     SESSION_IDLE_EXPIRED: freezeDefinition(401, 'Phiên đăng nhập đã hết hạn do không hoạt động.'),
-    SESSION_REVOKED: freezeDefinition(401, 'Phiên đăng nhập đã bị thu hồi.'),
 
     // ==========================================
     // 4. USER & ACCOUNT MANAGEMENT ERRORS

@@ -84,7 +84,7 @@ async function requireStrictApiAuth(req, res, next) {
 
         if (!strictExpiredState) {
             clearAuthCookies(res);
-            return next(requestError('SESSION_REVOKED'));
+            return next(requestError('SESSION_INVALID'));
         }
 
         return next(requestError('ACCESS_TOKEN_EXPIRED'));
@@ -100,7 +100,7 @@ async function requireStrictApiAuth(req, res, next) {
 
     if (!strictState) {
         clearAuthCookies(res);
-        return next(requestError('SESSION_REVOKED'));
+        return next(requestError('SESSION_INVALID'));
     }
 
     req.authUserId = strictState.user._id.toString();

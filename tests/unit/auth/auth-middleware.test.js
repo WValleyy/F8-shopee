@@ -93,7 +93,7 @@ describe('strict view authentication', () => {
         assert.equal(request.authSessionId, 'session-id');
     });
 
-    it('forwards SESSION_REVOKED instead of redirecting a revoked partial request', async () => {
+    it('forwards SESSION_INVALID instead of redirecting a revoked partial request', async () => {
         const request = createRequest({ partial: true });
         const response = createResponse();
         const next = vi.fn();
@@ -105,7 +105,7 @@ describe('strict view authentication', () => {
         assert.equal(next.mock.calls.length, 1);
         const error = next.mock.calls[0][0];
         assert.equal(error.statusCode, 401);
-        assert.equal(error.code, 'SESSION_REVOKED');
+        assert.equal(error.code, 'SESSION_INVALID');
         assert.equal(error.logSeverity, null);
         assert.equal(response.redirect.mock.calls.length, 0);
         assert.equal(response.clearCookie.mock.calls.length, 2);
