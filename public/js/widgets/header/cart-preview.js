@@ -1,4 +1,4 @@
-import { formatPrice } from "../../shared/lib/format-price.js";
+import { formatCurrency } from "../../shared/lib/format-currency.js";
 
 function renderHeaderCartPreview(preview) {
   const root = document.querySelector("[data-header-cart-preview]");
@@ -32,7 +32,7 @@ function renderHeaderCartPreview(preview) {
       ? optionValues.join(", ")
       : "Mặc định";
     const priceText = item.isAvailable
-      ? formatPrice(item.price)
+      ? formatCurrency(item.price)
       : "Không khả dụng";
 
     element.dataset.variantId = item.variantId;

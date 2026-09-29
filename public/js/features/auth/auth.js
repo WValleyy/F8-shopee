@@ -30,7 +30,6 @@ function mountAuth() {
   const loginForm = steps.login;
   const registerForm = steps.register;
   const elements = {
-    guestItems: getElements("[data-auth-guest-item]"),
     loginEmail: loginForm?.elements.email,
     loginPassword: loginForm?.elements.password,
     loginRememberMe: loginForm?.elements.rememberMe,
@@ -46,7 +45,6 @@ function mountAuth() {
     sessionLimitConfirm: getElement("[data-session-limit-confirm]"),
     sessionLimitMessage: getElement("[data-session-limit-message]"),
     steps,
-    userItem: getElement("[data-auth-user-item]"),
   };
   let stopCountdown = () => {};
 

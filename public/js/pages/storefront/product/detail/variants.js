@@ -1,9 +1,9 @@
-import { formatPrice } from "../../../../shared/lib/format-price.js";
+import { formatCurrency } from "../../../../shared/lib/format-currency.js";
 
 function formatPriceRange(range) {
   return range.min === range.max
-    ? formatPrice(range.min)
-    : `${formatPrice(range.min)} - ${formatPrice(range.max)}`;
+    ? formatCurrency(range.min)
+    : `${formatCurrency(range.min)} - ${formatCurrency(range.max)}`;
 }
 
 function calculateDiscountPercent(price, originalPrice) {
@@ -128,8 +128,8 @@ function createVariantSelection(root, initialState, { gallery }) {
     activeStock = Number(variant.stock);
     quantityInput.value = "1";
 
-    priceElement.textContent = formatPrice(variant.price);
-    originalPriceElement.textContent = formatPrice(variant.originalPrice);
+    priceElement.textContent = formatCurrency(variant.price);
+    originalPriceElement.textContent = formatCurrency(variant.originalPrice);
     syncDiscount(variant.price, variant.originalPrice);
     stockElement.textContent =
       activeStock > 0 ? `Còn ${activeStock} sản phẩm` : "Hết hàng";

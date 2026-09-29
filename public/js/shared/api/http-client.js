@@ -1,8 +1,7 @@
 const REFRESH_PATH = "/api/auth/session/refresh";
 
-function createAuthFetch({ nativeFetch, origin, notifySessionEnded }) {
+function createAuthFetch({ origin }) {
   let refreshPromise = null;
-  let sessionEndedNotified = false;
 
   async function readErrorCode(response) {
     if (response.status !== 401) return "";
@@ -21,7 +20,7 @@ function createAuthFetch({ nativeFetch, origin, notifySessionEnded }) {
 
   function refreshSessionOnce() {
     if (!refreshPromise) {
-      refreshPromise = nativeFetch(REFRESH_PATH, {
+      refreshPromise = fetch(REFRESH_PATH, {
         method: "POST",
         credentials: "same-origin",
         headers: { Accept: "application/json" },
@@ -43,10 +42,8 @@ function createAuthFetch({ nativeFetch, origin, notifySessionEnded }) {
     return refreshPromise;
   }
 
-  async function fetchWithAuth(input, init = {}, authRetryAttempted = false) {
-    const response = await nativeFetch(input, init);
-
-    if (authRetryAttempted) return response;
+  async function fetchWithAuth(input, init = {}) {
+    const response = await fetch(input, init);
 
     const requestUrl = new URL(
       typeof input === "string" || input instanceof URL ? input : input.url,
@@ -67,27 +64,19 @@ function createAuthFetch({ nativeFetch, origin, notifySessionEnded }) {
 
     try {
       await refreshSessionOnce();
-      sessionEndedNotified = false;
     } catch {
-      if (!sessionEndedNotified) {
-        sessionEndedNotified = true;
-        notifySessionEnded();
-      }
-
+      window.location.assign("/");
       return response;
     }
 
-    return fetchWithAuth(input, init, true);
+    return fetch(input, init);
   }
 
   return fetchWithAuth;
 }
 
 const authFetch = createAuthFetch({
-  nativeFetch: window.fetch.bind(window),
   origin: window.location.origin,
-  notifySessionEnded: () =>
-    window.dispatchEvent(new Event("auth:session-ended")),
 });
 
 function createRequestError(response, payload) {
@@ -139,7 +128,6 @@ function isAbortError(error, signal) {
 }
 
 export {
-  authFetch,
   createAuthFetch,
   isAbortError,
   requestPayload,

@@ -1,5 +1,5 @@
 import { requestJson } from "../../shared/api/http-client.js";
-import { formatPrice } from "../../shared/lib/format-price.js";
+import { formatCurrency } from "../../shared/lib/format-currency.js";
 import {
   loadSearchHistory,
   normalizeSearchTerm,
@@ -45,7 +45,7 @@ function renderSuggestions(list, suggestions) {
     fragment.querySelector("[data-search-suggestion-name]").textContent =
       suggestion.name;
     fragment.querySelector("[data-search-suggestion-price]").textContent =
-      formatPrice(suggestion.price);
+      formatCurrency(suggestion.price);
     list.append(fragment);
   });
 }

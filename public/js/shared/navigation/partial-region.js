@@ -1,34 +1,9 @@
-import { authFetch } from "../api/http-client.js";
+import { requestPayload } from "../api/http-client.js";
 import { exitForNavigation } from "../ui/modal.js";
 import { normalizePath } from "./path.js";
 
 const pendingNavigationControllers = new Set();
 let navigationGeneration = 0;
-
-async function fetchPartialPayload(path, signal, target) {
-  const response = await authFetch(path, {
-    headers: { "X-Partial-Target": target },
-    signal,
-  });
-
-  if (response.status === 401) {
-    const contentType = response.headers.get("content-type") || "";
-    const payload = contentType.includes("application/json")
-      ? await response.json()
-      : {};
-    const error = new Error(payload.message || "Authentication required.");
-
-    error.name = "PartialAuthenticationError";
-    error.redirectTo = payload.redirectTo || "/";
-    throw error;
-  }
-
-  if (!response.ok) {
-    throw new Error("Failed to load partial content.");
-  }
-
-  return response.json();
-}
 
 function cancelPendingNavigations() {
   navigationGeneration += 1;
@@ -66,11 +41,10 @@ function createPartialRegion({
     if (isNavigation) pendingNavigationControllers.add(requestController);
 
     try {
-      const payload = await fetchPartialPayload(
-        path,
-        requestController.signal,
-        target,
-      );
+      const payload = await requestPayload(path, {
+        headers: { "X-Partial-Target": target },
+        signal: requestController.signal,
+      });
 
       if (isNavigation && requestGeneration !== navigationGeneration)
         return false;
@@ -88,8 +62,8 @@ function createPartialRegion({
         return false;
       }
 
-      if (error.name === "PartialAuthenticationError") {
-        window.location.assign(error.redirectTo);
+      if (error.status === 401) {
+        window.location.assign("/");
         return false;
       }
 

@@ -1,9 +1,9 @@
 const VIEW_TIME_ZONE = "Asia/Ho_Chi_Minh";
 
 function formatCurrency(value) {
-  const amount = new Intl.NumberFormat("vi-VN").format(Number(value || 0));
+  const amount = Math.max(0, Math.round(Number(value) || 0));
 
-  return `${amount}đ`;
+  return `${new Intl.NumberFormat("vi-VN").format(amount)}đ`;
 }
 
 function formatDate(value) {

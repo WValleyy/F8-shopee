@@ -1,4 +1,4 @@
-import { formatPrice } from "../../../shared/lib/format-price.js";
+import { formatCurrency } from "../../../shared/lib/format-currency.js";
 
 function createCartView(root, state) {
   const cartHeader = root.querySelector("[data-cart-header]");
@@ -31,7 +31,7 @@ function createCartView(root, state) {
     });
 
     summaryLabel.textContent = `Chọn tất cả (${items.length})`;
-    summaryTotal.textContent = formatPrice(subtotal);
+    summaryTotal.textContent = formatCurrency(subtotal);
 
     const checkoutEnabled =
       selectedItems.length > 0 && !state.hasPendingMutation();
@@ -48,7 +48,7 @@ function createCartView(root, state) {
     buttons[0].disabled = item.quantityPending || item.quantity <= 1;
     buttons[1].disabled =
       item.quantityPending || item.quantity >= item.maxQuantity;
-    item.row.querySelector("[data-cart-item-total]").textContent = formatPrice(
+    item.row.querySelector("[data-cart-item-total]").textContent = formatCurrency(
       item.price * item.quantity,
     );
   }

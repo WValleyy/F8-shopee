@@ -16,7 +16,6 @@ function mountCredentials({
   clearPendingAuthUiState,
 }) {
   const {
-    guestItems,
     loginEmail,
     loginPassword,
     loginRememberMe,
@@ -29,7 +28,6 @@ function mountCredentials({
     sessionLimitConfirm,
     sessionLimitMessage,
     steps,
-    userItem,
   } = elements;
   let loginPending = false;
   let registerPending = false;
@@ -213,29 +211,10 @@ function mountCredentials({
     }
   }
 
-  function handleSessionEnded() {
-    clearPendingAuthUiState();
-    document.body.dataset.authenticated = "false";
-    guestItems.forEach((item) => {
-      item.hidden = false;
-    });
-
-    if (userItem) userItem.hidden = true;
-
-    if (
-      window.location.pathname === "/checkout" ||
-      window.location.pathname.startsWith("/user")
-    ) {
-      window.location.assign("/");
-    }
-  }
-
   listen(steps.login, "submit", submitLogin);
   listen(sessionLimitConfirm, "click", () => void submitLogin(null, true));
   listen(steps.register, "submit", submitRegister);
   listen(logoutButton, "click", logout);
-  listen(window, "auth:session-ended", handleSessionEnded);
-
   elements.sessionLimitCancelButtons.forEach((button) => {
     listen(button, "click", () => {
       setSessionLimitMessage("");

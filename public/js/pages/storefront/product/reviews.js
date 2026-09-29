@@ -1,4 +1,7 @@
-import { authFetch, requestJson } from "../../../shared/api/http-client.js";
+import {
+  requestJson,
+  requestPayload,
+} from "../../../shared/api/http-client.js";
 import { renderButtons } from "../../../shared/navigation/pagination.js";
 import { showToast } from "../../../shared/ui/toast.js";
 import { openAuthModal } from "../../../features/auth/auth.js";
@@ -37,7 +40,7 @@ function mountProductReviews({ root, initialState }) {
       params.set("rating", String(rating));
     }
 
-    const response = await authFetch(
+    return requestPayload(
       `/product/${encodeURIComponent(productSlug)}/reviews?${params.toString()}`,
       {
         credentials: "same-origin",
@@ -48,13 +51,6 @@ function mountProductReviews({ root, initialState }) {
         signal: requestSignal,
       },
     );
-    const payload = await response.json();
-
-    if (!response.ok) {
-      throw new Error(payload.message || "Không thể tải đánh giá.");
-    }
-
-    return payload;
   }
 
   async function loadReviews({ rating = currentRating, page = 1 } = {}) {
