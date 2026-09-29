@@ -41,10 +41,13 @@ describe('frontend auth request', () => {
         vi.unstubAllGlobals();
     });
 
-    it('refreshes and retries once when the access token is missing', async () => {
+    it.each([
+        'ACCESS_TOKEN_MISSING',
+        'ACCESS_TOKEN_EXPIRED',
+    ])('refreshes and retries once for %s', async (code) => {
         const nativeFetch = vi.fn()
             .mockResolvedValueOnce(jsonResponse(401, {
-                code: 'ACCESS_TOKEN_MISSING',
+                code,
             }))
             .mockResolvedValueOnce(jsonResponse(200, {}))
             .mockResolvedValueOnce(jsonResponse(200, {}));
