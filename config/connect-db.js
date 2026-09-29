@@ -14,9 +14,7 @@ function wait(ms) {
 }
 
 function getErrorCode(error) {
-    return error?.code
-        ?? error?.cause?.code
-        ?? error?.reason?.code;
+    return error?.code ?? error?.cause?.code;
 }
 
 function isRetryableConnectionError(error) {
@@ -27,6 +25,7 @@ function isRetryableConnectionError(error) {
         'MongoNetworkError',
         'MongoNetworkTimeoutError',
         'MongoServerSelectionError',
+        'MongooseServerSelectionError',
     ].includes(error?.name);
 }
 

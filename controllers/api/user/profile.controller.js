@@ -30,11 +30,7 @@ const profileController = {
 
         clearAuthCookies(res);
 
-        return res.json({
-            data: {
-                requiresReauth: true,
-            },
-        });
+        return res.json({});
     },
 
     async deleteAccount(req, res) {

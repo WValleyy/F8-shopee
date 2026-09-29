@@ -13,7 +13,7 @@ const adminProductController = {
         const input = parseProductInput(req.body, req.files);
         await saveAdminProduct(null, input);
 
-        return res.status(201).json({});
+        return res.json({});
     },
 
     async update(req, res) {

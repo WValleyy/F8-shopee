@@ -86,6 +86,7 @@ app.use(express.static(path.join(projectRoot, 'public')));
 app.use(attachLightAuth);
 app.use(requireSameOrigin);
 
+
 // ================= View Engine =================
 
 app.use(expressLayouts);
@@ -102,8 +103,10 @@ app.locals.formatDateOnly = formatDateOnly;
 
 // ================= Routes =================
 
+app.use('/', refreshExpiredViewSession); // Refresh expired view session before any view route
+
 viewRoutes.forEach(([path, router]) => {
-    app.use(path, refreshExpiredViewSession, router);
+    app.use(path, router);
 });
 
 apiRoutes.forEach(([path, router]) => {

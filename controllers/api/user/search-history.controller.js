@@ -1,6 +1,6 @@
 import {
     listUserSearchHistory,
-    recordAndListUserSearchHistory,
+    recordUserSearchHistory,
     removeUserSearchHistoryItem,
 } from '../../../services/user/search-history.service.js';
 import { parseSearchHistoryInput } from '../../requests-parser/user/search-history.request.js';
@@ -17,14 +17,8 @@ const searchHistoryApiController = {
     async record(req, res) {
         const input = parseSearchHistoryInput(req.body);
 
-        return res.json({
-            data: {
-                history: await recordAndListUserSearchHistory(
-                    req.authUserId,
-                    input,
-                ),
-            },
-        });
+        await recordUserSearchHistory(req.authUserId, input);
+        return res.json({});
     },
 
     async remove(req, res) {

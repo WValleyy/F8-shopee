@@ -20,7 +20,6 @@ async function users(req, res) {
             title,
             currentPage: 'users',
             activeSection: 'users',
-            adminUser: req.authUser,
         },
     });
 }

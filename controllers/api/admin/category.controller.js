@@ -8,7 +8,7 @@ const adminCategoryController = {
             parseCategoryInput(req.body),
         );
 
-        return res.status(201).json({});
+        return res.json({});
     },
 
     async update(req, res) {

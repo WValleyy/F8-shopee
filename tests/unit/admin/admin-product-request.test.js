@@ -101,7 +101,7 @@ describe('parseProductInput', () => {
                 ...validBody,
                 variants: JSON.stringify([{
                     ...JSON.parse(validBody.variants)[0],
-                    options: [option],
+                    options: `${option.name}:${option.value}`,
                 }]),
             }),
             'FIELD_LENGTH_INVALID',

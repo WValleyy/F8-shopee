@@ -20,7 +20,6 @@ const commerceController = {
                 title,
                 currentPage: 'orders',
                 activeSection: 'orders',
-                adminUser: req.authUser,
             },
         });
     },

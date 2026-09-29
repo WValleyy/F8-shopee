@@ -21,7 +21,6 @@ const systemController = {
                 title,
                 currentPage: 'app-logs',
                 activeSection: 'app-logs',
-                adminUser: req.authUser,
             },
         });
     },
@@ -39,7 +38,6 @@ const systemController = {
                 title,
                 currentPage: 'dashboard',
                 activeSection: 'dashboard',
-                adminUser: req.authUser,
             },
         });
     },

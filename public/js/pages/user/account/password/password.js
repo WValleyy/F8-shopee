@@ -80,7 +80,7 @@ function mountPasswordSettings({ root, signal }) {
       if (submitButton) submitButton.disabled = true;
 
       try {
-        const data = await requestJson("/api/account/password", {
+        await requestJson("/api/account/password", {
           method: "PATCH",
           body: {
             currentPassword: currentPassword.value,
@@ -94,9 +94,7 @@ function mountPasswordSettings({ root, signal }) {
           "Mật khẩu đã được cập nhật. Vui lòng đăng nhập lại.",
         );
 
-        if (data.requiresReauth) {
-          window.setTimeout(() => window.location.assign("/"), 500);
-        }
+        window.setTimeout(() => window.location.assign("/"), 500);
       } catch (error) {
         showPasswordError(error, {
           currentPassword,

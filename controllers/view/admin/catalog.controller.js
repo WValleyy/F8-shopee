@@ -35,7 +35,6 @@ const catalogController = {
                 title,
                 currentPage: 'categories',
                 activeSection: 'categories',
-                adminUser: req.authUser,
             },
         });
     },
@@ -58,7 +57,6 @@ const catalogController = {
                 title,
                 currentPage: 'products',
                 activeSection: 'products',
-                adminUser: req.authUser,
             },
         });
     },
@@ -99,7 +97,6 @@ const catalogController = {
                 title,
                 currentPage: 'product-editor',
                 activeSection: 'products',
-                adminUser: req.authUser,
             },
         });
     },
@@ -132,7 +129,6 @@ const catalogController = {
                 title,
                 currentPage: 'product-editor',
                 activeSection: 'products',
-                adminUser: req.authUser,
             },
         });
     },
@@ -153,7 +149,6 @@ const catalogController = {
                 title,
                 currentPage: 'reviews',
                 activeSection: 'reviews',
-                adminUser: req.authUser,
             },
         });
     },

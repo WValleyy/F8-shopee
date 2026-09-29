@@ -33,18 +33,14 @@ function saveGuestHistory(history) {
   return nextHistory;
 }
 
-async function requestHistory(method, query = "") {
-  const data = await requestJson("/api/search-history", {
-    method,
-    keepalive: method === "PUT",
-    ...(query ? { body: { query } } : {}),
-  });
+async function requestHistory() {
+  const data = await requestJson("/api/search-history");
 
   return data.history.map(normalizeSearchTerm).filter(Boolean);
 }
 
 async function loadSearchHistory() {
-  return isAuthenticated() ? requestHistory("GET") : loadGuestHistory();
+  return isAuthenticated() ? requestHistory() : loadGuestHistory();
 }
 
 async function recordSearch(rawQuery) {
@@ -52,7 +48,14 @@ async function recordSearch(rawQuery) {
 
   if (!query) return loadSearchHistory();
 
-  if (isAuthenticated()) return requestHistory("PUT", query);
+  if (isAuthenticated()) {
+    await requestJson("/api/search-history", {
+      method: "PUT",
+      keepalive: true,
+      body: { query },
+    });
+    return;
+  }
 
   const normalizedQuery = query.toLocaleLowerCase("vi-VN");
 

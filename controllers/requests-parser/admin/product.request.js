@@ -31,69 +31,33 @@ function parseAdminProductQuery(query = {}) {
 }
 
 function parseVariantOptions(value, label) {
-    let options;
+    const source = readOptionalString(value, label);
 
-    if (Array.isArray(value)) {
-        options = value.map((option, index) => {
-            if (!option || typeof option !== 'object' || Array.isArray(option))
-                throw requestError('FIELD_INVALID', {
-                    messageParams: { fieldLabel: label },
-                });
-            return {
-                name: readRequiredString(
-                    option.name,
-                    `${label}[${index}].name`,
-                    {
-                        maxLength:
-                            inputLimits.productVariant.optionNameMaxLength,
-                    },
-                ),
-                value: readRequiredString(
-                    option.value,
-                    `${label}[${index}].value`,
-                    {
-                        maxLength:
-                            inputLimits.productVariant.optionValueMaxLength,
-                    },
-                ),
-            };
-        });
-    } else {
-        const source = readOptionalString(value, label);
+    if (!source)
+        return [];
 
-        options = source
-            ? source.split(';').map((item, index) => {
-                const separatorIndex = item.indexOf(':');
+    return source.split(';').map((item, index) => {
+        const separatorIndex = item.indexOf(':');
 
-                if (separatorIndex < 1) {
-                    throw requestError('FIELD_INVALID', {
-                        messageParams: { fieldLabel: label },
-                    });
-                }
+        if (separatorIndex < 1) {
+            throw requestError('FIELD_INVALID', {
+                messageParams: { fieldLabel: label },
+            });
+        }
 
-                return {
-                    name: readRequiredString(
-                        item.slice(0, separatorIndex),
-                        `${label}[${index}].name`,
-                        {
-                            maxLength:
-                                inputLimits.productVariant.optionNameMaxLength,
-                        },
-                    ),
-                    value: readRequiredString(
-                        item.slice(separatorIndex + 1),
-                        `${label}[${index}].value`,
-                        {
-                            maxLength:
-                                inputLimits.productVariant.optionValueMaxLength,
-                        },
-                    ),
-                };
-            })
-            : [];
-    }
-
-    return options;
+        return {
+            name: readRequiredString(
+                item.slice(0, separatorIndex),
+                `${label}[${index}].name`,
+                { maxLength: inputLimits.productVariant.optionNameMaxLength },
+            ),
+            value: readRequiredString(
+                item.slice(separatorIndex + 1),
+                `${label}[${index}].value`,
+                { maxLength: inputLimits.productVariant.optionValueMaxLength },
+            ),
+        };
+    });
 }
 
 function parseImageFileIndex(value, label) {

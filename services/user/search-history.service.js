@@ -12,7 +12,7 @@ async function listUserSearchHistory(userId) {
     return history?.items.map(item => item.query) || [];
 }
 
-async function recordAndListUserSearchHistory(userId, input) {
+async function recordUserSearchHistory(userId, input) {
     const { query, normalizedQuery } = input;
     const userObjectId = new mongoose.Types.ObjectId(userId);
     const now = new Date();
@@ -50,13 +50,11 @@ async function recordAndListUserSearchHistory(userId, input) {
         },
     ];
     const options = {
-        returnDocument: 'after',
         updatePipeline: true,
     };
-    let history;
 
     try {
-        history = await UserSearchHistory.findOneAndUpdate(
+        await UserSearchHistory.updateOne(
             { user: userObjectId },
             pipeline,
             { ...options, upsert: true },
@@ -65,14 +63,13 @@ async function recordAndListUserSearchHistory(userId, input) {
         if (error?.code !== 11000)
             throw error;
 
-        history = await UserSearchHistory.findOneAndUpdate(
+        await UserSearchHistory.updateOne(
             { user: userObjectId },
             pipeline,
             options,
         );
     }
 
-    return history.items.map(item => item.query);
 }
 
 async function removeUserSearchHistoryItem(userId, normalizedQuery) {
@@ -84,6 +81,6 @@ async function removeUserSearchHistoryItem(userId, normalizedQuery) {
 
 export {
     listUserSearchHistory,
-    recordAndListUserSearchHistory,
+    recordUserSearchHistory,
     removeUserSearchHistoryItem,
 };
