@@ -8,7 +8,6 @@ import User from '../../models/user/user.model.js';
 import { logAppEvent } from '../../utils/error/app-error-logger.js';
 import {
     incidentError,
-    isAppErrorCode,
     requestError,
 } from '../../utils/error/app-error.js';
 import {
@@ -53,12 +52,10 @@ async function registerUser(data, sessionMetadata) {
     try {
         authSession = await createAuthSession(createdUser._id, sessionMetadata);
     } catch (error) {
-        if (!isAppErrorCode(error, 'SESSION_LIMIT_REACHED')) {
-            await logAppEvent('register-session-creation-failed', 'error', {
-                userId: createdUser._id.toString(),
-                error: error?.message || String(error),
-            });
-        }
+        await logAppEvent('register-session-creation-failed', 'error', {
+            userId: createdUser._id.toString(),
+            error: error?.message || String(error),
+        });
     }
 
     await createEmailVerificationNotificationBestEffort(createdUser._id);

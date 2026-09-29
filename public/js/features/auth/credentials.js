@@ -167,7 +167,7 @@ function mountCredentials({
         navigate("login");
         setFieldMessage(
           loginEmail,
-          result.message || "Tài khoản đã được tạo. Vui lòng đăng nhập.",
+          "Tài khoản đã được tạo. Vui lòng đăng nhập.",
         );
         return;
       }

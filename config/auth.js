@@ -37,7 +37,7 @@ const authConfig = Object.freeze({
         resendLimit: 10,
         resendWindowSeconds: 60 * 60,
         verifyLimit: 10,
-        verifyWindowSeconds: 60 * 60,
+        verifyWindowSeconds: 5 * 60,
         cookiePath: '/api/auth',
         cookieMaxAgeSeconds: 15 * 60,
         cookieNames: Object.freeze({

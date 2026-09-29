@@ -27,7 +27,6 @@ const authController = {
             return res.json({
                 data: {
                     authenticated: false,
-                    message: 'Tài khoản đã được tạo, vui lòng đăng nhập để tiếp tục.',
                 },
             });
         }

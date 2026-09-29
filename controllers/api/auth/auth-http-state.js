@@ -16,9 +16,6 @@ function setAuthCookies(res, session) {
         path: authConfig.cookie.refreshCookiePath,
     };
 
-    if (typeof session.refreshCookieMaxAge === 'number')
-        refreshCookieOptions.maxAge = session.refreshCookieMaxAge * 1000;
-
     const accessCookieOptions = {
         httpOnly: authConfig.cookie.httpOnly,
         sameSite: authConfig.cookie.sameSite,
@@ -26,8 +23,12 @@ function setAuthCookies(res, session) {
         path: '/',
     };
 
-    if (typeof session.refreshCookieMaxAge === 'number')
-        accessCookieOptions.maxAge = session.refreshCookieMaxAge * 1000;
+    if (typeof session.refreshCookieMaxAge === 'number') {
+        const maxAge = session.refreshCookieMaxAge * 1000;
+
+        refreshCookieOptions.maxAge = maxAge;
+        accessCookieOptions.maxAge = maxAge;
+    }
 
     res.cookie(
         authConfig.cookie.accessCookieName,
